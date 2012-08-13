@@ -1,4 +1,22 @@
 ECloudsV01::Application.routes.draw do
+  resources :instance_types
+
+  resources :operating_systems
+
+  resources :virtual_machines
+
+  get "static_pages/home"
+
+  get "static_pages/help"
+
+  get "static_pages/about"
+
+  resources :clusters  do
+    resources :virtual_machines
+  end
+
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

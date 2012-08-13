@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<br>
+<br>
+<br>
+<br>
+<p>
+  <b>Name:</b>
+  <%= @cluster.name %>
+  <br>
+  <br>
+  <b>InstanceType:</b>
+  <%= InstanceType.find(@cluster.instance_type_id).name %>
+</p>
+
+
+<%= link_to 'Edit', edit_cluster_path(@cluster) %> |
+<%= link_to 'Back', clusters_path %>
+
+<br>
+
+<br>
+
+<div class="span8">
+  <% if @cluster.virtual_machines.any? %>
+      <h3>Virtual Machines (<%= @cluster.virtual_machines.count %>)</h3>
+
+      <br>
+      <br>
+
+      <ol >
+        <%= render @cluster.virtual_machines %>
+      </ol>
+
+
+<% end %>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+
+<br>
+
+<%= link_to 'Add Virtual Machines', new_virtual_machine_path %>
+

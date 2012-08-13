@@ -1,0 +1,34 @@
+<%= form_for(@virtual_machine) do |f| %>
+  <% if @virtual_machine.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@virtual_machine.errors.count, "error") %> prohibited this virtual_machine from being saved:</h2>
+
+      <ul>
+      <% @virtual_machine.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :hostname %><br />
+    <%= f.text_field :hostname %>
+  </div>
+  <div class="field">
+    <%= f.label :ram %><br />
+    <%= f.number_field :ram %>
+  </div>
+  <div class="field">
+    <%= f.label :cores %><br />
+    <%= f.number_field :cores %>
+  </div>
+  <div class="field">
+    <%= f.label :localStorage %><br />
+    <%= f.number_field :localStorage %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  hostname: MyString
+  ram: 1
+  cores: 1
+  localStorage: 1
+  clusterId: 1
+
+two:
+  hostname: MyString
+  ram: 1
+  cores: 1
+  localStorage: 1
+  clusterId: 1

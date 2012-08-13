@@ -1,0 +1,25 @@
+<%= form_for(@cluster) do |f| %>
+  <% if @cluster.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cluster.errors.count, "error") %> prohibited this cluster from being saved:</h2>
+
+      <ul>
+      <% @cluster.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+
+    <%= f.label :instance_type_id %><br />
+    <%= select :cluster,  :instance_type_id , options_from_collection_for_select( InstanceType.all , :id , :name , @cluster.instance_type_id) %><br />
+
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
