@@ -12,6 +12,8 @@
   <![endif]-->
 </head>
 <body>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -20,7 +22,20 @@
         <ul class="nav pull-right">
           <li><%= link_to "Home",    '/static_pages/home' %></li>
           <li><%= link_to "Help",    '#' %></li>
-          <li><%= link_to "Sign in", '#' %></li>
+
+          <!-- botones de inicio de sesiion -->
+          <% if user_signed_in? %>
+              <li><%= link_to "Logout ", destroy_user_session_path , :method => :delete%></li>
+          <% else %>
+              <li><%= link_to "Login", new_user_session_path %></li>
+          <% end %>
+
+          <% if user_signed_in? %>
+              <li><%= link_to "Edit registration", edit_user_registration_path %></li>
+          <% else %>
+              <li><%= link_to "Register", new_user_registration_path %></li>
+          <% end %>
+
           <li><%= link_to "My Clusters",   clusters_path %></li>
         </ul>
       </nav>
@@ -34,5 +49,7 @@
   <%= yield %>
 </div>
 </body>
+
+
 </html>
 

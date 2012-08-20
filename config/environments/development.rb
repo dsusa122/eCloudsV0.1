@@ -14,7 +14,7 @@ ECloudsV01::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -34,4 +34,18 @@ ECloudsV01::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+
+  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+
+  config.action_mailer.smtp_settings = {
+      :address => "smtp.gmail.com",
+      :port => 587,
+      :user_name => 'nclopezo@gmail.com',
+      :password => 'E5G5yq6y',
+      :authentication => 'plain',
+      :enable_starttls_auto => true
+  }
+
+
 end

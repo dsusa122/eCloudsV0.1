@@ -1,6 +1,9 @@
 <% provide(:title, 'Home') %>
 <div class="center hero-unit">
-  <h1>Welcome to the Sample App</h1>
+  <h1>Welcome!</h1>
+
+
+
 
   <h2>
     This is the home page for the
@@ -8,7 +11,12 @@
     sample application.
   </h2>
 
-  <%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>
+  <% if user_signed_in? %>
+      <li><%= current_user.email%></li>
+  <% else %>
+      <li><%= link_to "Sign in!", new_user_session_path, class: "btn btn-large btn-primary" %></li>
+  <% end %>
+
 </div>
 
 <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>

@@ -1,4 +1,12 @@
 ECloudsV01::Application.routes.draw do
+  devise_for :users
+
+  devise_scope :user do
+    delete "users/sign_out"  => "devise/session#destroy"
+  end
+
+  root :to => "static_pages#home"
+
   resources :instance_types
 
   resources :operating_systems
@@ -13,7 +21,11 @@ ECloudsV01::Application.routes.draw do
 
   resources :clusters  do
     resources :virtual_machines
+    member do
+      post :add_virtual_machines
+    end
   end
+
 
 
 

@@ -18,6 +18,20 @@
 <%= link_to 'Back', clusters_path %>
 
 <br>
+<div class="span4">
+  <br>
+  <h2> Add Virtual Machines</h2>
+<%=  form_tag ( {:action => "add_virtual_machines" } ) do %>
+    <table class="table">
+
+      <tr>
+        <td> Number of Instances:</td>
+        <td> <%= select "vms_number_input", :vm_number, (1..5).map { |i| i} %>  </td>
+        <td><%= submit_tag("Add")%></td>
+      </tr>
+    </table>
+<% end %>
+</div>
 
 <br>
 
@@ -46,5 +60,5 @@
 
 <br>
 
-<%= link_to 'Add Virtual Machines', new_virtual_machine_path %>
+
 

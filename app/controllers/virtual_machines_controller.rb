@@ -25,7 +25,7 @@ class VirtualMachinesController < ApplicationController
   # GET /virtual_machines/new.json
   def new
     @virtual_machine = VirtualMachine.new
-    @cluster =  Cluster.first
+
 
     respond_to do |format|
       format.html # new.html.erb
