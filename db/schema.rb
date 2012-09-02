@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816233730) do
+ActiveRecord::Schema.define(:version => 20120902161011) do
+
+  create_table "cloud_files", :force => true do |t|
+    t.string   "name"
+    t.integer  "directory"
+    t.string   "url"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "avatar"
+    t.integer  "parent_id"
+  end
+
+  add_index "cloud_files", ["user_id"], :name => "index_cloud_files_on_user_id"
 
   create_table "clusters", :force => true do |t|
     t.integer  "user_id"
@@ -19,6 +32,14 @@ ActiveRecord::Schema.define(:version => 20120816233730) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "instance_type_id"
+  end
+
+  create_table "directories", :force => true do |t|
+    t.string   "name"
+    t.string   "directory_path"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "user_id"
   end
 
   create_table "instance_types", :force => true do |t|
@@ -51,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20120816233730) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.string   "confirmation_url"
+    t.integer  "current_directory_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

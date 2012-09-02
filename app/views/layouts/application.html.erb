@@ -20,8 +20,16 @@
       <%= link_to "e-Clouds", '#', id: "logo" %>
       <nav>
         <ul class="nav pull-right">
+
+          <% if user_signed_in? %>
+              <li><%= link_to "My Clusters",   clusters_path %></li>
+              <li><%= link_to "My Data",   cloud_files_path %></li>
+          <% end %>
+
+
           <li><%= link_to "Home",    '/static_pages/home' %></li>
           <li><%= link_to "Help",    '#' %></li>
+
 
           <!-- botones de inicio de sesiion -->
           <% if user_signed_in? %>
@@ -36,7 +44,9 @@
               <li><%= link_to "Register", new_user_registration_path %></li>
           <% end %>
 
-          <li><%= link_to "My Clusters",   clusters_path %></li>
+
+
+
         </ul>
       </nav>
     </div>

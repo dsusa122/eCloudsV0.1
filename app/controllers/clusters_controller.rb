@@ -92,9 +92,9 @@ class ClustersController < ApplicationController
     @number_of_vms = @number_of_vms[:vm_number].to_i
     #@number_of_vms =5
 
-    puts "hola!!!!!!!"
-    puts @cluster.name
-    puts @number_of_vms
+    #puts "hola!!!!!!!"
+    #puts @cluster.name
+    #puts @number_of_vms
 
        # falta coger info dependiendo del tipo de vm
     for i  in 1..@number_of_vms

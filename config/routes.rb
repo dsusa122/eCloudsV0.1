@@ -1,5 +1,9 @@
 ECloudsV01::Application.routes.draw do
-  devise_for :users
+  resources :directories
+
+  resources :cloud_files
+
+  devise_for :users, :controllers => { :registrations => "registrations" , :sessions => "sessions"}
 
   devise_scope :user do
     delete "users/sign_out"  => "devise/session#destroy"

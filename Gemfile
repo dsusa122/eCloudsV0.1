@@ -7,7 +7,13 @@ gem 'bootstrap-sass', '2.0.0'
 gem 'devise' , '2.1.2'
 
 gem 'aws'   , '2.5.6'
-# Bundle edge Rails instead:
+
+gem 'carrierwave_direct'
+
+gem 'fog' , '1.5.0'
+
+gem 'carrierwave' , '0.6.2'
+# Bundl<e edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development do
