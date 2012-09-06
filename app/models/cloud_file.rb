@@ -1,6 +1,19 @@
 class CloudFile < ActiveRecord::Base
-  attr_accessible :name, :url, :avatar, :directory
-  belongs_to :users
+
+  PRODUCTION_BUCKET  = "ecloudsProd/"
+  DEVELOPMENT_BUCKET = "eclouds/"
+  STAGING_BUCKET = "ecloudsStaging/"
+
+  AMAZON_S3_BASE_URL =   "https://s3.amazonaws.com/"
+
+
+  PRODUCTION_BUCKET_URL =AMAZON_S3_BASE_URL + PRODUCTION_BUCKET
+  DEVELOPMENT_BUCKET_URL =AMAZON_S3_BASE_URL + DEVELOPMENT_BUCKET
+  STAGING_BUCKET_URL = AMAZON_S3_BASE_URL + STAGING_BUCKET
+
+  attr_accessible :name, :url, :avatar, :directory_id
+  belongs_to :user
+  belongs_to :directory
 
   mount_uploader :avatar, AvatarUploader
 

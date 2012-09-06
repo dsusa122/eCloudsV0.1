@@ -1,0 +1,18 @@
+<div  class ="breadcrumb">
+  <div class="divider" >
+  <% if @current_directory #checking if we are under any folder %>
+     <%= link_to "/", data_home_path %>
+      <% @current_directory.ancestors.reverse.each do |directory| %>
+           <%= link_to directory.name, browse_path(directory) %>  /
+      <% end %>
+
+        <%= @current_directory.name %>
+
+
+  <% else #if we are not under any folder%>
+        <%= link_to "/", data_home_path %>
+
+      </div>
+  <% end %>
+
+</div>

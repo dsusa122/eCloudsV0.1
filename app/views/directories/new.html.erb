@@ -2,4 +2,17 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Back', directories_path %>
+<p>
+  <% if @directory.parent %>
+      <%= link_to "Back to '#{@directory.parent.name}' Directory", browse_path(@directory.parent) %>
+  <% else %>
+      <%= link_to "Back to Root directory", data_home_path %>
+  <% end %>
+</p>
+
+<%= render :partial => "browser/breadcrumbs" %>
+
+
+
+
+

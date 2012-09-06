@@ -11,15 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
+    <!-- <= f.error_messages %>         -->
+    <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :path %><br />
-    <%= f.text_field :path %>
-  </div>
+     </div>
+    <%= f.hidden_field :parent_id %>
+
   <div class="actions">
-    <%= f.submit %>
+    <% if @directory.new_record? %>
+        <%= f.submit "Create Folder" %>
+    <% else %>
+        <%= f.submit "Rename Folder" %>
+    <% end %>
   </div>
 <% end %>
+
+

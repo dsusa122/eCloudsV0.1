@@ -1,5 +1,7 @@
 class Directory < ActiveRecord::Base
-  attr_accessible :name, :path
+  acts_as_tree
+  attr_accessible :name, :path, :parent_id
+   belongs_to :user
 
-  belongs_to :users
+  has_many :cloud_files, :dependent => :destroy
 end

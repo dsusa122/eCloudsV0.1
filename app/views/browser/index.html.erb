@@ -1,10 +1,27 @@
-<h2>Directories</h2>
+<h1>Your Data</h1>
+
+
+
+<!-- TO create folders and directories -->
+<ul >
+  <% if @current_directory %>
+
+      <li><%= link_to "Upload", new_sub_file_path(@current_directory) %></li>
+      <li><%= link_to "New Folder", new_sub_directory_path(@current_directory) %></li>
+  <% else %>
+      <li><%= link_to "Upload", new_cloud_file_path %></li>
+      <li><%= link_to "New Folder", new_directory_path %></li>
+  <% end %>
+</ul>
+
+<%= render :partial => "browser/breadcrumbs" %>
+<!-- Directories -->
 
 <table class= "table table-striped">
   <tr>
     <th>Name</th>
     <th>Url</th>
-    <th>Type</th>
+    <th>Size</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,12 +29,40 @@
 
   <% @directories.each do |directory| %>
       <tr>
-        <td><%= directory.name %></td>
+        <td class = "alert alert-success"><%= link_to directory.name, browse_path(directory) %></td>
         <td><%= directory.directory_path %></td>
         <td>---</td>
-        <td><%= link_to 'Show', directory %></td>
+        <td>
+          <%= link_to "Rename" , rename_directory_path(directory) %>
+        </td>
+        <td>
+          <%= link_to "Delete" %>
+        </td>
+        <!-- <td><= link_to 'Show', directory %></td>    -->
         <!--<td><= link_to 'Edit', edit_cloud_file_path(cloud_file) %></td>-->
         <!-- <td><= link_to 'Destroy', cloud_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>  -- >
       </tr>
   <% end %>
+
+
+  <!-- Files -->
+
+  <% @cloud_files.each do |cloud_file| %>
+      <tr>
+        <td><%= cloud_file.name %></td>
+        <td><%= cloud_file.url %></td>
+        <td>---</td>
+        <td><%= link_to "Download" %>  </td>
+        <td><%= link_to "Delete" , cloud_file, :confirm => 'Are you sure?', :method => :delete%></td>
+        <!--<td><= link_to 'Edit', edit_cloud_file_path(cloud_file) %></td>-->
+        <!-- <td><= link_to 'Destroy', cloud_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>  -- >
+      </tr>
+  <% end %>
+
+
+
 </table>
+
+
+
+

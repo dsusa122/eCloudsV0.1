@@ -3,3 +3,11 @@
 <%= render 'form' %>
 
 <%= link_to 'Back', cloud_files_path %>
+
+<%= render :partial => "browser/breadcrumbs" %>
+
+<% if @cloud_file.directory %>
+    <%= link_to "Back to '#{@cloud_file.directory.name}' Folder", browse_path(@cloud_file.directory) %>
+<% else %>
+    <%= link_to "Back", root_url %>
+<% end %>

@@ -16,6 +16,8 @@
 
 <div class="label label-info"><%= session[:current_directory].directory_path %></div>
 
+<!-- Listing Files -->
+
 
 <table class= "table table-striped">
   <tr>
@@ -27,7 +29,7 @@
     <th></th>
   </tr>
 
-<% current_user.cloud_files.each do |cloud_file| %>
+<% @cloud_files.each do |cloud_file| %>
   <tr>
     <td><%= cloud_file.name %></td>
     <td><%= cloud_file.url %></td>
@@ -39,6 +41,31 @@
 <% end %>
 </table>
 
+<!-- Listing Directories -->
+
+<h2>Directories</h2>
+
+<table class= "table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Url</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @directories.each do |directory| %>
+      <tr>
+        <td><%= directory.name %></td>
+        <td><%= directory.directory_path %></td>
+        <td>---</td>
+        <td><%= link_to 'Show', directory %></td>
+        <!--<td><= link_to 'Edit', edit_cloud_file_path(cloud_file) %></td>-->
+        <!-- <td><= link_to 'Destroy', cloud_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>  -- >
+      </tr>
+  <% end %>
+</table>
 
 
 <!-- modal para rear directorio -->

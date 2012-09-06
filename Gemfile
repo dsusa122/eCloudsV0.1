@@ -13,6 +13,8 @@ gem 'carrierwave_direct'
 gem 'fog' , '1.5.0'
 
 gem 'carrierwave' , '0.6.2'
+
+gem "acts_as_tree"
 # Bundl<e edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

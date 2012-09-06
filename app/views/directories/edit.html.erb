@@ -1,6 +1,13 @@
 <h1>Editing directory</h1>
 
+<%= render :partial => "browser/breadcrumbs" %>
+
 <%= render 'form' %>
 
-<%= link_to 'Show', @directory %> |
-<%= link_to 'Back', directories_path %>
+
+
+<% if @directory.parent %>
+    <%= link_to "Back to '#{@directory.parent.name}' Folder", browse_path(@directory.parent) %>
+<% else %>
+    <%= link_to "Back", root_url %>
+<% end %>

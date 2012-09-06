@@ -1,7 +1,17 @@
 ECloudsV01::Application.routes.draw do
-  resources :directories
 
+  #resources
+  resources :directories
   resources :cloud_files
+  resources :instance_types
+  resources :operating_systems
+  resources :virtual_machines
+  resources :clusters  do
+    resources :virtual_machines
+    member do
+      post :add_virtual_machines
+    end
+  end
 
   devise_for :users, :controllers => { :registrations => "registrations" , :sessions => "sessions"}
 
@@ -11,11 +21,7 @@ ECloudsV01::Application.routes.draw do
 
   root :to => "static_pages#home"
 
-  resources :instance_types
 
-  resources :operating_systems
-
-  resources :virtual_machines
 
   get "static_pages/home"
 
@@ -23,12 +29,21 @@ ECloudsV01::Application.routes.draw do
 
   get "static_pages/about"
 
-  resources :clusters  do
-    resources :virtual_machines
-    member do
-      post :add_virtual_machines
-    end
-  end
+
+  #get "browser/browse"
+  get "browser/index"
+
+  match "browse/index" => "browser#index" , :as =>  "data_home"
+
+
+
+
+      match "browse/:directory_id" => "browser#browse", :as => "browse"
+  match "browse/:directory_id/new_folder" => "directories#new", :as => "new_sub_directory"
+
+  match "browse/:directory_id/new_file" => "cloud_files#new", :as => "new_sub_file"
+
+  match "browse/:directory_id/rename" => "directories#edit", :as => "rename_directory"
 
 
 
