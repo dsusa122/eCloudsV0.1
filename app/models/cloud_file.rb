@@ -23,6 +23,14 @@ class CloudFile < ActiveRecord::Base
     ##self.moderated = false
   end
 
+  def complete_url
+    if Rails.env.development?
+      return DEVELOPMENT_BUCKET_URL + self.url
+    elsif Rails.env.production?
+      return PRODUCTION_BUCKET_URL + self.url
+    end
+  end
+
 
 
 end

@@ -26,9 +26,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  def url
-    "https://s3.amazonws.com/eclouds" + super
-  end
+
 
   #def store_dir
    # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"

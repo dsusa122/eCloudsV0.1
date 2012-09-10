@@ -6,7 +6,7 @@ gem 'bootstrap-sass', '2.0.0'
 
 gem 'devise' , '2.1.2'
 
-gem 'aws'   , '2.5.6'
+gem 'aws'   , '2.5.7'
 
 gem 'carrierwave_direct'
 

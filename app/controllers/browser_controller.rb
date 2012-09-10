@@ -2,6 +2,20 @@ class BrowserController < ApplicationController
 
   #this action is for viewing folders
   def browse
+
+    #esto es para crear un nuevo archivo desde el modal
+    @cloud_file = CloudFile.new
+
+
+    if params[:directory_id] #if we want to upload a file inside another folder
+      @current_directory = current_user.directories.find(params[:directory_id])
+      @cloud_file.directory_id = @current_directory.id
+    end
+
+    #acá guardo el current dir en la sessión
+     session[:current_dir_session]  = @current_directory
+
+
     #get the folders owned/created by the current_user
     @current_directory = current_user.directories.find(params[:directory_id])
 
@@ -21,6 +35,16 @@ class BrowserController < ApplicationController
   end
 
   def index
+    #esto es para crear un nuevo archivo desde el modal
+    @cloud_file = CloudFile.new
+
+
+    if params[:directory_id] #if we want to upload a file inside another folder
+      @current_directory = current_user.directories.find(params[:directory_id])
+      @cloud_file.directory_id = @current_directory.id
+    end
+
+
     if user_signed_in?
       #show only root folders (which have no parent folders)
       @directories = current_user.directories.roots

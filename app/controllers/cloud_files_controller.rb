@@ -59,13 +59,21 @@ class CloudFilesController < ApplicationController
   # POST /cloud_files
   # POST /cloud_files.json
   def create
+
+    @current_directory = session[:current_dir_session]
+
+
+
     @cloud_file = CloudFile.new(params[:cloud_file])
     @cloud_file.user_id = current_user.id
+
+    @cloud_file.directory_id = @current_directory.id
 
     puts 'Holaaaaa'
     puts @cloud_file.attributes
 
-    @cloud_file.url =@cloud_file.avatar.store_path.to_s
+    @cloud_file.url =@cloud_file.avatar.store_dir.to_s
+
     @cloud_file.name = @cloud_file.avatar.filename.to_s
 
     #@upload = params["file_up" ]
@@ -79,12 +87,18 @@ class CloudFilesController < ApplicationController
     #File.open(path,"wb"){ |f| f.write(@upload[:data].read)}
 
     if @cloud_file.save
+
+      @cloud_file.url = @cloud_file.url + @cloud_file.id.to_s + "/" + @cloud_file.name
+
+
+      @cloud_file.save
+
       flash[:notice] = "Successfully uploaded the file."
 
       if @cloud_file.directory #checking if we have a parent folder for this file
         redirect_to browse_path(@cloud_file.directory)  #then we redirect to the parent folder
       else
-        redirect_to 'home/index'
+        redirect_to data_home_path
       end
     else
       render :action => 'new'

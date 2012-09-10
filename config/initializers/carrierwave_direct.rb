@@ -38,7 +38,7 @@ elsif Rails.env.development?
 
 
       config.fog_directory = 'eclouds'
-      config.fog_public = false
+      config.fog_public = true
       #config.fog_host= 'http://localhost:3000'
 
       #config.root = ::Rails.root.to_s + "/public"
@@ -60,7 +60,7 @@ else
 
 
     config.fog_directory = 'eclouds'
-    config.fog_public = false
+    config.fog_public = true
     #config.fog_host= 'http://localhost:3000'
 
     #config.root = ::Rails.root.to_s + "/public"

@@ -66,7 +66,7 @@ class DirectoriesController < ApplicationController
       if @directory.parent #checking if we have a parent folder on this one
         redirect_to browse_path(@directory.parent)  #then we redirect to the parent folder
       else
-        redirect_to root_url #if not, redirect back to home page
+        redirect_to data_home_path #if not, redirect back to home page
       end
     else
       render :action => 'new'
@@ -95,11 +95,19 @@ class DirectoriesController < ApplicationController
   # DELETE /directories/1.json
   def destroy
     @directory = current_user.directories.find(params[:id])
-    @directory.destroy
 
-    respond_to do |format|
-      format.html { redirect_to directories_url }
-      format.json { head :no_content }
+    @parent_directory = @directory.parent #grabbing the parent folder
+
+    #this will destroy the folder along with all the contents inside
+    #sub folders will also be deleted too as well as all files inside
+    @directory.destroy
+    flash[:notice] = "Successfully deleted the folder and all the contents inside."
+
+    #redirect to a relevant path depending on the parent folder
+    if @parent_directory
+      redirect_to browse_path(@parent_directory)
+    else
+      redirect_to data_home_path
     end
   end
 end

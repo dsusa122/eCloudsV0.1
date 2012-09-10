@@ -1,6 +1,8 @@
 <h1>Your Data</h1>
 
 
+<!-- Button to trigger modal -->
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Upload File</a>
 
 <!-- TO create folders and directories -->
 <ul >
@@ -15,32 +17,30 @@
 </ul>
 
 <%= render :partial => "browser/breadcrumbs" %>
+
 <!-- Directories -->
 
-<table class= "table table-striped">
+
+<table class= "table table-hover">
   <tr>
+    <th></th>
     <th>Name</th>
-    <th>Url</th>
-    <th>Size</th>
     <th></th>
     <th></th>
-    <th></th>
+
   </tr>
 
   <% @directories.each do |directory| %>
-      <tr>
-        <td class = "alert alert-success"><%= link_to directory.name, browse_path(directory) %></td>
-        <td><%= directory.directory_path %></td>
-        <td>---</td>
+      <tr class="alert alert-info">
+        <td> <i class="icon-folder-open"></i></td>
+        <td ><%= link_to directory.name, browse_path(directory) %></td>
         <td>
           <%= link_to "Rename" , rename_directory_path(directory) %>
         </td>
         <td>
-          <%= link_to "Delete" %>
+          <%= link_to "Delete", directory, :confirm => 'Are you sure to delete the folder and all of its contents?', :method => :delete %>
         </td>
-        <!-- <td><= link_to 'Show', directory %></td>    -->
-        <!--<td><= link_to 'Edit', edit_cloud_file_path(cloud_file) %></td>-->
-        <!-- <td><= link_to 'Destroy', cloud_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>  -- >
+
       </tr>
   <% end %>
 
@@ -49,13 +49,11 @@
 
   <% @cloud_files.each do |cloud_file| %>
       <tr>
+        <td><i class="icon-file"></td>
         <td><%= cloud_file.name %></td>
-        <td><%= cloud_file.url %></td>
-        <td>---</td>
-        <td><%= link_to "Download" %>  </td>
+        <td><a href="<%= cloud_file.complete_url %>">Download</a></td>
         <td><%= link_to "Delete" , cloud_file, :confirm => 'Are you sure?', :method => :delete%></td>
-        <!--<td><= link_to 'Edit', edit_cloud_file_path(cloud_file) %></td>-->
-        <!-- <td><= link_to 'Destroy', cloud_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>  -- >
+
       </tr>
   <% end %>
 
@@ -66,3 +64,55 @@
 
 
 
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////-->
+
+<!-- Modals -->
+
+<!-- modal para subir archivo-->
+
+<!-- Modal -->
+<div class="modal hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-show="false">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Upload File</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      <%= form_for(@cloud_file, :html => {:multipart =>true}) do |f| %>
+          <% if @cloud_file.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@cloud_file.errors.count, "error") %> prohibited this cloud_file from being saved:</h2>
+
+              <ul>
+                <% @cloud_file.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+
+
+
+        <div class="field">
+          <%= f.label "file" %><br />
+          <%= f.file_field :avatar %>
+        </div>
+
+
+
+
+        </p>
+        </div>
+        <div class="modal-footer">
+
+          <div class="btn ">
+            <%= f.submit %>
+          </div>
+
+        </div>
+
+    <% end %>
+    </div>
+
+<!-- FIN de modal para subir archivo-->
