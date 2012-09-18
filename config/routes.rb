@@ -1,5 +1,13 @@
 ECloudsV01::Application.routes.draw do
 
+
+
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
+  resources :virtual_machine_events
+
   #resources
   resources :directories
   resources :cloud_files
@@ -36,16 +44,26 @@ ECloudsV01::Application.routes.draw do
   match "browse/index" => "browser#index" , :as =>  "data_home"
 
 
+  #rutas para browsear directorios
 
-
-      match "browse/:directory_id" => "browser#browse", :as => "browse"
+  match "browse/:directory_id" => "browser#browse", :as => "browse"
   match "browse/:directory_id/new_folder" => "directories#new", :as => "new_sub_directory"
 
   match "browse/:directory_id/new_file" => "cloud_files#new", :as => "new_sub_file"
 
   match "browse/:directory_id/rename" => "directories#edit", :as => "rename_directory"
 
+  #rutas para acciones con máquinas virtuales
+  # acá puse el current cluster para saber a qué cluster toca devolverse
+  match "virtual_machines/:virtual_machine_id/stop/:current_cluster_id"  => "virtual_machines#stop", :as => "stop_virtual_machine"
+  match "virtual_machines/:virtual_machine_id/start/:current_cluster_id"  => "virtual_machines#start", :as => "start_virtual_machine"
+  match "virtual_machines/:virtual_machine_id/reboot/:current_cluster_id"  => "virtual_machines#reboot", :as => "reboot_virtual_machine"
+  match "virtual_machines/:virtual_machine_id/terminate/:current_cluster_id"  => "virtual_machines#terminate", :as => "terminate_virtual_machine"
 
+  match "virtual_machines/start_all/:current_cluster_id"  => "virtual_machines#start_all", :as => "start_all_virtual_machine"
+  match "virtual_machines/reboot_all/:current_cluster_id"  => "virtual_machines#reboot_all", :as => "reboot_all_virtual_machine"
+  match "virtual_machines/stop_all/:current_cluster_id"  => "virtual_machines#stop_all", :as => "stop_all_virtual_machine"
+  match "virtual_machines/terminate_all/:current_cluster_id"  => "virtual_machines#terminate_all", :as => "terminate_all_virtual_machine"
 
 
   # The priority is based upon order of creation:

@@ -10,7 +10,7 @@
   <br>
   <br>
   <b>InstanceType:</b>
-  <%= InstanceType.find(@cluster.instance_type_id).name %>
+  <%= @cluster.instance_type %>
 </p>
 
 
@@ -34,31 +34,71 @@
 </div>
 
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-<div class="span8">
-  <% if @cluster.virtual_machines.any? %>
-      <h3>Virtual Machines (<%= @cluster.virtual_machines.count %>)</h3>
 
-      <br>
-      <br>
 
-      <ol >
-        <%= render @cluster.virtual_machines %>
-      </ol>
+<% if @cluster.virtual_machines.any? %>
 
+    <button class="btn btn-info">
+      <%= link_to 'Start All', start_all_virtual_machine_path( @cluster)%>
+    </button>
+
+    <button class="btn btn-info">
+      <%= link_to 'Reboot All', reboot_all_virtual_machine_path( @cluster)%>
+    </button>
+
+    <button class="btn btn-info">
+      <%= link_to 'Stop All', stop_all_virtual_machine_path( @cluster)%>
+    </button>
+
+    <button class="btn btn-info">
+      <%= link_to 'Terminate All', terminate_all_virtual_machine_path( @cluster)%>
+    </button>
+
+    <br>
+    <br>
+
+<h3>Virtual Machines (<%= @cluster.virtual_machines.count %>)</h3>
+<table class="table">
+     <tr>
+         <th>
+            Name
+         </th>
+         <th>
+            State
+         </th>
+     </tr>
+  <% @cluster.virtual_machines.each do |virtual_machine| %>
+
+      <% if !(virtual_machine.current_state == "terminated" ) %>
+
+         <tr>
+            <td><%= virtual_machine.hostname %></td>
+            <td><%= virtual_machine.current_state %></td>
+            <td><i class="icon-play-circle"></i><%= link_to 'Start', start_virtual_machine_path(virtual_machine, @cluster)%></td>
+            <td><i class="icon-minus-sign"></i><%= link_to 'Stop', stop_virtual_machine_path(virtual_machine, @cluster)%></td>
+            <td><i class="icon-repeat"></i><%= link_to 'Reboot', reboot_virtual_machine_path(virtual_machine, @cluster)%></td>
+            <td><i class="icon-remove-sign"></i><%= link_to 'Terminate', terminate_virtual_machine_path(virtual_machine, @cluster)%></td>
+     </tr>
+      <% end %>
+  <% end %>
+
+</table>
 
 <% end %>
-</div>
 
-<br>
-<br>
-<br>
-<br>
-<br>
 
-<br>
 
-<br>
+
+
+
 
 
 

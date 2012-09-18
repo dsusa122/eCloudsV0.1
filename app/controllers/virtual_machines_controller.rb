@@ -83,4 +83,198 @@ class VirtualMachinesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def stop
+    @virtual_machine = VirtualMachine.find( params[:virtual_machine_id])
+    @current_cluster = Cluster.find ( params[:current_cluster_id])
+
+    stop_one_vm(@virtual_machine)
+
+
+    flash[:notice]   = @virtual_machine.hostname
+    redirect_to @current_cluster
+  end
+
+  def stop_all
+
+    @current_cluster = Cluster.find ( params[:current_cluster_id])
+
+    @current_cluster.virtual_machines.each do |virtual_machine|
+
+      if !(virtual_machine.state == "terminated" )
+
+        stop_one_vm(virtual_machine)
+
+      end
+
+    end
+
+    redirect_to @current_cluster
+  end
+
+  def stop_one_vm(vm)
+
+    if !(vm.state == "stopped" or vm.state == "stopping")
+
+
+        @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+
+        @ec2.stop_instances([vm.hostname])
+
+        # acá genero el evento y lo guardo
+        @event = VirtualMachineEvent.new
+
+        @event.action = VIRTUAL_MACHINE_EVENTS[:STOPPED]
+        @event.vm_id = vm.id
+        @event.user_id = current_user.id
+        @event.save
+
+
+    end
+
+  end
+
+
+  def start
+    @virtual_machine = VirtualMachine.find( params[:virtual_machine_id])
+    @current_cluster = Cluster.find ( params[:current_cluster_id])
+
+    start_one_vm(@virtual_machine)
+
+    flash[:notice]   = @virtual_machine.hostname
+    redirect_to @current_cluster
+  end
+
+  def start_all
+
+    @current_cluster = Cluster.find ( params[:current_cluster_id])
+
+    @current_cluster.virtual_machines.each do |virtual_machine|
+
+      if !(virtual_machine.state == "terminated" )
+
+          start_one_vm(virtual_machine)
+
+      end
+
+    end
+
+    redirect_to @current_cluster
+
+  end
+
+  def start_one_vm(vm)
+
+    if !(vm.state == "running" or vm.state == "pending")
+
+      @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+
+      @ec2.start_instances([vm.hostname])
+
+      # acá genero el evento y lo guardo
+      @event = VirtualMachineEvent.new
+
+      @event.action = VIRTUAL_MACHINE_EVENTS[:STARTED]
+      @event.vm_id = vm.id
+      @event.user_id = current_user.id
+      @event.save
+
+    end
+  end
+
+
+  def reboot
+    @virtual_machine = VirtualMachine.find( params[:virtual_machine_id])
+    @current_cluster = Cluster.find ( params[:current_cluster_id])
+
+    reboot_one_vm(@virtual_machine)
+
+
+    flash[:notice]   = @virtual_machine.hostname
+    redirect_to @current_cluster
+  end
+
+  def reboot_all
+
+    @current_cluster = Cluster.find ( params[:current_cluster_id])
+
+    @current_cluster.virtual_machines.each do |virtual_machine|
+
+      if !(virtual_machine.state == "terminated" )
+
+        reboot_one_vm(virtual_machine)
+
+      end
+
+    end
+
+    redirect_to @current_cluster
+
+  end
+
+
+  def reboot_one_vm(vm)
+
+    if !(vm.state == "stopped" or vm.state == "stopping")
+
+      @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+
+      @ec2.reboot_instances([vm.hostname])
+
+      # acá genero el evento y lo guardo
+      @event = VirtualMachineEvent.new
+
+      @event.action = VIRTUAL_MACHINE_EVENTS[:REBOOTED]
+      @event.vm_id = vm.id
+      @event.user_id = current_user.id
+      @event.save
+
+    end
+  end
+
+  def terminate
+    @virtual_machine = VirtualMachine.find( params[:virtual_machine_id])
+    @current_cluster = Cluster.find ( params[:current_cluster_id])
+
+   terminate_one_vm(@virtual_machine)
+
+
+    flash[:notice]   = @virtual_machine.hostname
+    redirect_to @current_cluster
+  end
+
+  def terminate_all
+
+    @current_cluster = Cluster.find ( params[:current_cluster_id])
+
+    @current_cluster.virtual_machines.each do |virtual_machine|
+
+      if !(virtual_machine.state == "terminated" )
+
+        terminate_one_vm(virtual_machine)
+
+      end
+
+    end
+
+    redirect_to @current_cluster
+
+  end
+
+
+  def terminate_one_vm(vm)
+
+    @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+
+    @ec2.terminate_instances([vm.hostname])
+
+    # acá genero el evento y lo guardo
+    @event = VirtualMachineEvent.new
+
+    @event.action = VIRTUAL_MACHINE_EVENTS[:TERMINATED]
+    @event.vm_id = vm.id
+    @event.user_id = current_user.id
+    @event.save
+
+  end
 end

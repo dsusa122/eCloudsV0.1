@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event date:</b>
+  <%= @virtual_machine_event.event_date %>
+</p>
+
+<p>
+  <b>Action:</b>
+  <%= @virtual_machine_event.action %>
+</p>
+
+<p>
+  <b>Vm:</b>
+  <%= @virtual_machine_event.vm_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @virtual_machine_event.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_virtual_machine_event_path(@virtual_machine_event) %> |
+<%= link_to 'Back', virtual_machine_events_path %>

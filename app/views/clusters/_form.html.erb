@@ -16,7 +16,7 @@
     <%= f.text_field :name %>
 
     <%= f.label :instance_type_id %><br />
-    <%= select :cluster,  :instance_type_id , options_from_collection_for_select( InstanceType.all , :id , :name , @cluster.instance_type_id) %><br />
+    <%= select :cluster,  :instance_type ,  Aws::Ec2::INSTANCE_TYPES  %><br />
 
 
   </div>

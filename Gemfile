@@ -15,6 +15,12 @@ gem 'fog' , '1.5.0'
 gem 'carrierwave' , '0.6.2'
 
 gem "acts_as_tree"
+
+gem 'activeadmin'
+
+gem 'meta_search' , '>= 1.1.0.pre'
+
+
 # Bundl<e edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

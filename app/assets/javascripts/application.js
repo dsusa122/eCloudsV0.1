@@ -13,5 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-//= require bootstrap_dropdown
-//= require modal
+//= require bootstrap
+

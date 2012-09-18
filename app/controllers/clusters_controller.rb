@@ -2,6 +2,9 @@ class ClustersController < ApplicationController
   # GET /clusters
   # GET /clusters.json
   def index
+
+
+
     @clusters = Cluster.all
 
     respond_to do |format|
@@ -87,10 +90,15 @@ class ClustersController < ApplicationController
   end
 
   def add_virtual_machines
+
+    @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+
     @cluster = Cluster.find(params[:id])
     @number_of_vms = params["vms_number_input" ]
     @number_of_vms = @number_of_vms[:vm_number].to_i
     #@number_of_vms =5
+
+
 
     #puts "hola!!!!!!!"
     #puts @cluster.name
@@ -99,17 +107,36 @@ class ClustersController < ApplicationController
        # falta coger info dependiendo del tipo de vm
     for i  in 1..@number_of_vms
 
-      @name =  (0..4).map{(65.+rand(25)).chr}.join
+      @instances = @ec2.launch_instances( 'ami-96f352ff' ,:group_ids => ['AppCientificas'],
+                                          :user_data => 'EClouds Instance',
+                                          :key_name => 'David4')
+      @instance = @instances[0]
+
+      #@name =  (0..4).map{(65.+rand(25)).chr}.join
+      @name = @instance[:aws_instance_id]
+
       @virtual_machine = VirtualMachine.new
       @virtual_machine.hostname = @name
+
+      ## acá cojo el estado de la mv
+
       @virtual_machine.cluster_id = @cluster.id
 
       puts @virtual_machine.cluster_id
       @virtual_machine.save
+
+      @event = VirtualMachineEvent.new
+
+      @event.action = VIRTUAL_MACHINE_EVENTS[:CREATED]
+      @event.vm_id = @virtual_machine.id
+      @event.user_id = current_user.id
+      @event.save
 
     end
       respond_to do |format|
        format.html { redirect_to @cluster, notice: 'Cluster was successfully updated.' }
        end
   end
+
+
 end

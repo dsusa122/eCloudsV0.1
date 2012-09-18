@@ -1,0 +1,28 @@
+<h1>Listing virtual_machine_events</h1>
+
+<table>
+  <tr>
+    <th>Event date</th>
+    <th>Action</th>
+    <th>Vm</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @virtual_machine_events.each do |virtual_machine_event| %>
+  <tr>
+    <td><%= virtual_machine_event.action %></td>
+    <td><%= virtual_machine_event.vm_id %></td>
+    <td><%= virtual_machine_event.user_id %></td>
+    <td><%= link_to 'Show', virtual_machine_event %></td>
+    <td><%= link_to 'Edit', edit_virtual_machine_event_path(virtual_machine_event) %></td>
+    <td><%= link_to 'Destroy', virtual_machine_event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Virtual machine event', new_virtual_machine_event_path %>

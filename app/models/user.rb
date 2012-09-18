@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
 
   has_many :directories
 
+  has_many :virtual_machine_events
 
 
 end
