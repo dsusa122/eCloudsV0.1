@@ -3,6 +3,9 @@ class Cluster < ActiveRecord::Base
 
 
   has_many :virtual_machines
+  has_many :jobs
 
-  belongs_to :users
+  belongs_to :user
+
+
 end

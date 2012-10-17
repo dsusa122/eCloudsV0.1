@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Application:</b>
+  <%= @job.application_id %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @job.user_id %>
+</p>
+
+<p>
+  <b>Cluster:</b>
+  <%= @job.cluster_id %>
+</p>
+
+<p>
+  <b>Virtual machine:</b>
+  <%= @job.virtual_machine_id %>
+</p>
+
+<p>
+  <b>Parameters:</b>
+  <%= @job.parameters %>
+</p>
+
+<p>
+  <b>Inputs:</b>
+  <%= @job.inputs %>
+</p>
+
+<p>
+  <b>Outputdir:</b>
+  <%= @job.outputdir %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @job.status %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @job.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @job.end_time %>
+</p>
+
+<p>
+  <b>Wallclock time:</b>
+  <%= @job.wallclock_time %>
+</p>
+
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>

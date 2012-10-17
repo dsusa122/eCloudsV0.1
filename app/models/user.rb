@@ -25,5 +25,10 @@ class User < ActiveRecord::Base
 
   has_many :virtual_machine_events
 
+  has_many :jobs
+
+  def to_s
+    email
+  end
 
 end

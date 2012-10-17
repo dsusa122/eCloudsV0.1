@@ -22,6 +22,9 @@
         <ul class="nav pull-right">
 
           <% if user_signed_in? %>
+
+              <li><%= link_to "Jobs",   jobs_path %></li>
+              <li><%= link_to "Apps",   applications_path %></li>
               <li><%= link_to "My Clusters",   clusters_path %></li>
               <li><%= link_to "My Data",   data_home_path %></li>
           <% end %>

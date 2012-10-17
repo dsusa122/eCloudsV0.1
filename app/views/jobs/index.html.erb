@@ -1,0 +1,35 @@
+<h1>Your Jobs</h1>
+
+<table class="table">
+  <tr>
+    <th>Id</th>
+    <th>Application</th>
+    <th>Cluster</th>
+    <th>Virtual machine</th>
+    <th>Status</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @jobs.each do |job| %>
+  <tr>
+    <td><%= job.id %></td>
+    <td><%= job.application_id %></td>
+    <td><%= job.cluster_id %></td>
+    <td><%= job.virtual_machine_id %></td>
+    <td><%= job.status %></td>
+    <td><%= job.start_time %></td>
+    <td><%= job.end_time %></td>
+    <td><%= link_to 'Show', job %></td>
+    <td><%= link_to 'Edit', edit_job_path(job) %></td>
+    <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Job', new_job_path %>

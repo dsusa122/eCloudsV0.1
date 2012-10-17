@@ -2,6 +2,10 @@ ECloudsV01::Application.routes.draw do
 
 
 
+  resources :jobs
+
+  resources :applications
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config

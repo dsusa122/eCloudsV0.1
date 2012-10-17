@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917163544) do
+ActiveRecord::Schema.define(:version => 20121017144953) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(:version => 20120917163544) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "applications", :force => true do |t|
+    t.string   "name"
+    t.string   "version"
+    t.string   "installer_url"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "cloud_files", :force => true do |t|
     t.string   "name"
     t.integer  "directory"
@@ -56,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120917163544) do
     t.string   "avatar"
     t.integer  "parent_id"
     t.integer  "directory_id"
+    t.integer  "size"
   end
 
   add_index "cloud_files", ["directory_id"], :name => "index_cloud_files_on_directory_id"
@@ -86,6 +95,22 @@ ActiveRecord::Schema.define(:version => 20120917163544) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "jobs", :force => true do |t|
+    t.integer  "application_id"
+    t.integer  "user_id"
+    t.integer  "cluster_id"
+    t.integer  "virtual_machine_id"
+    t.string   "parameters"
+    t.string   "inputs"
+    t.string   "outputdir"
+    t.string   "status"
+    t.date     "start_time"
+    t.date     "end_time"
+    t.integer  "wallclock_time"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "operating_systems", :force => true do |t|

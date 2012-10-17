@@ -2,6 +2,8 @@ class VirtualMachine < ActiveRecord::Base
   attr_accessible :cores, :hostname, :localStorage, :ram , :cluster_id
   belongs_to :cluster
 
+  has_many :jobs
+
   #acutaliza y salva el estado de la maq virtual
   def current_state
 
