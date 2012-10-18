@@ -117,6 +117,7 @@ class ClustersController < ApplicationController
 
       @virtual_machine = VirtualMachine.new
       @virtual_machine.hostname = @name
+      @virtual_machine.slots = 1
 
       ## acá cojo el estado de la mv
 

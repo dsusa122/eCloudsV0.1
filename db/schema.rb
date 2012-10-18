@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017144953) do
+ActiveRecord::Schema.define(:version => 20121018183627) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20121017144953) do
     t.integer  "wallclock_time"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.string   "script_url"
   end
 
   create_table "operating_systems", :force => true do |t|
@@ -161,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20121017144953) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state"
+    t.integer  "slots"
   end
 
 end

@@ -7,6 +7,8 @@ VIRTUAL_MACHINE_EVENTS = { :STARTED => "STARTED",
                            :CREATED => "CREATED"}
 
 JOBS_STATUS =  { :PENDING=> "PENDING",
+                 :PREPARING => "PREPARING",
+                 :WAITING => "WAITING",
                  :QUEUED => "QUEUED",
                  :RUNNING =>"RUNNING",
                  :FAILED => "FAILED",
@@ -19,3 +21,6 @@ AWS_SECRET_ACCESS_KEY = 'DOQX+t8eZmesb1nfGSLHfq3h5928vRDny5UZDZl6'
 PRESCHEDULING_QUEUE = 'prescheduling'
 
 SCHEDULE_JOB_MSG = 'SCHEDULE_JOB'
+RUN_JOB_MSG = 'RUN_JOB'
+
+SCHEDULING_QUEUE = 'scheduling'
