@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018183627) do
+ActiveRecord::Schema.define(:version => 20121022185918) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -50,8 +50,9 @@ ActiveRecord::Schema.define(:version => 20121018183627) do
     t.string   "name"
     t.string   "version"
     t.string   "installer_url"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "installation_url"
   end
 
   create_table "cloud_files", :force => true do |t|

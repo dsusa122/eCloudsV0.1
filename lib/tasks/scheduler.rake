@@ -113,13 +113,14 @@ task :checkForJobs => :environment do
 
       @job.virtual_machine = @chosen_vm
       @chosen_vm.slots = @chosen_vm.slots - 1
-      @chosen_vm.save
+
       @job.save
       # ahora debo poner el mensaje en la cola de scheduling
       @queue = @sqs.queue(SCHEDULING_QUEUE)
-      @queue.send_message(RUN_JOB_MSG + ';' + @job.id.to_s+';'+@job.script_url+';'+@job.outputdir )
+      @queue.send_message(@chosen_vm.hostname+';'+RUN_JOB_MSG + ';' + @job.id.to_s+';'+@job.application.installer_url+';'+@job.script_url+';'+@job.outputdir )
       @job.status = JOBS_STATUS[:QUEUED] + ':'+@chosen_vm.hostname
       @job.save
+      @chosen_vm.save
 
 
      else
