@@ -68,8 +68,11 @@
 <h3>Virtual Machines (<%= @cluster.virtual_machines.count %>)</h3>
 <table class="table">
      <tr>
+       <th>
+         provider id
+       </th>
          <th>
-            Name
+            internal dns Name
          </th>
          <th>
             State
@@ -80,6 +83,7 @@
       <% if !(virtual_machine.current_state == "terminated" ) %>
 
          <tr>
+           <td><%= virtual_machine.AMI_name %></td>
             <td><%= virtual_machine.hostname %></td>
             <td><%= virtual_machine.current_state %></td>
             <td><i class="icon-play-circle"></i><%= link_to 'Start', start_virtual_machine_path(virtual_machine, @cluster)%></td>

@@ -11,8 +11,10 @@ task :checkForJobs => :environment do
 
   @parts = @msg.to_s.split(':')
 
+  puts @parts[0]
 
-  if(@parts[0] <=> SCHEDULE_JOB_MSG)
+
+  if(@parts[0]<=> SCHEDULE_JOB_MSG)
 
     @job=Job.find(@parts[1])
     @job.status = JOBS_STATUS[:PREPARING]
@@ -91,7 +93,7 @@ task :checkForJobs => :environment do
     @bucket.put('commands/' + f.path, f, {}, 'public-read')
 
     @location  = @bucket.public_link
-    @commandFileUrl = @location + @commandFilename.to_s
+    @commandFileUrl = @location + '/commands/'+@commandFilename.to_s
 
     puts 'successfully uploaded command file to ' + @commandFileUrl
 
@@ -118,7 +120,7 @@ task :checkForJobs => :environment do
       # ahora debo poner el mensaje en la cola de scheduling
       @queue = @sqs.queue(SCHEDULING_QUEUE)
       @queue.send_message(@chosen_vm.hostname+';'+RUN_JOB_MSG + ';' + @job.id.to_s+';'+@job.application.installer_url+';'+@job.script_url+';'+@job.outputdir )
-      @job.status = JOBS_STATUS[:QUEUED] + ':'+@chosen_vm.hostname
+      @job.status = JOBS_STATUS[:QUEUED] + ':'+@chosen_vm.AMI_name
       @job.save
       @chosen_vm.save
 
@@ -134,5 +136,30 @@ task :checkForJobs => :environment do
 
   end
 
+
+end
+
+task :checkJobStatus => :environment do
+
+  puts 'I am going to check the queue for new messages'
+
+  @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+  @queue = @sqs.queue(SCHEDULING_QUEUE)
+  @msg = @queue.receive
+
+  puts 'I just received the message:'
+  puts @msg
+
+  @parts = @msg.to_s.split(';')
+
+  if(@parts[0] == INSTALLING_APP_MSG)
+
+    # ahora encuentro el job que me dicen que esta en estado instalando
+    @job = Job.find(@parts[1])
+    @job.status = JOBS_STATUS[:INSTALLING] + ':' + @job.virtual_machine.hostname
+    @job.save
+    @msg.delete
+
+  end
 
 end

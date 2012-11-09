@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="230f2e4a-8641-4e1f-a4f3-35f5a3258900" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/tasks/agent.rake" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/command-10" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/command-11" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/command-9" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commandTemp" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/clusters_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/clusters_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/virtual_machine.rb" afterPath="$PROJECT_DIR$/app/models/virtual_machine.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/clusters/show.html.erb" afterPath="$PROJECT_DIR$/app/views/clusters/show.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/virtual_machines/show.html.erb" afterPath="$PROJECT_DIR$/app/views/virtual_machines/show.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/general.rb" afterPath="$PROJECT_DIR$/config/initializers/general.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/agent.rake" afterPath="$PROJECT_DIR$/lib/tasks/agent.rake" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/scheduler.rake" afterPath="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
     </list>
     <ignored path="eCloudsV0.1.iws" />
@@ -34,16 +44,34 @@
       <file leaf-file-name="scheduler.rake" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tasks/scheduler.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="102" column="20" selection-start="2902" selection-end="2902" vertical-scroll-proportion="0.0">
+            <state line="114" column="27" selection-start="3166" selection-end="3166" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="agent.rake" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="agent.rake" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tasks/agent.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="20" selection-start="289" selection-end="289" vertical-scroll-proportion="0.20965058">
+            <state line="26" column="33" selection-start="680" selection-end="680" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clusters_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/clusters_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="109" column="55" selection-start="2600" selection-end="2600" vertical-scroll-proportion="0.20965058">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="virtual_machines_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="268" column="41" selection-start="6229" selection-end="6229" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -62,11 +90,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/models/user.rb" />
-        <option value="$PROJECT_DIR$/app/models/cluster.rb" />
-        <option value="$PROJECT_DIR$/app/models/application.rb" />
-        <option value="$PROJECT_DIR$/app/models/virtual_machine.rb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
         <option value="$PROJECT_DIR$/app/views/jobs/_form.html.erb" />
         <option value="$PROJECT_DIR$/app/models/job.rb" />
         <option value="$PROJECT_DIR$/app/views/jobs/index.html.erb" />
@@ -74,10 +97,15 @@
         <option value="$PROJECT_DIR$/app/models/scheduler.rb" />
         <option value="$PROJECT_DIR$/script/scheduler/scheduler.rake" />
         <option value="$PROJECT_DIR$/db/migrate/20121018182746_add_script_url_to_jobs.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/clusters_controller.rb" />
         <option value="$PROJECT_DIR$/config/initializers/general.rb" />
-        <option value="$PROJECT_DIR$/lib/tasks/agent.rake" />
+        <option value="$PROJECT_DIR$/db/migrate/20121108233226_add_ami_nameto_virtual_machine.rb" />
+        <option value="$PROJECT_DIR$/app/views/virtual_machines/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/clusters/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/virtual_machine.rb" />
         <option value="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
+        <option value="$PROJECT_DIR$/lib/tasks/agent.rake" />
+        <option value="$PROJECT_DIR$/app/controllers/clusters_controller.rb" />
       </list>
     </option>
   </component>
@@ -113,12 +141,12 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="RailsProjectView">
-        <subPane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="eCloudsV0.1" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -197,7 +225,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -214,15 +242,19 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
+      <pane id="RailsProjectView">
+        <subPane>
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eCloudsV0.1" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -594,7 +626,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26196268" sideWeight="0.50079745" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28548256" sideWeight="0.67145133" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29683697" sideWeight="0.67145133" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2652068" sideWeight="0.49441788" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32737276" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -664,47 +696,9 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/jobs/index.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/jobs/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="25" selection-start="289" selection-end="289" vertical-scroll-proportion="-10.347826" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/operating_system.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="70" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20120919143704_add_size_integer_to_cloud_file.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="4" selection-start="75" selection-end="115" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20121018183627_add_slots_to_virtual_machine.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="62" selection-start="131" selection-end="131" vertical-scroll-proportion="0.1252236">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20121018182746_add_script_url_to_jobs.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="55" selection-start="117" selection-end="117" vertical-scroll-proportion="0.12068965">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/job.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="67" selection-start="297" selection-end="297" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/cloud_file.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="29" selection-start="100" selection-end="107" vertical-scroll-proportion="0.0" />
+        <state line="15" column="101" selection-start="496" selection-end="496" vertical-scroll-proportion="0.37701976" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/jobs_controller.rb">
@@ -712,58 +706,96 @@
         <state line="43" column="28" selection-start="844" selection-end="844" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/clusters_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/jobs/new.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="25" selection-start="3372" selection-end="3372" vertical-scroll-proportion="0.8036606">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
+    <entry file="file://$PROJECT_DIR$/db/migrate/20121022185918_add_installation_url_to_application.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="37" selection-start="107" selection-end="107" vertical-scroll-proportion="0.16306156">
+        <state line="2" column="3" selection-start="66" selection-end="139" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/initializers/general.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="37" selection-start="744" selection-end="744" vertical-scroll-proportion="0.46589017">
+        <state line="29" column="3" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.67554075">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/application.rb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/cloud_files_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20121108233226_add_ami_nameto_virtual_machine.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="43" selection-start="158" selection-end="158" vertical-scroll-proportion="0.18635607">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/clusters/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="8" selection-start="234" selection-end="234" vertical-scroll-proportion="0.47755834">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/virtual_machines/_virtual_machine.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20121022185918_add_installation_url_to_application.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/virtual_machines/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="10" selection-start="144" selection-end="144" vertical-scroll-proportion="0.11647254">
+        <state line="9" column="31" selection-start="152" selection-end="152" vertical-scroll-proportion="0.22621185">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/applications/_form.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/views/clusters/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="2" selection-start="564" selection-end="564" vertical-scroll-proportion="0.50865054">
+        <state line="71" column="20" selection-start="1374" selection-end="1374" vertical-scroll-proportion="-14.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/virtual_machine.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="5" selection-start="521" selection-end="521" vertical-scroll-proportion="0.5008944">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/scheduler.rake">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="20" selection-start="2902" selection-end="2902" vertical-scroll-proportion="0.0">
+        <state line="114" column="27" selection-start="3166" selection-end="3166" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/agent.rake">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="20" selection-start="289" selection-end="289" vertical-scroll-proportion="0.20965058">
+        <state line="26" column="33" selection-start="680" selection-end="680" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="268" column="41" selection-start="6229" selection-end="6229" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/clusters_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="55" selection-start="2600" selection-end="2600" vertical-scroll-proportion="0.20965058">
           <folding />
         </state>
       </provider>

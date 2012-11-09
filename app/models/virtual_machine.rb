@@ -1,5 +1,5 @@
 class VirtualMachine < ActiveRecord::Base
-  attr_accessible :cores, :hostname, :localStorage, :ram , :cluster_id
+  attr_accessible :cores, :hostname, :localStorage, :ram , :cluster_id, :AMI_name
   belongs_to :cluster
 
   has_many :jobs
@@ -10,11 +10,15 @@ class VirtualMachine < ActiveRecord::Base
     if self.state == "terminated"
       return self.state
     else
+      puts self.AMI_name
       @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
 
-      @vm_description = @ec2.describe_instances([self.hostname])
+      @vm_description = @ec2.describe_instances([self.AMI_name])
 
       @state = @vm_description[0][:aws_state]
+
+
+      self.hostname = @vm_description[0][:private_dns_name]
 
       self.state = @state
       self.save

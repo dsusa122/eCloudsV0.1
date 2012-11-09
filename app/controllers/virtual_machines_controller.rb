@@ -119,7 +119,7 @@ class VirtualMachinesController < ApplicationController
 
         @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
 
-        @ec2.stop_instances([vm.hostname])
+        @ec2.stop_instances([vm.AMI_name])
 
         # acá genero el evento y lo guardo
         @event = VirtualMachineEvent.new
@@ -169,7 +169,7 @@ class VirtualMachinesController < ApplicationController
 
       @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
 
-      @ec2.start_instances([vm.hostname])
+      @ec2.start_instances([vm.AMI_name])
 
       # acá genero el evento y lo guardo
       @event = VirtualMachineEvent.new
@@ -219,7 +219,7 @@ class VirtualMachinesController < ApplicationController
 
       @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
 
-      @ec2.reboot_instances([vm.hostname])
+      @ec2.reboot_instances([vm.AMI_name])
 
       # acá genero el evento y lo guardo
       @event = VirtualMachineEvent.new
@@ -266,7 +266,7 @@ class VirtualMachinesController < ApplicationController
 
     @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
 
-    @ec2.terminate_instances([vm.hostname])
+    @ec2.terminate_instances([vm.AMI_name])
 
     # acá genero el evento y lo guardo
     @event = VirtualMachineEvent.new

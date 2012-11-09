@@ -107,16 +107,19 @@ class ClustersController < ApplicationController
        # falta coger info dependiendo del tipo de vm
     for i  in 1..@number_of_vms
 
-      @instances = @ec2.launch_instances( 'ami-96f352ff' ,:group_ids => ['AppCientificas'],
+      @instances = @ec2.launch_instances( 'ami-d4ab2ebd' ,:group_ids => ['AppCientificas'],
                                           :user_data => 'EClouds Instance',
-                                          :key_name => 'David4')
+                                          :key_name => 'amazonKeys')
       @instance = @instances[0]
 
       #@name =  (0..4).map{(65.+rand(25)).chr}.join
       @name = @instance[:aws_instance_id]
 
       @virtual_machine = VirtualMachine.new
-      @virtual_machine.hostname = @name
+      @virtual_machine.AMI_name = @name
+      @virtual_machine.hostname = 'pending'
+      puts 'obteniendo nombre de la vm'
+      puts @virtual_machine.AMI_name
       @virtual_machine.slots = 1
 
       ## acá cojo el estado de la mv
