@@ -132,9 +132,9 @@ task :checkQueue => :environment do
 
     end
 
-    #es mejor que el scheduler se encargue de poner el mensaje de que terminó
-    # @finished_job_msg = FINISHED_JOB_MSG+';'+ @msg_parts[2].to_s
-    #@queue.send_message(@finished_job_msg)
+    
+    @finished_job_msg = FINISHED_JOB_MSG+';'+ @msg_parts[2].to_s
+    @queue.send_message(@finished_job_msg)
 
   end
 

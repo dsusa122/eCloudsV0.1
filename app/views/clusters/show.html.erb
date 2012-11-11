@@ -77,6 +77,12 @@
          <th>
             State
          </th>
+         <th>
+            Slots
+         </th>
+         <th>
+            Jobs
+         </th>
      </tr>
   <% @cluster.virtual_machines.each do |virtual_machine| %>
 
@@ -86,6 +92,13 @@
            <td><%= virtual_machine.AMI_name %></td>
             <td><%= virtual_machine.hostname %></td>
             <td><%= virtual_machine.current_state %></td>
+            <td><%= virtual_machine.slots %></td>
+            <td>
+                <% virtual_machine.jobs.each do |job| %>
+                  <%= link_to job.id, job %>
+                <% end %>
+              </td>
+
             <td><i class="icon-play-circle"></i><%= link_to 'Start', start_virtual_machine_path(virtual_machine, @cluster)%></td>
             <td><i class="icon-minus-sign"></i><%= link_to 'Stop', stop_virtual_machine_path(virtual_machine, @cluster)%></td>
             <td><i class="icon-repeat"></i><%= link_to 'Reboot', reboot_virtual_machine_path(virtual_machine, @cluster)%></td>

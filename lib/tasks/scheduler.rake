@@ -11,6 +11,7 @@ task :checkForJobs => :environment do
 
   @parts = @msg.to_s.split(':')
 
+
   puts @parts[0]
 
 
@@ -119,7 +120,7 @@ task :checkForJobs => :environment do
       @job.save
       # ahora debo poner el mensaje en la cola de scheduling
       @queue = @sqs.queue(SCHEDULING_QUEUE)
-      @queue.send_message(@chosen_vm.hostname+';'+RUN_JOB_MSG + ';' + @job.id.to_s+';'+@job.application.installer_url+';'+@job.script_url+';'+@job.outputdir )
+      @queue.send_message(@chosen_vm.hostname+';'+RUN_JOB_MSG + ';' + @job.id.to_s+';'+@job.application.installer_url+';'+@job.script_url+';'+@job.directory.name )
       @job.status = JOBS_STATUS[:QUEUED] + ':'+@chosen_vm.AMI_name
       @job.save
       @chosen_vm.save
@@ -151,15 +152,63 @@ task :checkJobStatus => :environment do
   puts @msg
 
   @parts = @msg.to_s.split(';')
+  #  toca también por punto y coma porque las urls van separadas por :
+  @parts2 = @msg.to_s.split(';')
 
   if(@parts[0] == INSTALLING_APP_MSG)
 
     # ahora encuentro el job que me dicen que esta en estado instalando
     @job = Job.find(@parts[1])
-    @job.status = JOBS_STATUS[:INSTALLING] + ':' + @job.virtual_machine.hostname
+    @job.status = JOBS_STATUS[:INSTALLING] + ':' + @job.virtual_machine.AMI_name
     @job.save
     @msg.delete
 
+  end
+
+  if(@parts[0] == RUNNING_APP_MSG)
+
+    # ahora encuentro el job que me dicen que esta en estado instalando
+    @job = Job.find(@parts[1])
+    @job.status = JOBS_STATUS[:RUNNING] + ':' + @job.virtual_machine.AMI_name
+    @job.save
+    @msg.delete
+  end
+
+  if(@parts[0] == UPLOADING_OUTPUTS_MSG)
+
+    # ahora encuentro el job que me dicen que esta en estado instalando
+    @job = Job.find(@parts[1])
+    @job.status = JOBS_STATUS[:UPLOADING_OUTPUTS] + ':' + @job.virtual_machine.AMI_name
+    @job.save
+    @msg.delete
+  end
+
+  if(@parts2[0] == REGISTER_FILE_MSG)
+
+    puts 'registering file'
+
+    # ahora encuentro el job que me dicen que toca registrarle el output
+    @job = Job.find(@parts2[1])
+    # creo un nuevo cloud file para representar el archivo
+    @cloud_file = CloudFile.new
+    @file_url =@parts2[2]
+    puts @file_url
+
+
+    @file_url_parts = @file_url.split('/')
+    @file_name = @file_url_parts.last
+
+    @cloud_file.name = @file_name 
+    @cloud_file.directory =  @job.directory
+    @cloud_file.user = @job.user
+
+    @url = @file_url_parts[4] + '/'+ @file_url_parts[5]+ '/' + @file_url_parts[6]
+    @cloud_file.url = @url
+    @cloud_file.avatar = @file_name
+
+    @cloud_file.save
+
+    @msg.delete
   end
 
 end

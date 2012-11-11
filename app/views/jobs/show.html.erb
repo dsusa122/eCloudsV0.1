@@ -2,22 +2,24 @@
 
 <p>
   <b>Application:</b>
-  <%= @job.application_id %>
+  <%= @job.application.name %>
 </p>
 
 <p>
   <b>User:</b>
-  <%= @job.user_id %>
+  <%= @job.user.email %>
 </p>
 
 <p>
   <b>Cluster:</b>
-  <%= @job.cluster_id %>
+  <%= link_to @job.cluster.name, @job.cluster %>
 </p>
 
 <p>
   <b>Virtual machine:</b>
-  <%= @job.virtual_machine_id %>
+  <% if @job.virtual_machine != nil %>
+  <%= link_to @job.virtual_machine.AMI_name, @job.virtual_machine  %>
+  <% end %>
 </p>
 
 <p>
@@ -31,8 +33,8 @@
 </p>
 
 <p>
-  <b>Outputdir:</b>
-  <%= @job.outputdir %>
+  <b>Output Directory:</b>
+  <%= @job.directory %>
 </p>
 
 <p>

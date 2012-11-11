@@ -7,6 +7,7 @@
     <th>Cluster</th>
     <th>Virtual machine</th>
     <th>Status</th>
+    <th>Output Directory</th>
     <th>Start time</th>
     <th>End time</th>
     <th></th>
@@ -17,10 +18,17 @@
 <% @jobs.each do |job| %>
   <tr>
     <td><%= job.id %></td>
-    <td><%= job.application_id %></td>
-    <td><%= job.cluster_id %></td>
-    <td><%= job.virtual_machine_id %></td>
+    <td><%= job.application.name %></td>
+    <td><%= link_to job.cluster.name, job.cluster %></td>
+    <td>
+        <% if job.virtual_machine != nil %>
+         <%= link_to job.virtual_machine.AMI_name, job.virtual_machine  %>
+        <% end %>
+    </td>
     <td><%= job.status %></td>
+    <td>
+        <%= link_to job.directory.name , browse_path(job.directory) %>
+    </td>
     <td><%= job.start_time %></td>
     <td><%= job.end_time %></td>
     <td><%= link_to 'Show', job %></td>

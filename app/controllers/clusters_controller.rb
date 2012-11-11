@@ -99,7 +99,7 @@ class ClustersController < ApplicationController
     #@number_of_vms =5
 
 
-
+    @instance_type = @cluster.instance_type
     #puts "hola!!!!!!!"
     #puts @cluster.name
     #puts @number_of_vms
@@ -108,6 +108,7 @@ class ClustersController < ApplicationController
     for i  in 1..@number_of_vms
 
       @instances = @ec2.launch_instances( 'ami-d4ab2ebd' ,:group_ids => ['AppCientificas'],
+                                          :instance_type => @instance_type ,
                                           :user_data => 'EClouds Instance',
                                           :key_name => 'amazonKeys')
       @instance = @instances[0]

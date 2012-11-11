@@ -13,6 +13,7 @@ JOBS_STATUS =  { :PENDING=> "PENDING",
                  :INSTALLING => "INSTALLING",
                  :RUNNING =>"RUNNING",
                  :FAILED => "FAILED",
+                 :UPLOADING_OUTPUTS => "UPLOADING_OUTPUTS",
                  :FINISHED => "FINISHED"}
 
 AWS_ACCESS_KEY_ID = 'AKIAJPESCLIRTTE5MOWQ'

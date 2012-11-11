@@ -6,16 +6,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/command-11" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/command-9" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/commandTemp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/clusters_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/clusters_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/virtual_machine.rb" afterPath="$PROJECT_DIR$/app/models/virtual_machine.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/clusters/show.html.erb" afterPath="$PROJECT_DIR$/app/views/clusters/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/virtual_machines/show.html.erb" afterPath="$PROJECT_DIR$/app/views/virtual_machines/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/general.rb" afterPath="$PROJECT_DIR$/config/initializers/general.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/agent.rake" afterPath="$PROJECT_DIR$/lib/tasks/agent.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/scheduler.rake" afterPath="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
     </list>
     <ignored path="eCloudsV0.1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -620,7 +610,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="25" width="1288" height="753" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32927817" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />

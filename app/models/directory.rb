@@ -4,4 +4,6 @@ class Directory < ActiveRecord::Base
    belongs_to :user
 
   has_many :cloud_files, :dependent => :destroy
+  has_many :jobs
+  
 end

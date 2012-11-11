@@ -28,8 +28,8 @@
     <%= f.text_field :inputs %>
   </div>
   <div class="field">
-    <%= f.label :outputdir %><br />
-    <%= f.text_field :outputdir %>
+    <%= f.label :directory_id %><br />
+    <%= select :job,  :directory_id ,  options_from_collection_for_select( current_user.directories, :id , :name)  %>
   </div>
 
   <div class="actions">

@@ -34,7 +34,8 @@ class JobsController < InheritedResources::Base
 
     @job.user_id = current_user.id
     @job.status = JOBS_STATUS[:PENDING]
-
+    
+    @job.start_time = DateTime.now
 
 
     respond_to do |format|
