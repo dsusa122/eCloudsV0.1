@@ -1,5 +1,5 @@
 class ConfirmationsController < Devise::ApplicationController
-
+  before_filter :authenticate_user!
   def show
     self.resource = resource_class.find_by_confirmation_token(params[:confirmation_token])
     super if resource.confirmed?
