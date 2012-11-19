@@ -129,10 +129,10 @@ ECloudsV01::Application.configure do
   config.action_mailer.default_url_options = { :host => 'floating-wave-3280.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com",
+      :address => "smtp.sendgrid.net",
       :port => 587,
-      :user_name => 'nclopezo@gmail.com',
-      :password => 'E5G5yq6y',
+      :user_name => 'dgmendez67',
+      :password => '86T8X6N7',
       :authentication => 'plain',
       :enable_starttls_auto => true
   }
