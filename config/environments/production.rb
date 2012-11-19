@@ -126,7 +126,7 @@ ECloudsV01::Application.configure do
   config.assets.debug = true
 
 
-  config.action_mailer.default_url_options = { :host => 'floating-wave-3280.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'eclouds.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
       :address => "smtp.sendgrid.net",
