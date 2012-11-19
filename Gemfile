@@ -20,6 +20,8 @@ gem 'activeadmin'
 
 gem 'meta_search' , '>= 1.1.0.pre'
 
+gem 'activerecord-mysql-adapter'
+
 
 # Bundl<e edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
