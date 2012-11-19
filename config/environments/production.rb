@@ -87,6 +87,7 @@ ECloudsV01::Application.configure do
 
  ####################################################
 
+  reload!
 
 
   # In the development environment your application's code is reloaded on
