@@ -1,4 +1,7 @@
 class ConfirmationsController < Devise::ApplicationController
+
+  require 'application_controller'
+
   before_filter :authenticate_user!
   def show
     self.resource = resource_class.find_by_confirmation_token(params[:confirmation_token])
