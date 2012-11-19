@@ -48,6 +48,7 @@ gem 'jquery-rails'
 group :production do
   gem 'pg', '0.12.2'
   gem 'mysql2'
+  gem 'activerecord-mysql-adapter'
 end
 
 
