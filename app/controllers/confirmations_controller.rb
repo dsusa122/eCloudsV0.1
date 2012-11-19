@@ -2,7 +2,6 @@ class ConfirmationsController < Devise::ApplicationController
 
   require 'Devise'
 
-  reload!
 
   before_filter :authenticate_user!
   def show
