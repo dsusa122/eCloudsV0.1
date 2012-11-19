@@ -7,7 +7,7 @@ ECloudsV01::Application.configure do
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = false
@@ -66,7 +66,7 @@ ECloudsV01::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+  config.action_mailer.default_url_options = { :host => 'floating-wave-3280.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
       :address => "smtp.gmail.com",
