@@ -99,9 +99,9 @@ ECloudsV01::Application.configure do
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
-  # Show full error reports and disable caching
+  # Acá si está como en producción
   config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = true
@@ -126,7 +126,7 @@ ECloudsV01::Application.configure do
   config.assets.debug = true
 
 
-  config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
+  config.action_mailer.default_url_options = { :host => 'floating-wave-3280.herokuapp.com' }
 
   config.action_mailer.smtp_settings = {
       :address => "smtp.gmail.com",
