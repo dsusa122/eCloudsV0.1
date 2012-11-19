@@ -26,6 +26,7 @@ gem 'meta_search' , '>= 1.1.0.pre'
 
 group :development do
   gem 'sqlite3', '1.3.5'
+  gem 'mysql2'
 end
 
 
@@ -44,6 +45,7 @@ gem 'jquery-rails'
 
 group :production do
   gem 'pg', '0.12.2'
+  gem 'mysql2'
 end
 
 
