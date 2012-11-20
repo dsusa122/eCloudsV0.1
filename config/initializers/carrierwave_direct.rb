@@ -16,7 +16,7 @@ if Rails.env.production?
 
 
           config.fog_directory = 'ecloudsProd'
-          config.fog_public = false
+          config.fog_public = true
       #config.fog_host= 'http://localhost:3000'
 
       #config.root = ::Rails.root.to_s + "/public"
