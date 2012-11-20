@@ -44,6 +44,7 @@ class BrowserController < ApplicationController
       @cloud_file.directory_id = @current_directory.id
     end
 
+    session[:current_dir_session] = nil
 
     if user_signed_in?
       #show only root folders (which have no parent folders)

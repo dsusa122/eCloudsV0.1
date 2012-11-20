@@ -1,13 +1,35 @@
 <h1>New cloud_file</h1>
 
-<%= render 'form' %>
+<%= form_for(@cloud_file, :html => {:multipart =>true}) do |f| %>
+          <% if @cloud_file.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@cloud_file.errors.count, "error") %> prohibited this cloud_file from being saved:</h2>
 
-<%= link_to 'Back', cloud_files_path %>
+              <ul>
+                <% @cloud_file.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+  		<div class="field">
+          <%= f.label "file" %><br />
+          <%= f.file_field :avatar %>
+        </div>
+
+        <div class="btn ">
+            <%= f.submit %>
+        </div>
+<%end %>
+
+
+
+
 
 <%= render :partial => "browser/breadcrumbs" %>
 
 <% if @cloud_file.directory %>
     <%= link_to "Back to '#{@cloud_file.directory.name}' Folder", browse_path(@cloud_file.directory) %>
 <% else %>
-    <%= link_to "Back", root_url %>
+    <%= link_to "Back", data_home_path %>
 <% end %>

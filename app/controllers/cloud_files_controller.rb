@@ -60,14 +60,24 @@ class CloudFilesController < ApplicationController
   # POST /cloud_files.json
   def create
 
-    @current_directory = session[:current_dir_session]
+
+    
 
 
 
     @cloud_file = CloudFile.new(params[:cloud_file])
+
+    
+    @current_directory = session[:current_dir_session]
+    if(@current_directory != nil)
+      @cloud_file.directory_id = @current_directory.id
+    end
+  
+
+
     @cloud_file.user_id = current_user.id
 
-    @cloud_file.directory_id = @current_directory.id
+    
 
     puts 'Holaaaaa'
     puts @cloud_file.attributes
