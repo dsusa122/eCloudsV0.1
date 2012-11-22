@@ -20,6 +20,12 @@ test:
 
 production:
   adapter: postgresql
-  database: postgres://caigwehtxinkgo:ntKlp5NNKQrNSCXQ3RR2g7qq9V@ec2-23-23-144-111.compute-1.amazonaws.com:5432/dam4t4u1ou4oic
+  username: caigwehtxinkgo
+  password: ntKlp5NNKQrNSCXQ3RR2g7qq9V
+  ssl_mode: require
+  encoding: utf8
+  host: ec2-23-23-144-111.compute-1.amazonaws.com
+  port: 5432
+  database: dam4t4u1ou4oic
   pool: 5
   timeout: 5000

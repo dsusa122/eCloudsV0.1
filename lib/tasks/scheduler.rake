@@ -3,7 +3,7 @@ task :checkForJobs => :environment do
   puts 'I am going to check the queue for new messages'
 
   @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-  @queue = @sqs.queue(PRESCHEDULING_QUEUE)
+  @queue = @sqs.queue(PRESCHEDULING_QUEUE, create=false)
   @msg = @queue.receive
 
   puts 'I just received the message:'
@@ -114,12 +114,16 @@ task :checkForJobs => :environment do
 
       puts 'I chose the virtual machine ' + @chosen_vm.hostname
 
+      # acá borro el mensaje en la cola
+
+      @msg.delete
+
       @job.virtual_machine = @chosen_vm
       @chosen_vm.slots = @chosen_vm.slots - 1
 
       @job.save
       # ahora debo poner el mensaje en la cola de scheduling
-      @queue = @sqs.queue(SCHEDULING_QUEUE)
+      @queue = @sqs.queue(SCHEDULING_QUEUE, create=false)
       @queue.send_message(@chosen_vm.hostname+';'+RUN_JOB_MSG + ';' + @job.id.to_s+';'+@job.application.installer_url+';'+@job.script_url+';'+@job.directory.name )
       @job.status = JOBS_STATUS[:QUEUED] + ':'+@chosen_vm.AMI_name
       @job.save

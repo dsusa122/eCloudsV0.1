@@ -16,7 +16,7 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "e-Clouds", '#', id: "logo" %>
+      <div class= "brand"><%= link_to "e-Clouds", '#', id: "logo" %></title> </div>
       <nav>
         <ul class="nav pull-right">
 
@@ -62,8 +62,20 @@
   <br>
   <br>
   <br>
-  <p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+
+  <% flash.each do |key,value| %>
+        <% if key == :notice %>
+            <p class="notice span4"><%= notice %></p>
+            
+        <% elsif key == :alert %>
+            <p class="alert span4"><%= alert %></p>
+        <% else %>
+          <p class="notice span4"><%= notice %></p>
+        <% end %>
+      <% end %>
+
+  
+
 </div>
 </body>
 

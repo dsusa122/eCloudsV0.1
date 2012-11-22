@@ -20,6 +20,9 @@ gem 'activeadmin'
 
 gem 'meta_search' , '>= 1.1.0.pre'
 
+gem 'pg', '0.12.2'
+
+
 
 
 
@@ -46,6 +49,7 @@ end
 gem 'jquery-rails'
 
 group :production do
+  #gem 'activerecord-postgresql-adapter'
   gem 'pg', '0.12.2'
   gem 'mysql2'
   #gem 'activerecord-mysql-adapter'
