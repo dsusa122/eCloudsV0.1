@@ -2,9 +2,15 @@ ECloudsV01::Application.routes.draw do
 
 
 
+  resources :inputs
+
+  resources :parameters
+
   resources :jobs
 
-  resources :applications
+  resources :applications  do
+    resources :inputs
+  end
 
   ActiveAdmin.routes(self)
 
@@ -70,6 +76,11 @@ ECloudsV01::Application.routes.draw do
   match "virtual_machines/stop_all/:current_cluster_id"  => "virtual_machines#stop_all", :as => "stop_all_virtual_machine"
   match "virtual_machines/terminate_all/:current_cluster_id"  => "virtual_machines#terminate_all", :as => "terminate_all_virtual_machine"
 
+  #rutas para crear las aplicaciones
+  match "add_inputs/:application_id/" => "applications#add_inputs", :as => "add_inputs"
+  match "organize_parameters/:application_id/" => "applications#organize_parameters", :as => "organize_parameters"
+  #match "add_parameters/:application_id/" => "applications#add_parameters", :as => "add_parameters"
+  #match "add_one_input/:input_id/:application_id" => "applications#add_one_input", :as => "add_one_input"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

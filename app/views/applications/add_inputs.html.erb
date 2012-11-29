@@ -1,0 +1,155 @@
+<%= form_for(@input) do |f|  %>
+    <% if @application.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+          <ul>
+            <% @application.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+
+    <% end %>
+
+    <h1> <%= @application.name %>  <%= @application.version %> </h1>
+
+    <table>
+      <tr>
+        <td>
+          <h3>Name </h3>
+        </td>
+      </tr>
+      <td>
+          <%= @application.name %>
+      </td>
+      </tr>
+      <tr>
+        <td>
+          <h3> Version </h3>
+        </td>
+      </tr>
+      <td>
+        <%= @application.version %>
+      </td>
+      </tr>
+      <tr>
+        <td>
+          <h3> Installer Url </h3>
+        </td>
+      </tr>
+      <td>
+        <%= @application.installer_url %>
+      </td>
+      </tr>
+    </table>
+
+    <br>
+    <br>
+
+    <ul class="nav nav-list">
+
+        <li class="divider"></li>
+
+    </ul>
+
+    <h2> Describe the inputs of your application </h2>
+
+
+
+    <% if @application.inputs.any? %>
+
+        <br>
+
+
+            <h3> Current Inputs: </h3>
+
+
+
+            <table class="table">
+              <tr>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Prefix</td>
+                <td>Value</td>
+                <td>File</td>
+                <td>Directory</td>
+              </tr>
+              <% @application.inputs.each do |input| %>
+                  <tr>
+                    <td> <%= input.name %></td>
+                    <td> <%= input.description %></td>
+                    <td> <%= input.prefix %></td>
+                    <td> <%= input.value_example %></td>
+                    <td><% if input.is_file? %> X <% end %></td>
+                    <td><% if input.is_directory? %> X <% end %></td>
+                    <td><%= link_to 'Delete', input, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+              <% end %>
+            </table>
+
+    <% end %>
+
+
+
+
+    <h2> Add Input: </h2>
+
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :is_file %>
+      <%= f.check_box :is_file %>
+    </div>
+
+    <div class="field">
+      <%= f.label :is_directory %>
+      <%= f.check_box :is_directory %>
+    </div>
+
+    <div class="field">
+      <%= f.label :prefix %>
+      <%= f.text_field :prefix %>
+    </div>
+
+    <div class="field">
+      <%= f.label :value_example %><br />
+      <%= f.text_field :value_example %>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description, :rows => 6 %>
+    </div>
+
+    <div class="field">
+      <%= f.hidden_field :application_id , :value_example => @application.id %>
+    </div>
+
+
+
+
+    <div class="actions">
+      <%= f.submit "Add Input" %>
+    </div>
+
+
+    <br>
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    <div class="actions">
+      <%= f.submit 'Next', :name => "next" %>
+    </div>
+
+
+
+<% end %>

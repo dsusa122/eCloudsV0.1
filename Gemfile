@@ -22,6 +22,8 @@ gem 'meta_search' , '>= 1.1.0.pre'
 
 gem 'pg', '0.12.2'
 
+gem 'formtastic'
+
 
 
 

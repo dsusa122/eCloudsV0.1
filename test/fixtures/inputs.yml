@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  is_file: false
+  is_directory: false
+  value: MyString
+  cloud_file_id: 1
+  directory_id: 1
+  description: MyString
+
+two:
+  name: MyString
+  is_file: false
+  is_directory: false
+  value: MyString
+  cloud_file_id: 1
+  directory_id: 1
+  description: MyString

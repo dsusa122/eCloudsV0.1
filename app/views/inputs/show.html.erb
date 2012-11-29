@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @input.name %>
+</p>
+
+<p>
+  <b>Is file:</b>
+  <%= @input.is_file %>
+</p>
+
+<p>
+  <b>Is directory:</b>
+  <%= @input.is_directory %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @input.value_example %>
+</p>
+
+<p>
+  <b>Cloud file:</b>
+  <%= @input.cloud_file_id %>
+</p>
+
+<p>
+  <b>Directory:</b>
+  <%= @input.directory_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @input.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_input_path(@input) %> |
+<%= link_to 'Back', inputs_path %>

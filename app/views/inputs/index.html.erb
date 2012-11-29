@@ -1,0 +1,35 @@
+<h1>Listing inputs</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Is file</th>
+    <th>Is directory</th>
+    <th>Value</th>
+    <th>Cloud file</th>
+    <th>Directory</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @inputs.each do |input| %>
+  <tr>
+    <td><%= input.name %></td>
+    <td><%= input.is_file %></td>
+    <td><%= input.is_directory %></td>
+    <td><%= input.value_example %></td>
+    <td><%= input.cloud_file_id %></td>
+    <td><%= input.directory_id %></td>
+    <td><%= input.description %></td>
+    <td><%= link_to 'Show', input %></td>
+    <td><%= link_to 'Edit', edit_input_path(input) %></td>
+    <td><%= link_to 'Destroy', input, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Input', new_input_path %>

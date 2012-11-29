@@ -198,6 +198,7 @@ DEPENDENCIES
   coffee-rails (= 3.2.2)
   devise (= 2.1.2)
   fog (= 1.5.0)
+  formtastic
   jquery-rails
   meta_search (>= 1.1.0.pre)
   mysql2

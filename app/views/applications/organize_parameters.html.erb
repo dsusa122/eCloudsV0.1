@@ -1,0 +1,149 @@
+<%= form_for(@application) do |f|  %>
+    <% if @application.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+          <ul>
+            <% @application.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+
+    <% end %>
+
+    <h1> <%= @application.name %>  <%= @application.version %> </h1>
+
+    <table>
+      <tr>
+        <td>
+          <h3>Name </h3>
+        </td>
+      </tr>
+      <td>
+        <%= @application.name %>
+      </td>
+      </tr>
+      <tr>
+        <td>
+          <h3> Version </h3>
+        </td>
+      </tr>
+      <td>
+        <%= @application.version %>
+      </td>
+      </tr>
+      <tr>
+        <td>
+          <h3> Installer Url </h3>
+        </td>
+      </tr>
+      <td>
+        <%= @application.installer_url %>
+      </td>
+      </tr>
+    </table>
+
+    <br>
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    <h2> Inputs: </h2>
+
+
+
+    <% if @application.inputs.any? %>
+
+        <br>
+
+
+        <table class="table">
+          <tr>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Prefix</td>
+            <td>File</td>
+            <td>Directory</td>
+            <td>Position</td>
+          </tr>
+          <% @application.inputs.each do |input| %>
+              <tr>
+                <td> <%= input.name %></td>
+                <td> <%= input.description %></td>
+                <td> <%= input.prefix %></td>
+                <td><% if input.is_file? %> X <% end %></td>
+                <td><% if input.is_directory? %> X <% end %></td>
+                <td> <b> <%= input.position %> </b></td>
+              </tr>
+          <% end %>
+        </table>
+
+    <% else %>
+        <br>
+        <h3> No inputs </h3>
+
+    <% end %>
+
+
+    <br>
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    <h2> Base Command: </h2>
+
+    <div class="field">
+      <%= f.label :begin_command %>
+      <%= f.text_field :begin_command %>
+    </div>
+
+    <div class="field">
+      <%= f.label :end_command %>
+      <%= f.text_field :end_command %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit nil, :name => "update_command" %>
+    </div>
+
+    <br>
+    <br>
+
+    <h4>Example:</h4>
+
+    <%= @example_command %>
+
+    <h4>General Command:</h4>
+
+    <%= @application.base_command %>
+
+    <br>
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    <div class="actions">
+      <%= f.submit 'Back', :name => "back" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Next', :name => "next" %>
+    </div>
+
+
+
+
+<% end %>

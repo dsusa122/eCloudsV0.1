@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111113729) do
+ActiveRecord::Schema.define(:version => 20121128162631) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -53,6 +53,9 @@ ActiveRecord::Schema.define(:version => 20121111113729) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.string   "installation_url"
+    t.string   "base_command"
+    t.string   "begin_command"
+    t.string   "end_command"
   end
 
   create_table "cloud_files", :force => true do |t|
@@ -72,12 +75,12 @@ ActiveRecord::Schema.define(:version => 20121111113729) do
   add_index "cloud_files", ["user_id"], :name => "index_cloud_files_on_user_id"
 
   create_table "clusters", :force => true do |t|
-    t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "instance_type_id"
     t.string   "instance_type"
+    t.integer  "user_id"
   end
 
   create_table "directories", :force => true do |t|
@@ -91,6 +94,21 @@ ActiveRecord::Schema.define(:version => 20121111113729) do
 
   add_index "directories", ["parent_id"], :name => "index_directories_on_parent_id"
   add_index "directories", ["user_id"], :name => "index_directories_on_user_id"
+
+  create_table "inputs", :force => true do |t|
+    t.string   "name"
+    t.boolean  "is_file"
+    t.boolean  "is_directory"
+    t.string   "value"
+    t.integer  "cloud_file_id"
+    t.integer  "directory_id"
+    t.string   "description"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "application_id"
+    t.string   "prefix"
+    t.integer  "position"
+  end
 
   create_table "instance_types", :force => true do |t|
     t.string   "name"
@@ -119,6 +137,15 @@ ActiveRecord::Schema.define(:version => 20121111113729) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "parameters", :force => true do |t|
+    t.string   "name"
+    t.string   "prefix"
+    t.string   "value"
+    t.integer  "application_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -159,12 +186,12 @@ ActiveRecord::Schema.define(:version => 20121111113729) do
     t.integer  "ram"
     t.integer  "cores"
     t.integer  "localStorage"
-    t.integer  "cluster_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "state"
     t.integer  "slots"
     t.string   "AMI_name"
+    t.integer  "cluster_id"
   end
 
 end
