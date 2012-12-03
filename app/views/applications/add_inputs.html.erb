@@ -80,7 +80,7 @@
                     <td> <%= input.name %></td>
                     <td> <%= input.description %></td>
                     <td> <%= input.prefix %></td>
-                    <td> <%= input.value_example %></td>
+                    <td> <%= input.value %></td>
                     <td><% if input.is_file? %> X <% end %></td>
                     <td><% if input.is_directory? %> X <% end %></td>
                     <td><%= link_to 'Delete', input, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -116,8 +116,8 @@
     </div>
 
     <div class="field">
-      <%= f.label :value_example %><br />
-      <%= f.text_field :value_example %>
+      <%= f.label :value %><br />
+      <%= f.text_field :value %>
     </div>
 
     <div class="field">
@@ -126,7 +126,7 @@
     </div>
 
     <div class="field">
-      <%= f.hidden_field :application_id , :value_example => @application.id %>
+      <%= f.hidden_field :application_id , :value => @application.id %>
     </div>
 
 

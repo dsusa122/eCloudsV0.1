@@ -1,0 +1,35 @@
+<h1>Your Executions:</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Application</th>
+    <th>Directory</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @executions.each do |execution| %>
+  <tr>
+    <td><%= execution.user_id %></td>
+    <td><%= execution.application_id %></td>
+    <td><%= execution.directory_id %></td>
+    <td><%= execution.start_date %></td>
+    <td><%= execution.end_date %></td>
+    <td><%= execution.name %></td>
+    <td><%= execution.description %></td>
+    <td><%= link_to 'Show', execution %></td>
+    <td><%= link_to 'Edit', edit_execution_path(execution) %></td>
+    <td><%= link_to 'Destroy', execution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Execution', new_execution_path %>

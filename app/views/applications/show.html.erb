@@ -1,20 +1,111 @@
-<p id="notice"><%= notice %></p>
+<h1> <%= @application.name %>  <%= @application.version %> </h1>
+<br>
 
-<p>
-  <b>Name:</b>
-  <%= @application.name %>
-</p>
+<br>
 
-<p>
-  <b>Version:</b>
-  <%= @application.version %>
-</p>
 
-<p>
-  <b>Installer url:</b>
-  <%= @application.installer_url %>
-</p>
+<table>
+  <tr>
+    <td>
+      <h3>Name </h3>
+    </td>
+  </tr>
+  <td>
+    <%= @application.name %>
+  </td>
+  </tr>
+  <tr>
+    <td>
+      <h3> Version </h3>
+    </td>
+  </tr>
+  <td>
+    <%= @application.version %>
+  </td>
+  </tr>
+  <tr>
+    <td>
+      <h3> Installer Url </h3>
+    </td>
+  </tr>
+  <td>
+    <%= @application.installer_url %>
+  </td>
+  </tr>
+</table>
 
+<br>
+<br>
+
+<ul class="nav nav-list">
+
+  <li class="divider"></li>
+
+</ul>
+
+<h2> Inputs: </h2>
+
+
+
+<% if @application.inputs.any? %>
+
+    <br>
+
+
+    <table class="table">
+      <tr>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Prefix</td>
+        <td>Value</td>
+        <td>File</td>
+        <td>Directory</td>
+        <td>Position</td>
+      </tr>
+      <% @application.inputs.order('position asc').each do |input| %>
+          <tr>
+            <td> <%= input.name %></td>
+            <td> <%= input.description %></td>
+            <td> <%= input.prefix %></td>
+            <td> <%= input.value %></td>
+            <td><% if input.is_file? %> X <% end %></td>
+            <td><% if input.is_directory? %> X <% end %></td>
+            <td> <b> <%= input.position %> </b></td>
+
+          </tr>
+      <% end %>
+    </table>
+
+<% else %>
+    <br>
+    <h3> No inputs </h3>
+
+<% end %>
+
+
+<br>
+<br>
+
+<ul class="nav nav-list">
+
+  <li class="divider"></li>
+
+</ul>
+
+<h2> Base Command: </h2>
+
+
+
+<%= @application.base_command %>
+
+<br>
+<br>
+
+<ul class="nav nav-list">
+
+  <li class="divider"></li>
+
+</ul>
 
 <%= link_to 'Edit', edit_application_path(@application) %> |
 <%= link_to 'Back', applications_path %>

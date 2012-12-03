@@ -1,0 +1,60 @@
+<%= form_for(@execution) do |e| %>
+
+    <% if @execution.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@execution.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+          <ul>
+            <% execution.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+
+    <% end %>
+
+
+    <br>
+
+    <h2> <%= @execution.application.name %> </h2>
+    <br>
+    <strong> <%= @execution.base_command %></strong>
+    <br>
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    <h1> Define the parameters for your execution: </h1>
+
+    <br>
+    <br>
+
+    Choose a virtual machine type:
+
+    <%= select :execution_params,  :instance_type ,  Aws::Ec2::INSTANCE_TYPES  %>
+
+    Enter an estimated time per job in minutes:
+
+    <%= select :execution_params,  :time_per_job  , (1..1440).map { |i| i}  %>
+
+    <table class="table span3">
+      <tr>
+        <td>Total Jobs: </td>
+        <td><%= @execution.number_of_jobs %> </td>
+      </tr>
+      <tr>
+        <td>Computing hours: </td>
+        <td> <%= @execution.computing_hours %> </td>
+      </tr>
+    </table>
+
+
+    <div class="actions" >
+      <%= e.submit 'Calculate', :name => "calculate"%>
+    </div>
+
+<% end %>

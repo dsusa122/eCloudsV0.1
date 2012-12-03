@@ -16,6 +16,13 @@ JOBS_STATUS =  { :PENDING=> "PENDING",
                  :UPLOADING_OUTPUTS => "UPLOADING_OUTPUTS",
                  :FINISHED => "FINISHED"}
 
+WM_PRICING = {"t1.micro"  => 0.020,
+              "m1.small"  => 0.065,
+              "c1.medium"  => 0.165,
+              "m1.large"  => 0.260,
+              "m1.xlarge"  => 0.520,
+              "c1.xlarge" => 0.660}
+
 AWS_ACCESS_KEY_ID = 'AKIAJPESCLIRTTE5MOWQ'
 
 AWS_SECRET_ACCESS_KEY = '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'

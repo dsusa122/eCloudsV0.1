@@ -1,0 +1,86 @@
+<%= form_for(@execution) do |e|%>
+
+    <% if @execution.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@execution.errors.count, "error") %> prohibited this application from being saved:</h2>
+
+          <ul>
+            <% execution.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+
+    <% end %>
+
+
+    <br>
+    <h1> Define the Inputs for the Application: </h1>
+    <br>
+
+    <h2> <%= @application.name %> <%= @application.version %></h2>
+
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    <% i=0 %>
+    <% @application.inputs.order('position asc').each do |input|%>
+        <h3> <%=input.name%> </h3>
+        <br>
+        <%=input.description%>
+
+        <br>
+        <br>
+
+        <% if input.is_file?%>
+
+            Select one of your files in eClouds:
+
+
+            <div class="field">
+              <%= select :inputs,  i,  options_from_collection_for_select(@cloud_files, :id,:name)  %><br />
+            </div>
+
+
+
+
+        <% elsif input.is_directory?%>
+
+            Select one of your directories in eClouds:
+
+            <div class="field">
+              <%= select :inputs,  i,  options_from_collection_for_select(@directories, :id,:name)  %><br />
+            </div>
+
+        <% else %>
+
+            <% if input.value != nil || input.value != ''%>
+                The value of this parameter has been preset for you, you can change it if you want
+
+                <br>
+                <%= text_field :inputs, i , :value => input.value%>
+            <% else%>
+                <%= text_field :inputs, i %>
+            <% end %>
+
+
+
+        <% end %>
+
+
+
+        <br>
+        <% i=i+1 %>
+    <% end %>
+
+    <div class="actions">
+      <%= e.submit %>
+    </div>
+
+
+<% end %>

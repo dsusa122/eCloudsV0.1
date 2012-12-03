@@ -2,6 +2,8 @@ ECloudsV01::Application.routes.draw do
 
 
 
+  resources :executions
+
   resources :inputs
 
   resources :parameters
@@ -79,8 +81,14 @@ ECloudsV01::Application.routes.draw do
   #rutas para crear las aplicaciones
   match "add_inputs/:application_id/" => "applications#add_inputs", :as => "add_inputs"
   match "organize_parameters/:application_id/" => "applications#organize_parameters", :as => "organize_parameters"
+  match "decrease_position/:application_id/:input_id" => "applications#decrease_position_parameter" , :as => "decrease_position_parameter"
+  match "increase_position/:application_id/:input_id" => "applications#increase_position_parameter" , :as => "increase_position_parameter"
   #match "add_parameters/:application_id/" => "applications#add_parameters", :as => "add_parameters"
   #match "add_one_input/:input_id/:application_id" => "applications#add_one_input", :as => "add_one_input"
+
+  #rutas para crear las ejecuciones
+  match "define_execution/:execution_id" => "executions#define_execution" , :as => "define_execution"
+  match "define_execution_part2/:execution_id" => "executions#define_execution_part2" , :as => "define_execution_part2"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

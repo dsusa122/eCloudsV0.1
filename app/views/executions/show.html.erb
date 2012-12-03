@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @execution.user_id %>
+</p>
+
+<p>
+  <b>Application:</b>
+  <%= @execution.application_id %>
+</p>
+
+<p>
+  <b>Directory:</b>
+  <%= @execution.directory_id %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @execution.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @execution.end_date %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @execution.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @execution.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_execution_path(@execution) %> |
+<%= link_to 'Back', executions_path %>

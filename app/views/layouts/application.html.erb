@@ -16,15 +16,14 @@
 <header class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <div class= "brand"><%= link_to "e-Clouds", '#', id: "logo" %></title> </div>
+      <div class= "brand"><%= link_to "e-Clouds", '#', id: "logo" %> <%= image_tag('https://s3.amazonaws.com/eclouds/imagenes/logo.jpg' , :size => "30x30") %> </div>
       <nav>
         <ul class="nav pull-right">
 
           <% if user_signed_in? %>
 
-              <li><%= link_to "Jobs",   jobs_path %></li>
+              <li><%= link_to "Executions",   executions_path %></li>
               <li><%= link_to "Apps",   applications_path %></li>
-              <li><%= link_to "My Clusters",   clusters_path %></li>
               <li><%= link_to "My Data",   data_home_path %></li>
           <% end %>
 

@@ -7,4 +7,5 @@ class Job < ActiveRecord::Base
   belongs_to :application
   belongs_to :virtual_machine
   belongs_to :directory
+  belongs_to :execution
 end

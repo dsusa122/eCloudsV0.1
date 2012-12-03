@@ -53,7 +53,7 @@
 
     </ul>
 
-    <h2> Inputs: </h2>
+    <h2> Organize the Inputs: </h2>
 
 
 
@@ -67,18 +67,22 @@
             <td>Name</td>
             <td>Description</td>
             <td>Prefix</td>
+            <td>Value</td>
             <td>File</td>
             <td>Directory</td>
             <td>Position</td>
           </tr>
-          <% @application.inputs.each do |input| %>
+          <% @application.inputs.order('position asc').each do |input| %>
               <tr>
                 <td> <%= input.name %></td>
                 <td> <%= input.description %></td>
                 <td> <%= input.prefix %></td>
+                <td> <%= input.value %></td>
                 <td><% if input.is_file? %> X <% end %></td>
                 <td><% if input.is_directory? %> X <% end %></td>
                 <td> <b> <%= input.position %> </b></td>
+                <td> <b><%= link_to '-', decrease_position_parameter_path(@application,input) %></b></td>
+                <td> <b><%= link_to '+', increase_position_parameter_path(@application,input) %></b></td>
               </tr>
           <% end %>
         </table>
@@ -112,7 +116,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit nil, :name => "update_command" %>
+      <%= f.submit 'Update Command', :name => "update_command" %>
     </div>
 
     <br>
@@ -123,6 +127,10 @@
     <%= @example_command %>
 
     <h4>General Command:</h4>
+
+    <%= @example_command_names %>
+
+    <h4>Base Command:</h4>
 
     <%= @application.base_command %>
 
@@ -140,7 +148,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit 'Next', :name => "next" %>
+      <%= f.submit 'Finish', :name => "finish" %>
     </div>
 
 
