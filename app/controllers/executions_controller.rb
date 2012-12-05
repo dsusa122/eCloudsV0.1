@@ -1,5 +1,7 @@
 class ExecutionsController < InheritedResources::Base
 
+  before_filter :authenticate_user!
+
   def create
     @execution = Execution.new(params[:execution])
 
@@ -61,11 +63,52 @@ class ExecutionsController < InheritedResources::Base
 
         @execution.time_per_job=@time_per_job
 
-        @execution.computing_hours = ((@time_per_job * @execution.number_of_jobs)/60).ceil
+        @execution.computing_hours = ((@time_per_job*1.0 * @execution.number_of_jobs)/60).ceil
+
+        @execution.computing_minutes = @time_per_job*1.0 * @execution.number_of_jobs
+
+        @vm_type = @execution_params["instance_type"]
+
+        @execution.vm_type = @vm_type
+
+        @vm_cost = VM_PRICING[@vm_type]
+
+        @execution.vm_cost = @vm_cost
+
+        @execution.vm_number = @execution.computing_hours
+
+        @execution.total_estimated_cost = @execution.vm_number * @vm_cost *1.0
+
+        @execution.estimated_time_minutes = @execution.computing_minutes / @execution.vm_number
 
         respond_to do |format|
           if @execution.save
             format.html { redirect_to define_execution_part2_path(@execution), notice: 'Define the parameters for your execution' }
+            format.json { render json: @execution, status: :created, location: @execution}
+          else
+            format.html { render action: "new" }
+            format.json { render json: @execution.errors, status: :unprocessable_entity }
+          end
+        end
+
+      elsif params[:launch]
+
+        @execution.user = current_user
+
+        @now = DateTime.now
+
+        @execution.start_date = @now
+
+        #acá pongo el mensaje en la cola
+        @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+        @queue = @sqs.queue(PRESCHEDULING_QUEUE, false )
+
+        @msg = PROCESS_EXECUTION_MSG + ':' + @execution.id.to_s
+        @queue.send_message(@msg)
+
+        respond_to do |format|
+          if @execution.save
+            format.html { redirect_to @execution, notice: 'Your execution is being launched' }
             format.json { render json: @execution, status: :created, location: @execution}
           else
             format.html { render action: "new" }
@@ -78,6 +121,9 @@ class ExecutionsController < InheritedResources::Base
         # este es el número de jobs total
         @num_jobs = 1
 
+        @output_dir = Directory.find(@raw_inputs['output_dir'].to_i)
+
+        @execution.directory =  @output_dir
 
         i=0
         @application.inputs.order('position asc').each do |app_input|

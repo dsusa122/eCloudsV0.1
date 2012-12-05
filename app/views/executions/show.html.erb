@@ -1,39 +1,120 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @execution.user_id %>
-</p>
+<br>
 
-<p>
-  <b>Application:</b>
-  <%= @execution.application_id %>
-</p>
+<h1> <%= @execution.name %> </h1>
 
-<p>
-  <b>Directory:</b>
-  <%= @execution.directory_id %>
-</p>
+<br>
 
-<p>
-  <b>Start date:</b>
-  <%= @execution.start_date %>
-</p>
+<h2> <%= @execution.description %> </h2>
 
-<p>
-  <b>End date:</b>
-  <%= @execution.end_date %>
-</p>
+<table class="table">
+  <tr>
+    <td>
+      Application:
+    </td>
+    <td>
+      <%= @execution.application.name %>
+    </td>
 
-<p>
-  <b>Name:</b>
-  <%= @execution.name %>
-</p>
+  </tr>
 
-<p>
-  <b>Description:</b>
-  <%= @execution.description %>
-</p>
+  <tr>
+    <td>
+      Output Directory:
+    </td>
+    <td>
+      <%= link_to @execution.directory.name, browse_path(@execution.directory) %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>
+      Start Date:
+    </td>
+    <td>
+      <%= @execution.start_date %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>
+      End Date:
+    </td>
+    <td>
+      <%= @execution.end_date %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>
+      Number of virtual machines:
+    </td>
+    <td>
+      <%= @execution.vm_number %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>
+      Number of jobs:
+    </td>
+    <td>
+      <%= @execution.number_of_jobs %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>
+      Virtual machine type
+    </td>
+    <td>
+      <%= @execution.vm_type %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>
+      Cost per Virtual Machine
+    </td>
+    <td>
+      $USD <%= @execution.vm_cost %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>
+      Estimated Cost
+    </td>
+    <td>
+      $USD <%= @execution.total_estimated_cost %>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td>
+      Estimated Time
+    </td>
+    <td>
+      <%= @execution.estimated_time_minutes %>  minutes
+    </td>
+
+  </tr>
+</table>
+
+
+
+
+
+
 
 
 <%= link_to 'Edit', edit_execution_path(@execution) %> |

@@ -78,9 +78,38 @@
         <% i=i+1 %>
     <% end %>
 
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    Select the output directory for your execution
+
+    <br>
+
+    <div class="field">
+      <%= select :inputs,  'output_dir', options_from_collection_for_select(@directories, :id,:name)  %><br />
+    </div>
+
+    <br>
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    <br>
+
     <div class="actions">
       <%= e.submit %>
     </div>
+
+
 
 
 <% end %>

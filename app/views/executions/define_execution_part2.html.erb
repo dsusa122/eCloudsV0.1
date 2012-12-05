@@ -42,19 +42,66 @@
     <%= select :execution_params,  :time_per_job  , (1..1440).map { |i| i}  %>
 
     <table class="table span3">
+
+      <tr>
+        <td>Chosen VM: </td>
+        <td><%= @execution.vm_type %> </td>
+      </tr>
+
+      <tr>
+        <td>Estimated Time per job: </td>
+        <td><%= @execution.time_per_job %> </td>
+      </tr>
+
       <tr>
         <td>Total Jobs: </td>
         <td><%= @execution.number_of_jobs %> </td>
       </tr>
       <tr>
         <td>Computing hours: </td>
-        <td> <%= @execution.computing_hours %> </td>
+        <td> <%= @execution.computing_hours %>  - (<%= @execution.computing_minutes %> minutes )  </td>
+      </tr>
+      <tr>
+        <td>Cost per virtual machine: </td>
+        <td> $USD <%= @execution.vm_cost %> per hour   </td>
+      </tr>
+
+      <tr>
+        <td>eClouds will use: </td>
+        <td>  <%= @execution.vm_number %> virtual_machines   </td>
+      </tr>
+
+      <tr>
+        <td>This will cost </td>
+        <td> $USD <%= @execution.total_estimated_cost %>    </td>
+      </tr>
+
+      <tr>
+        <td>This will take </td>
+        <td> <%= @execution.estimated_time_minutes %>   minutes </td>
       </tr>
     </table>
 
 
     <div class="actions" >
       <%= e.submit 'Calculate', :name => "calculate"%>
+    </div>
+
+
+    <br>
+    <br>
+
+    <ul class="nav nav-list">
+
+      <li class="divider"></li>
+
+    </ul>
+
+    <br>
+    <br>
+
+    <div class="actions" >
+      <%= e.submit 'Launch Execution', :name => "launch"%>
     </div>
 
 <% end %>

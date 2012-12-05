@@ -16,7 +16,7 @@ JOBS_STATUS =  { :PENDING=> "PENDING",
                  :UPLOADING_OUTPUTS => "UPLOADING_OUTPUTS",
                  :FINISHED => "FINISHED"}
 
-WM_PRICING = {"t1.micro"  => 0.020,
+VM_PRICING = {"t1.micro"  => 0.020,
               "m1.small"  => 0.065,
               "c1.medium"  => 0.165,
               "m1.large"  => 0.260,
@@ -28,6 +28,8 @@ AWS_ACCESS_KEY_ID = 'AKIAJPESCLIRTTE5MOWQ'
 AWS_SECRET_ACCESS_KEY = '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'
 
 PRESCHEDULING_QUEUE = 'prescheduling'
+
+PROCESS_EXECUTION_MSG = 'PROCESS_EXECUTION'
 
 SCHEDULE_JOB_MSG = 'SCHEDULE_JOB'
 RUN_JOB_MSG = 'RUN_JOB'

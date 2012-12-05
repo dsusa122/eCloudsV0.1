@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203193103) do
+ActiveRecord::Schema.define(:version => 20121205021047) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -103,12 +103,19 @@ ActiveRecord::Schema.define(:version => 20121203193103) do
     t.datetime "end_date"
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "base_command"
     t.integer  "number_of_jobs"
     t.integer  "computing_hours"
     t.integer  "time_per_job"
+    t.integer  "computing_minutes"
+    t.integer  "estimated_cost"
+    t.decimal  "vm_cost"
+    t.integer  "vm_number"
+    t.decimal  "total_estimated_cost"
+    t.string   "vm_type"
+    t.decimal  "estimated_time_minutes"
   end
 
   create_table "inputs", :force => true do |t|
