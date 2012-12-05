@@ -2,13 +2,15 @@ ECloudsV01::Application.routes.draw do
 
 
 
-  resources :executions
+  resources :executions do
+    resources :jobs
+  end
 
   resources :inputs
 
   resources :parameters
 
-  resources :jobs
+
 
   resources :applications  do
     resources :inputs

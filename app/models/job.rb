@@ -1,6 +1,6 @@
 class Job < ActiveRecord::Base
 
-  attr_accessible :application_id, :cluster_id, :end_time, :inputs, :outputdir, :parameters, :start_time, :status, :user_id, :virtual_machine_id, :wallclock_time, :directory_id
+  attr_accessible :application_id, :cluster_id, :end_time, :inputs, :outputdir, :parameters, :start_time, :status, :user_id, :virtual_machine_id, :wallclock_time, :directory_id, :execution_id
 
   belongs_to :user
   belongs_to :cluster

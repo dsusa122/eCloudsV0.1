@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205021047) do
+ActiveRecord::Schema.define(:version => 20121205214436) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -116,6 +116,8 @@ ActiveRecord::Schema.define(:version => 20121205021047) do
     t.decimal  "total_estimated_cost"
     t.string   "vm_type"
     t.decimal  "estimated_time_minutes"
+    t.integer  "cluster_id"
+    t.string   "example_command"
   end
 
   create_table "inputs", :force => true do |t|
@@ -131,6 +133,7 @@ ActiveRecord::Schema.define(:version => 20121205021047) do
     t.integer  "application_id"
     t.string   "prefix"
     t.integer  "position"
+    t.integer  "execution_id"
   end
 
   create_table "instance_types", :force => true do |t|
@@ -154,6 +157,7 @@ ActiveRecord::Schema.define(:version => 20121205021047) do
     t.datetime "updated_at",         :null => false
     t.string   "script_url"
     t.integer  "directory_id"
+    t.integer  "execution_id"
   end
 
   create_table "operating_systems", :force => true do |t|

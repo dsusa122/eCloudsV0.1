@@ -3,7 +3,9 @@ class JobsController < InheritedResources::Base
   before_filter :authenticate_user!
 
   def index
-    @jobs = current_user.jobs.all
+
+    @execution = Execution.find(params[:execution_id])
+    @jobs = @execution.jobs
 
     respond_to do |format|
       format.html # index.html.erb

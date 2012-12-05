@@ -49,7 +49,9 @@ class ExecutionsController < InheritedResources::Base
 
     @application = @execution.application
 
+    @example_command = @application.begin_command + ' '
     @base_command = @application.begin_command + ' '
+
 
     # estos son los inputs escogidos por el usuario
     @raw_inputs = params['inputs']
@@ -139,10 +141,10 @@ class ExecutionsController < InheritedResources::Base
 
             if @execution_input.prefix != nil or @execution_input.prefix != ''
 
-              @base_command = @base_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
+              @example_command = @example_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
 
             else
-              @base_command = @base_command + @execution_input.value+ ' '
+              @example_command = @example_command + @execution_input.value+ ' '
 
             end
 
@@ -158,10 +160,10 @@ class ExecutionsController < InheritedResources::Base
 
             if @execution_input.prefix != nil or @execution_input.prefix != ''
 
-              @base_command = @base_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
+              @example_command = @example_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
 
             else
-              @base_command = @base_command + @execution_input.value+ ' '
+              @example_command = @example_command + @execution_input.value+ ' '
 
             end
 
@@ -171,21 +173,28 @@ class ExecutionsController < InheritedResources::Base
 
             if @execution_input.prefix != nil or @execution_input.prefix != ''
 
-              @base_command = @base_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
+              @example_command = @example_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
 
             else
-              @base_command = @base_command + @execution_input.value+ ' '
+              @example_command = @example_command + @execution_input.value+ ' '
 
             end
           end
-          i=i+1
+
+          @execution_input.execution_id =  @execution.id
+          @execution_input.application_id = nil
+          @execution_input.save
+
+          @base_command = ' '+app_input.prefix+' '+'INPUT'+i.to_s
+              i=i+1
         end
 
         puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
         puts @num_jobs
 
-        @execution.base_command = @base_command
+        @execution.example_command = @example_command + @application.end_command
+        @execution.base_command = @base_command + @application.end_command
         @execution.number_of_jobs = @num_jobs
 
         respond_to do |format|

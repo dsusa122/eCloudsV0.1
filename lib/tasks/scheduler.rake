@@ -1,9 +1,64 @@
+task :checkForExecutions => :environment do
+
+  puts 'I am going to check the queue for executions'
+
+  @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+  @queue = @sqs.queue(PRESCHEDULING_QUEUE, false)
+  @msg = @queue.receive
+
+  puts 'I just received the message:'
+  puts @msg
+
+  @parts = @msg.to_s.split(':')
+
+  if @parts[0]== PROCESS_EXECUTION_MSG
+
+    @execution = Execution.find(@parts[1])
+
+    #primero debo crear un nuevo cluster
+    puts 'I will create a new cluster'
+    @cluster = Cluster.new
+    @cluster.user_id = @execution.user_id
+    @cluster.name = 'CLUSTER_FOR_EXECUTION_ID:'+@execution.id.to_s
+    @cluster.save
+    @execution.cluster_id = @cluster.id
+    puts 'cluster with name ' + @cluster.name + ' and id ' + @cluster.id.to_s + ' was created'
+
+
+    ## debo prender las máquina que me toca
+    @vm_number = @execution.vm_number
+    @vm_type = @execution.vm_type
+    puts 'I wil turn on ' + @vm_number.to_s + ' instances'
+    puts ' of type' + @vm_type
+
+    for i in 1..@vm_number
+      @virtual_machine = launch_one_vm @vm_type, @cluster
+      puts @virtual_machine.hostname + ' created'
+    end
+
+    # ahora debo crear los jobs
+    #debo identificar cuál es el directorio y su posición
+    @input_dir = get_directory (@execution.inputs)
+
+    # si no es nil es que hay directorio
+    if @input_dir != nil
+
+    end
+
+
+
+
+
+  end
+
+end
+
 task :checkForJobs => :environment do
 
   puts 'I am going to check the queue for new messages'
 
   @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-  @queue = @sqs.queue(PRESCHEDULING_QUEUE, create=false)
+  @queue = @sqs.queue(PRESCHEDULING_QUEUE, false)
   @msg = @queue.receive
 
   puts 'I just received the message:'
@@ -214,5 +269,69 @@ task :checkJobStatus => :environment do
 
     @msg.delete
   end
+
+
+
+end
+
+
+####### funciones
+
+# saca de los inputs pasados por parámtero cuál es el directorio
+# si no hay ninguno retorna nil
+def get_directory (inputs)
+
+  inputs.each do |input|
+    if input.is_directory?
+        return input
+    end
+  end
+
+  return nil
+end
+
+def create_cluster
+  @cluster = current_user.clusters.new
+end
+
+# busca en la cadena string un patrón y lo reemplaza con replacement
+def find_replace string, pattern, replacement
+    string.gsub(pattern , replacement)
+end
+
+# lanza una máquina virtual con el tipo de instancia dado por parametro, y la asocia el cluster dado por parametro
+def launch_one_vm(instance_type, cluster)
+
+  @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+
+  @instances = @ec2.launch_instances( 'ami-d4ab2ebd' ,:group_ids => ['AppCientificas'],
+                                      :instance_type => instance_type ,
+                                      :user_data => 'EClouds Instance',
+                                      :key_name => 'amazonKeys')
+  @instance = @instances[0]
+
+  @name = @instance[:aws_instance_id]
+
+  @virtual_machine = VirtualMachine.new
+  @virtual_machine.AMI_name = @name
+  @virtual_machine.hostname = 'pending'
+  puts 'obteniendo nombre de la vm'
+  puts @virtual_machine.AMI_name
+  @virtual_machine.slots = 1
+
+  @virtual_machine.cluster_id = cluster.id
+
+  puts @virtual_machine.cluster_id
+  @virtual_machine.save
+
+  @event = VirtualMachineEvent.new
+
+  @event.action = VIRTUAL_MACHINE_EVENTS[:CREATED]
+  @event.vm_id = @virtual_machine.id
+  @event.user_id = cluster.user.id
+  @event.save
+
+  @virtual_machine
+
 
 end
