@@ -141,10 +141,10 @@ class ExecutionsController < InheritedResources::Base
 
             if @execution_input.prefix != nil or @execution_input.prefix != ''
 
-              @example_command = @example_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
+              @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+ '}'+' '
 
             else
-              @example_command = @example_command + @execution_input.value+ ' '
+              @example_command = @example_command + '{'+@execution_input.value+ '}'+' '
 
             end
 
@@ -160,10 +160,10 @@ class ExecutionsController < InheritedResources::Base
 
             if @execution_input.prefix != nil or @execution_input.prefix != ''
 
-              @example_command = @example_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
+              @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+ '}'+' '
 
             else
-              @example_command = @example_command + @execution_input.value+ ' '
+              @example_command = @example_command +'{'+ @execution_input.value+'}'+' '
 
             end
 
@@ -173,10 +173,10 @@ class ExecutionsController < InheritedResources::Base
 
             if @execution_input.prefix != nil or @execution_input.prefix != ''
 
-              @example_command = @example_command +@execution_input.prefix + ' '+ @execution_input.value+ ' '
+              @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+'}'+ ' '
 
             else
-              @example_command = @example_command + @execution_input.value+ ' '
+              @example_command = @example_command + '{'+ @execution_input.value+'}' + ' '
 
             end
           end
@@ -185,7 +185,11 @@ class ExecutionsController < InheritedResources::Base
           @execution_input.application_id = nil
           @execution_input.save
 
-          @base_command = ' '+app_input.prefix+' '+'INPUT'+i.to_s
+          puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
+          puts @base_command
+
+          @base_command = @base_command+ ' '+@execution_input.prefix+' '+'INPUT'+i.to_s
               i=i+1
         end
 

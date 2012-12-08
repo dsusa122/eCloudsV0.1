@@ -16,18 +16,14 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/stylesheets/static_pages.css.scss" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/stylesheets/virtual_machine_events.css.scss" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/stylesheets/virtual_machines.css.scss" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/clusters_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/clusters_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/executions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/jobs_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/jobs_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/execution.rb" afterPath="$PROJECT_DIR$/app/models/execution.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/input.rb" afterPath="$PROJECT_DIR$/app/models/input.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/job.rb" afterPath="$PROJECT_DIR$/app/models/job.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/browser/browse.html.erb" afterPath="$PROJECT_DIR$/app/views/browser/browse.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/browser/index.html.erb" afterPath="$PROJECT_DIR$/app/views/browser/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/cluster.rb" afterPath="$PROJECT_DIR$/app/models/cluster.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/executions/define_execution_part2.html.erb" afterPath="$PROJECT_DIR$/app/views/executions/define_execution_part2.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/executions/show.html.erb" afterPath="$PROJECT_DIR$/app/views/executions/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/jobs/index.html.erb" afterPath="$PROJECT_DIR$/app/views/jobs/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/command-15" afterPath="$PROJECT_DIR$/command-15" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/command-16" afterPath="$PROJECT_DIR$/command-16" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/command-17" afterPath="$PROJECT_DIR$/command-17" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/command-18" afterPath="$PROJECT_DIR$/command-18" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/command-19" afterPath="$PROJECT_DIR$/command-19" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/scheduler.rake" afterPath="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
     </list>
@@ -55,19 +51,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="scheduler.rake" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="scheduler.rake" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/tasks/scheduler.rake">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="14" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.0">
+            <state line="83" column="22" selection-start="2520" selection-end="2520" vertical-scroll-proportion="0.5096525">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="virtual_machine.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/virtual_machine.rb">
+      <file leaf-file-name="cluster.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/cluster.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="9" selection-start="620" selection-end="620" vertical-scroll-proportion="0.0">
+            <state line="6" column="8" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cloud_file.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/cloud_file.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jobs_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/jobs_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="18" selection-start="648" selection-end="792" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="job.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/job.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -77,15 +100,6 @@
         <entry file="file://$PROJECT_DIR$/app/models/execution.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state line="10" column="190" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cluster.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/cluster.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -109,10 +123,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="executions_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="executions_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="196" column="8" selection-start="5992" selection-end="5992" vertical-scroll-proportion="0.61142856">
+            <state line="150" column="41" selection-start="4476" selection-end="4476" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -121,16 +135,7 @@
       <file leaf-file-name="define_execution_part2.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/executions/define_execution_part2.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="32" selection-start="567" selection-end="567" vertical-scroll-proportion="-12.782609">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="input.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/input.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="153" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0">
+            <state line="21" column="8" selection-start="543" selection-end="543" vertical-scroll-proportion="-7.7391305">
               <folding />
             </state>
           </provider>
@@ -149,7 +154,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/views/executions/define_execution.html.erb" />
         <option value="$PROJECT_DIR$/app/views/executions/index.html.erb" />
         <option value="$PROJECT_DIR$/config/initializers/general.rb" />
         <option value="$PROJECT_DIR$/config/routes.rb" />
@@ -161,10 +165,11 @@
         <option value="$PROJECT_DIR$/app/views/browser/index.html.erb" />
         <option value="$PROJECT_DIR$/app/views/browser/browse.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/clusters_controller.rb" />
-        <option value="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
         <option value="$PROJECT_DIR$/app/models/execution.rb" />
         <option value="$PROJECT_DIR$/app/views/executions/define_execution_part2.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/cluster.rb" />
+        <option value="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
       </list>
     </option>
   </component>
@@ -367,6 +372,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eCloudsV0.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eCloudsV0.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -832,41 +855,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/executions/define_execution.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="8" selection-start="1902" selection-end="1902" vertical-scroll-proportion="0.71139705">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/virtual_machine_events_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/cluster.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/browser/browse.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="13" selection-start="1450" selection-end="1450" vertical-scroll-proportion="0.30592734">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/browser/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="18" selection-start="1253" selection-end="1253" vertical-scroll-proportion="0.21691176">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/input.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="153" selection-start="186" selection-end="186" vertical-scroll-proportion="0.0">
@@ -902,23 +890,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/executions/define_execution_part2.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="5" selection-start="3461" selection-end="3477" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/clusters_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="16" selection-start="3312" selection-end="3616" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tasks/scheduler.rake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="14" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.0">
+        <state line="21" column="8" selection-start="543" selection-end="543" vertical-scroll-proportion="-7.7391305">
           <folding />
         </state>
       </provider>
@@ -930,16 +904,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/executions/define_execution_part2.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/controllers/clusters_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="32" selection-start="567" selection-end="567" vertical-scroll-proportion="-12.782609">
+        <state line="135" column="16" selection-start="3312" selection-end="3616" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/virtual_machines_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="5" selection-start="3461" selection-end="3477" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="196" column="8" selection-start="5992" selection-end="5992" vertical-scroll-proportion="0.61142856">
+        <state line="150" column="41" selection-start="4476" selection-end="4476" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/jobs_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="18" selection-start="648" selection-end="792" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/cloud_file.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/job.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="9" selection-start="9" selection-end="9" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/cluster.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="8" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tasks/scheduler.rake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="22" selection-start="2520" selection-end="2520" vertical-scroll-proportion="0.5096525">
           <folding />
         </state>
       </provider>
