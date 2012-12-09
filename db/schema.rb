@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208141342) do
+ActiveRecord::Schema.define(:version => 20121209012640) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20121208141342) do
     t.decimal  "estimated_time_minutes"
     t.integer  "cluster_id"
     t.string   "example_command"
+    t.string   "queue_name"
   end
 
   create_table "inputs", :force => true do |t|

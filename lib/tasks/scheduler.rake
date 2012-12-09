@@ -1,3 +1,76 @@
+task :assignExecution => :environment do
+
+  puts 'I am going to check the queue for executions'
+
+  @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+  @queue = @sqs.queue(PRESCHEDULING_QUEUE, false)
+  @msg = @queue.receive
+
+
+
+  puts 'I just received the message:'
+  puts @msg
+
+  @parts = @msg.to_s.split(':')
+
+  if @parts[0]== ASSIGN_EXECUTION_MSG
+
+    #borro el mensaje de la cola
+    @msg.delete
+
+    @execution = Execution.find(@parts[1])
+    puts 'I will create a queue for the execution, I will use the execution id'
+    @queue_name  = 'QUEUE_FOR_EXEC_ID-'+@execution.id.to_s
+    puts  'I choose the name ' + @queue_name
+
+    @queue = @sqs.queue(@queue_name, true, 1)
+    puts 'I created the queue on aws'
+    @execution.queue_name = @queue_name
+    @execution.save
+    puts 'Now I will have to tell the virtual machines to switch to this queue'
+
+    @cluster = @execution.cluster
+
+
+    @virtual_machines = @cluster.virtual_machines
+
+    @virtual_machines.each do |vm|
+      #reviso que el hostname no sea pending
+      vm.current_state
+
+      if vm.hostname != 'pending' or vm.hostname !=''
+          @msg = vm.hostname+';'+SWITCH_TO_QUEUE_MSG+';'+@queue_name
+          @queue = @sqs.queue(PRESCHEDULING_QUEUE, false)
+          @queue.send_message(@msg)
+
+      else
+        #tengo que poner el mensaje en la cola para que siga con losque faltan
+      end
+    end
+
+    # ahora le pongo a cada job que está en estado assigning
+    @jobs = @cluster.jobs
+    i=0
+    @jobs.each do |job|
+      job.status = JOBS_STATUS[:ASSIGNING]
+
+      @queue = @sqs.queue(@queue_name, false)
+      #acá pongo el mensaje para que la mv ejecute el job
+      puts 'Sending message to new queue '
+      @msg = RUN_JOB_MSG + ';' + job.id.to_s+';'+job.application.installer_url+';'+job.script_url+';'+job.directory.name
+
+      @queue.send_message(@msg)
+      puts @msg
+
+
+      job.save
+    end
+
+    puts 'DONE'
+
+  end
+
+end
 task :checkForExecutions => :environment do
 
   puts 'I am going to check the queue for executions'
@@ -21,6 +94,7 @@ task :checkForExecutions => :environment do
     @cluster.user_id = @execution.user_id
     @cluster.name = 'CLUSTER_FOR_EXECUTION_ID:'+@execution.id.to_s
     @cluster.execution_id = @execution.id
+    @cluster.instance_type = @execution.vm_type
     @cluster.save
     @execution.cluster_id = @cluster.id
     puts 'cluster with name ' + @cluster.name + ' and id ' + @cluster.id.to_s + ' was created'
@@ -92,6 +166,7 @@ task :checkForExecutions => :environment do
 
           @job = create_job @cluster, inputs_cloud_files , all_inputs, @execution.base_command, @execution
 
+
           #obtengo el tamaño del array para sacar el ultimo
           @execution.inputs.pop
 
@@ -103,6 +178,11 @@ task :checkForExecutions => :environment do
 
 
     end
+
+    # ahpra pongo el mensaje en la cola para que lo terminen de organizar la ejecución
+    @msg.delete
+    @msg = ASSIGN_EXECUTION_MSG + ':'+@execution.id.to_s
+    @queue.send_message(@msg)
 
 
 
@@ -393,7 +473,13 @@ def create_job cluster, cloud_file_inputs, all_inputs, base_command, execution
 
   @job.application = execution.application
 
+  @job.cluster = cluster
+
+  @job.directory= execution.directory
+
   @job.save
+
+
 
 
   puts 'now I will generate the command'
@@ -501,14 +587,14 @@ def launch_one_vm(instance_type, cluster)
 
   @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
 
-  #@instances = @ec2.launch_instances( 'ami-d4ab2ebd' ,:group_ids => ['AppCientificas'],
-   #                                   :instance_type => instance_type ,
-    #                                  :user_data => 'EClouds Instance',
-     #                                 :key_name => 'amazonKeys')
- # @instance = @instances[0]
+  @instances = @ec2.launch_instances( 'ami-d4ab2ebd' ,:group_ids => ['AppCientificas'],
+                                     :instance_type => instance_type ,
+                                     :user_data => 'EClouds Instance',
+                                      :key_name => 'amazonKeys')
+  @instance = @instances[0]
 
-  #@name = @instance[:aws_instance_id]
-  @name = 'not real vm'
+  @name = @instance[:aws_instance_id]
+  #@name = 'not real vm'
 
   @virtual_machine = VirtualMachine.new
   @virtual_machine.AMI_name = @name

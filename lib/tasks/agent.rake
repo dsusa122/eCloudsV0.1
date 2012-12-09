@@ -1,5 +1,22 @@
 task :checkQueue => :environment do
-  puts 'I wil check the queue to see if I have to execute any job'
+  puts 'I will check if I have an execution queue assigned'
+
+  if File.exist?('exec_queue_name')
+
+    puts 'reading file exec_queue_name'
+
+
+    File.open('exec_queue_name', "r") do |infile|
+      while (line = infile.gets)
+        puts line
+        @queue_name = line.chop
+      end
+    end
+
+  else
+    puts 'I still do not have any queue assigned'
+  end
+
 
   @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
   @queue = @sqs.queue(SCHEDULING_QUEUE)
@@ -139,5 +156,55 @@ task :checkQueue => :environment do
   end
 
 
+
+end
+
+task :getAssignedQueue => :environment do
+
+  puts 'I wil check the queue to see which queue I have to use'
+
+  @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+  @queue = @sqs.queue(PRESCHEDULING_QUEUE, false)
+
+  @msg = @queue.receive
+
+  puts 'I just received the message:'
+  puts @msg
+
+  if @msg.to_s.split(';')[1] == SWITCH_TO_QUEUE_MSG  and  @msg.to_s.split(';').first  != ''
+    @msg_parts = @msg.to_s.split(';')
+
+    @msg_parts = @msg.to_s.split(';')
+
+    @host = Socket.gethostname
+    @host = @host.split('.').first
+    puts 'my hostname is: '
+    puts @host.to_s
+
+    @targetHostname = @msg_parts[0].split('.').first
+    puts 'the target hostname is: '
+    puts @targetHostname
+
+    if @targetHostname != @host
+      puts 'this is not for me '
+    else
+      # acá cojo la cola que me tocó
+      @exec_queue_name = @msg_parts[2]
+
+      puts 'They assigned the queue ' +@exec_queue_name + ' for me'
+      puts 'I will save it in the file exec_queue_name'
+
+      File.open('exec_queue_name', 'w') do |stream|
+
+
+        stream.puts @exec_queue_name
+
+      end
+
+      puts 'DONE'
+
+      @msg.delete
+    end
+  end
 
 end

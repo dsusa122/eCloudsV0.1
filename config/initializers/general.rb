@@ -14,7 +14,8 @@ JOBS_STATUS =  { :PENDING=> "PENDING",
                  :RUNNING =>"RUNNING",
                  :FAILED => "FAILED",
                  :UPLOADING_OUTPUTS => "UPLOADING_OUTPUTS",
-                 :FINISHED => "FINISHED"}
+                 :FINISHED => "FINISHED",
+                 :ASSIGNING => "ASSIGNING"}
 
 VM_PRICING = {"t1.micro"  => 0.020,
               "m1.small"  => 0.065,
@@ -30,6 +31,10 @@ AWS_SECRET_ACCESS_KEY = 'DOQX+t8eZmesb1nfGSLHfq3h5928vRDny5UZDZl6'
 PRESCHEDULING_QUEUE = 'prescheduling'
 
 PROCESS_EXECUTION_MSG = 'PROCESS_EXECUTION'
+
+ASSIGN_EXECUTION_MSG = 'ASSIGN_EXECUTION'
+
+SWITCH_TO_QUEUE_MSG = 'SWITCH_TO_QUEUE'
 
 SCHEDULE_JOB_MSG = 'SCHEDULE_JOB'
 RUN_JOB_MSG = 'RUN_JOB'
