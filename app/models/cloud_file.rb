@@ -1,8 +1,8 @@
 class CloudFile < ActiveRecord::Base
 
-  PRODUCTION_BUCKET  = "ecloudsProd/"
-  DEVELOPMENT_BUCKET = "eclouds/"
-  STAGING_BUCKET = "ecloudsStaging/"
+  PRODUCTION_BUCKET  = ENV["S3_BUCKET_PROD"]
+  DEVELOPMENT_BUCKET = ENV["S3_BUCKET_DEV"]
+  STAGING_BUCKET = ENV["S3_BUCKET_STAGING"]
 
   AMAZON_S3_BASE_URL =   "https://s3.amazonaws.com/"
 

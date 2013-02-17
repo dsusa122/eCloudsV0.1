@@ -40,10 +40,10 @@ ECloudsV01::Application.configure do
   config.action_mailer.default_url_options = { :host => '0.0.0.0:3000' }
 
   config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com",
-      :port => 587,
-      :user_name => 'nclopezo@gmail.com',
-      :password => 'E5G5yq6y',
+      :address => ENV["SMTP_DEV"],
+      :port => ENV["SMTP_PORT_DEV"],
+      :user_name => ENV["SMTP_USER_NAME_DEV"],
+      :password => ENV["SMTP_PASSWORD_DEV"],
       :authentication => 'plain',
       :enable_starttls_auto => true
   }

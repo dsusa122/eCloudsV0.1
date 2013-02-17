@@ -126,13 +126,13 @@ ECloudsV01::Application.configure do
   config.assets.debug = true
 
 
-  config.action_mailer.default_url_options = { :host => 'eclouds.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
   config.action_mailer.smtp_settings = {
-      :address => "smtp.sendgrid.net",
-      :port => 587,
-      :user_name => 'dgmendez67',
-      :password => '86T8X6N7',
+      :address => ENV["SMTP_PROD"],
+      :port => ENV["SMTP_PORT_PROD"],
+      :user_name => ENV["SMTP_USER_NAME_PROD"],
+      :password => ENV["SMTP_PASSWORD_PROD"],
       :authentication => 'plain',
       :enable_starttls_auto => true
   }

@@ -24,11 +24,11 @@ VM_PRICING = {"t1.micro"  => 0.020,
               "m1.xlarge"  => 0.520,
               "c1.xlarge" => 0.660}
 
-AWS_ACCESS_KEY_ID = 'AKIAJPESCLIRTTE5MOWQ'
+AWS_ACCESS_KEY_ID = ENV["AMAZON_ACCESS_KEY_ID"]
 
-AWS_SECRET_ACCESS_KEY = 'DOQX+t8eZmesb1nfGSLHfq3h5928vRDny5UZDZl6'
+AWS_SECRET_ACCESS_KEY = ENV["AMAZON_SECRET_ACCESS_KEY"]
 
-PRESCHEDULING_QUEUE = 'prescheduling'
+
 
 PROCESS_EXECUTION_MSG = 'PROCESS_EXECUTION'
 
@@ -46,4 +46,19 @@ FINISHED_JOB_MSG = 'FINISHED_JOB_MSG'
 
 
 
-SCHEDULING_QUEUE = 'scheduling'
+
+
+
+if Rails.env.production?
+
+  PRESCHEDULING_QUEUE = 'preschedulingProduction'
+  SCHEDULING_QUEUE = 'schedulingProduction'
+
+elsif Rails.env.development?
+  PRESCHEDULING_QUEUE = 'preschedulingDevelopment'
+  SCHEDULING_QUEUE = 'schedulingDevelopment'
+
+else
+  PRESCHEDULING_QUEUE = 'preschedulingDevelopment'
+  SCHEDULING_QUEUE = 'schedulingDevelopment'
+end

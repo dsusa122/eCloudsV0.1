@@ -8,14 +8,14 @@ if Rails.env.production?
       config.fog_credentials = {
 
           :provider => 'AWS',
-          :aws_access_key_id => 'AKIAJPESCLIRTTE5MOWQ',
-          :aws_secret_access_key => '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',
+          :aws_access_key_id => ENV["AMAZON_ACCESS_KEY_ID"],
+          :aws_secret_access_key => ENV["AMAZON_SECRET_ACCESS_KEY"],
           :region => 'us-east-1'
       }
 
 
 
-          config.fog_directory = 'ecloudsProd'
+          config.fog_directory = ENV["S3_BUCKET_PROD"]
           config.fog_public = true
       #config.fog_host= 'http://localhost:3000'
 
@@ -30,14 +30,14 @@ elsif Rails.env.development?
       config.fog_credentials = {
 
           :provider => 'AWS',
-          :aws_access_key_id => 'AKIAJPESCLIRTTE5MOWQ',
-          :aws_secret_access_key => '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',
+          :aws_access_key_id => ENV["AMAZON_ACCESS_KEY_ID"],
+          :aws_secret_access_key => ENV["AMAZON_SECRET_ACCESS_KEY"],
           :region => 'us-east-1'
       }
 
 
 
-      config.fog_directory = 'eclouds'
+      config.fog_directory = ENV["S3_BUCKET_DEV"]
       config.fog_public = true
       #config.fog_host= 'http://localhost:3000'
 
@@ -52,14 +52,14 @@ else
     config.fog_credentials = {
 
         :provider => 'AWS',
-        :aws_access_key_id => 'AKIAJPESCLIRTTE5MOWQ',
-        :aws_secret_access_key => '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',
+        :aws_access_key_id => ENV["AMAZON_ACCESS_KEY_ID"],
+        :aws_secret_access_key => ENV["AMAZON_SECRET_ACCESS_KEY"],
         :region => 'us-east-1'
     }
 
 
 
-    config.fog_directory = 'eclouds'
+    config.fog_directory = ENV["S3_BUCKET_STAGING"]
     config.fog_public = true
     #config.fog_host= 'http://localhost:3000'
 

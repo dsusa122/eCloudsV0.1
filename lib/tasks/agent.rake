@@ -8,7 +8,7 @@ task :checkQueue => :environment do
 
     File.open('exec_queue_name', "r") do |infile|
       while (line = infile.gets)
-        puts line
+          puts line
         @queue_name = line.chop
       end
     end
@@ -120,7 +120,7 @@ task :checkQueue => :environment do
         @job_id = @msg_parts[2].to_s
 
         @s3 = Aws::S3.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-        @bucket =  @s3.bucket('eclouds')
+        @bucket =  @s3.bucket(ENV['S3_BUCKET_DEV'])
 
         for i in  0..(@outputFiles.size-1) do
 

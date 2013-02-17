@@ -587,10 +587,10 @@ def launch_one_vm(instance_type, cluster)
 
   @ec2 = Aws::Ec2.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
 
-  @instances = @ec2.launch_instances( 'ami-d4ab2ebd' ,:group_ids => ['AppCientificas'],
+  @instances = @ec2.launch_instances( ENV["AMI_APP_CIENTIFICAS_NAME"] ,:group_ids => ['AppCientificas'],
                                      :instance_type => instance_type ,
                                      :user_data => 'EClouds Instance',
-                                      :key_name => 'amazonKeys')
+                                      :key_name => ENV["KEY_PAIR_NAME"])
   @instance = @instances[0]
 
   @name = @instance[:aws_instance_id]

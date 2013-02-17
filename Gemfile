@@ -24,6 +24,8 @@ gem 'pg', '0.12.2'
 
 gem 'formtastic'
 
+gem 'json', '1.7.7'
+
 
 
 
