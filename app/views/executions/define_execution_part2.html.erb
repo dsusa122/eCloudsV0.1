@@ -36,24 +36,55 @@
     <br>
     <br>
 
-    Choose a virtual machine type:
+    To help e-Clouds calculate the best way to perform the execution, please estimate the following parameters:
 
-    <%= select :execution_params,  :instance_type ,  Aws::Ec2::INSTANCE_TYPES  %>
+    <br>
+    <br>
+
+
+
+    Choose a virtual machine type:
+    <br>
+
+    <%= select :execution_params, :instance_type , Aws::Ec2::INSTANCE_TYPES, :selected => @execution.vm_type %>
+
+    <br>
+    <br>
 
     Enter an estimated time per job in minutes:
 
-    <%= select :execution_params,  :time_per_job  , (1..1440).map { |i| i}  %>
+    <br>
+
+    <%= select :execution_params, :time_per_job , (1..1440).map { |i| i} , :selected => @execution.time_per_job %>
+
+    <br>
+
+    <br>
+
+    <div class="actions" >
+      <%= e.submit 'Calculate', :name => "calculate"%>
+    </div>
+
+    <br>
+
+    <br>
+
+    <h2> Execution Parameters</h2>
+
+    <br>
+
+    For a <b><%= @execution.vm_type %></b> virtual machine and <b><%= @execution.time_per_job %> minutes </b> per job,
+    e-Clouds will choose the following parameters
+
+    <br>
+    <br>
+    <br>
 
     <table class="table span3">
 
       <tr>
-        <td>Chosen VM: </td>
-        <td><%= @execution.vm_type %> </td>
-      </tr>
-
-      <tr>
-        <td>Estimated Time per job: </td>
-        <td><%= @execution.time_per_job %> </td>
+        <td>eClouds will use: </td>
+        <td> <%= @execution.vm_number %> virtual_machines </td>
       </tr>
 
       <tr>
@@ -62,27 +93,23 @@
       </tr>
       <tr>
         <td>Computing hours: </td>
-        <td> <%= @execution.computing_hours %>  - (<%= @execution.computing_minutes %> minutes )  </td>
+        <td> <%= @execution.computing_hours %> -> (<%= @execution.computing_minutes %> minutes ) </td>
       </tr>
       <tr>
         <td>Cost per virtual machine: </td>
-        <td> $USD <%= @execution.vm_cost %> per hour   </td>
+        <td> $USD <%= @execution.vm_cost %> per hour </td>
       </tr>
 
       <tr>
-        <td>eClouds will use: </td>
-        <td>  <%= @execution.vm_number %> virtual_machines   </td>
-      </tr>
-
-      <tr>
-        <td>This will cost </td>
-        <td> $USD <%= @execution.total_estimated_cost %>    </td>
+        <td>Total cost </td>
+        <td> $USD <%= @execution.total_estimated_cost %> </td>
       </tr>
 
       <tr>
         <td>This will take </td>
-        <td> <%= @execution.estimated_time_minutes %>   minutes </td>
+        <td> <%= @execution.estimated_time_minutes %> minutes </td>
       </tr>
+
     </table>
 
 

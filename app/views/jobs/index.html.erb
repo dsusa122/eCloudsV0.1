@@ -3,11 +3,18 @@
 <br>
 <br>
 
-<% if @jobs.empty?  %>
+<% if @jobs.empty? %>
 
     <h2>Your execution is being processed and there are still no jobs launched</h2>
 
 <% end %>
+
+
+<strong> <%= @execution.current_vms %> Virtual machines running</strong> <br>
+<strong> $ <%= @execution.vm_cost %> per virtual machine per hour</strong> <br>
+<strong> Current Computing Hours: 1</strong> <br>
+<strong> Current Cost: USD $<%= @execution.vm_cost%> </strong>
+
 
 
 <br>
@@ -27,30 +34,27 @@
     <th>End time</th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
 
-<% @jobs.each do |job| %>
-  <tr>
-    <td><%= job.id %></td>
-    <td><%= job.application.name %></td>
-    <td><%= link_to job.cluster.name, job.cluster %></td>
-    <td><%= job.status %></td>
-    <td>
-        <%= link_to job.directory.name , browse_path(job.directory) %>
-    </td>
-    <td>
-        <a href="<%= job.script_url %>">View Script</a>
-    </td>
-    <td><%= job.start_time %></td>
-    <td><%= job.end_time %></td>
-    <td><%= link_to 'Show', job %></td>
-    <td><%= link_to 'Edit', edit_job_path(job) %></td>
-    <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @jobs.each do |job| %>
+      <tr>
+        <td><%= job.id %></td>
+        <td><%= job.application.name %></td>
+        <td><%= link_to job.cluster.name, job.cluster %></td>
+        <td><%= job.status %></td>
+        <td>
+          <%= link_to job.directory.name , browse_path(job.directory) %>
+        </td>
+        <td>
+          <a href="<%= job.script_url %>">View Script</a>
+        </td>
+        <td><%= job.start_time %> 13:30:30</td>
+        <td><%= job.start_time %> 13:45:52</td>
+        <td><%= job.end_time %></td>
+
+
+      </tr>
+  <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Job', new_job_path %>

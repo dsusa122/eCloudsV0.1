@@ -107,10 +107,10 @@ class ClustersController < ApplicationController
        # falta coger info dependiendo del tipo de vm
     for i  in 1..@number_of_vms
 
-      @instances = @ec2.launch_instances( ENV["AMI_APP_CIENTIFICAS_NAME"] ,:group_ids => ['AppCientificas'],
+      @instances = @ec2.launch_instances( ENV["AMI_APP_CIENTIFICAS_NAME"] ,:group_ids => [ENV["SECURITY_GROUP"]],
                                           :instance_type => @instance_type ,
                                           :user_data => 'EClouds Instance',
-                                          :key_name => 'amazonKeys')
+                                          :key_name => ENV["KEY_PAIR_NAME"])
       @instance = @instances[0]
 
       #@name =  (0..4).map{(65.+rand(25)).chr}.join

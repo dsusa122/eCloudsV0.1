@@ -1,25 +1,28 @@
-<h1>New cloud_file</h1>
+<h1>New Cloud File</h1>
 
 <%= form_for(@cloud_file, :html => {:multipart =>true}) do |f| %>
-          <% if @cloud_file.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@cloud_file.errors.count, "error") %> prohibited this cloud_file from being saved:</h2>
+    <% if @cloud_file.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@cloud_file.errors.count, "error") %> prohibited this cloud_file from being saved:</h2>
 
-              <ul>
-                <% @cloud_file.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-  		<div class="field">
-          <%= f.label "file" %><br />
-          <%= f.file_field :avatar %>
+          <ul>
+            <% @cloud_file.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
         </div>
+    <% end %>
+    <br>
+    <div class="field">
+      <%= f.label "file" %><br />
+      <%= f.file_field :avatar %>
+    </div>
 
-        <div class="btn ">
-            <%= f.submit %>
-        </div>
+    <br>
+    <br>
+    <div class="btn ">
+      <%= f.submit %>
+    </div>
 <%end %>
 
 

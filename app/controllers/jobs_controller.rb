@@ -5,7 +5,12 @@ class JobsController < InheritedResources::Base
   def index
 
     @execution = Execution.find(params[:execution_id])
+    puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    puts @execution.id
     @jobs = @execution.jobs
+    @jobs.each do |j|
+      puts j.id
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -36,7 +41,7 @@ class JobsController < InheritedResources::Base
 
     @job.user_id = current_user.id
     @job.status = JOBS_STATUS[:PENDING]
-    
+
     @job.start_time = DateTime.now
 
 

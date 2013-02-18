@@ -1,4 +1,7 @@
-task :checkQueue => :environment do
+task :checkJobsQueue => :environment do
+
+
+
   puts 'I will check if I have an execution queue assigned'
 
   if File.exist?('exec_queue_name')
@@ -8,53 +11,62 @@ task :checkQueue => :environment do
 
     File.open('exec_queue_name', "r") do |infile|
       while (line = infile.gets)
-          puts line
+        puts line
         @queue_name = line.chop
       end
     end
 
-  else
-    puts 'I still do not have any queue assigned'
-  end
+    puts 'I will check the queue for messages'
+    puts 'using queue: '+ @queue_name
+    @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+    @queue = @sqs.queue(@queue_name,false )
+
+    puts 'I will check the queue for messages'
+
+    @msg = @queue.receive
 
 
-  @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-  @queue = @sqs.queue(SCHEDULING_QUEUE)
+    puts 'I just received the message: '
+    puts @msg
 
-  @msg = @queue.receive
-
-  puts 'I just received the message:'
-  puts @msg
-
-
-
-  if @msg.to_s.split(';')[1] == RUN_JOB_MSG  and  @msg.to_s.split(';').first  != ''
+    puts 'I will get my hostname to register my status: '
+    @host = Socket.gethostname
+    puts @host
 
     @msg_parts = @msg.to_s.split(';')
 
-    @host = Socket.gethostname
-    @host = @host.split('.').first
-    puts 'my hostname is: '
-    puts @host.to_s
+    if @msg_parts[0] == RUN_JOB_MSG
 
-    @targetHostname = @msg_parts[0].split('.').first
-    puts 'the target hostname is: '
-    puts @targetHostname
+      puts 'I will check if another process is running a job '
 
-      if @targetHostname != @host
-        puts 'this is not for me '
-      else
+      if !File.exist?('running_job')
+
+        puts 'I will register a file that says that I am running a job '
+
+        File.open('running_job', 'w') do |stream|
+
+
+          stream.puts 'CURRENTLY RUNNING ANOTHER QUEUE'
+
+        end
 
         #borro el mensaje
         @msg.delete
 
+        # my queue for moniroring will be the same as for prescheduling
+
+        @queue_monitoring = @sqs.queue(PRESCHEDULING_QUEUE,false )
+
+        puts 'All the monitoring messages will me sent to '
+        puts @queue_monitoring
 
 
-        @app_installer_url = @msg_parts[3].to_s
+
+        @app_installer_url = @msg_parts[2].to_s
         @installation_file_name = @app_installer_url.split('/').last
 
-        @installing_msg = INSTALLING_APP_MSG+';'+ @msg_parts[2].to_s
-        @queue.send_message(@installing_msg)
+        @installing_msg = INSTALLING_APP_MSG+';'+ @msg_parts[1].to_s
+        @queue_monitoring.send_message(@installing_msg)
 
         if( File.exists? @installation_file_name )
           puts 'application already installed'
@@ -88,15 +100,15 @@ task :checkQueue => :environment do
 
 
         puts 'I will download the command file'
-        @command_url = @msg_parts[4].to_s
+        @command_url = @msg_parts[3].to_s
 
         puts '########################################'
         puts 'wget ' + @command_url
 
         system('wget ' + @command_url )
 
-        @running_msg = RUNNING_APP_MSG+';'+ @msg_parts[2].to_s
-        @queue.send_message(@running_msg)
+        @running_msg = RUNNING_APP_MSG+';'+ @msg_parts[1].to_s+';'+@host
+        @queue_monitoring.send_message(@running_msg)
 
         @command_file_name = @command_url.split('/').last
 
@@ -104,25 +116,23 @@ task :checkQueue => :environment do
         puts 'chmod 755 ' + @command_file_name
         system( 'chmod 755 ' + @command_file_name )
 
-        @running = INSTALLING_APP_MSG+';'+ @msg_parts[2].to_s
-        @queue.send_message(@installing_msg)
 
         puts './'+@command_file_name + ' > jobsOutputs/output.txt'
         system( './'+@command_file_name + ' > jobsOutputs/output.txt' )
 
         puts 'I will upload the outputs'
 
-        @uploading_outs_msg = UPLOADING_OUTPUTS_MSG+';'+ @msg_parts[2].to_s
-        @queue.send_message(@uploading_outs_msg)
+        @uploading_outs_msg = UPLOADING_OUTPUTS_MSG+';'+ @msg_parts[1].to_s
+        @queue_monitoring.send_message(@uploading_outs_msg)
 
         @outputFiles = Dir['jobsOutputs/*']
 
-        @job_id = @msg_parts[2].to_s
+        @job_id = @msg_parts[1].to_s
 
         @s3 = Aws::S3.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-        @bucket =  @s3.bucket(ENV['S3_BUCKET_DEV'])
+        @bucket = @s3.bucket('Eclouds')
 
-        for i in  0..(@outputFiles.size-1) do
+        for i in 0..(@outputFiles.size-1) do
 
           @file = @outputFiles[i]
 
@@ -134,26 +144,55 @@ task :checkQueue => :environment do
           # el permiso que toca ponerle es public-read
           @bucket.put('outputs/'+@job_id +'/'+ @filename, f, {}, 'public-read')
 
-          @location  = @bucket.public_link
+          @location = @bucket.public_link
           @fileUrl = @location + '/outputs/'+@job_id+'/'+@filename.to_s
 
           puts 'successfully uploaded command file to ' + @fileUrl
 
-          @registerFile = REGISTER_FILE_MSG+';'+ @msg_parts[2].to_s+';'+@fileUrl
-          @queue.send_message(@registerFile)
+          @registerFile = REGISTER_FILE_MSG+';'+ @msg_parts[1].to_s+';'+@fileUrl
+          @queue_monitoring.send_message(@registerFile)
 
           File.delete(@file)
 
         end
 
 
+
+
+
+        @finished_job_msg = FINISHED_JOB_MSG+';'+ @msg_parts[1].to_s+';'+@host
+        @queue_monitoring.send_message(@finished_job_msg)
+
+        puts 'I will delete the file that represents that I am busy'
+
+        File.delete('running_job')
+
+      else
+
+        puts 'another process is running a job, I will wait'
+      end
+
+
+
+
     end
 
-    
-    @finished_job_msg = FINISHED_JOB_MSG+';'+ @msg_parts[2].to_s
-    @queue.send_message(@finished_job_msg)
 
+  else
+    puts 'I still do not have any queue assigned'
   end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -161,50 +200,61 @@ end
 
 task :getAssignedQueue => :environment do
 
-  puts 'I wil check the queue to see which queue I have to use'
+  i=0
 
-  @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-  @queue = @sqs.queue(PRESCHEDULING_QUEUE, false)
+  while i < 10 do
 
-  @msg = @queue.receive
+    sleep 5
+    i=i+1
 
-  puts 'I just received the message:'
-  puts @msg
+    puts 'I wil check the queue to see which queue I have to use'
 
-  if @msg.to_s.split(';')[1] == SWITCH_TO_QUEUE_MSG  and  @msg.to_s.split(';').first  != ''
-    @msg_parts = @msg.to_s.split(';')
+    @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+    @queue = @sqs.queue(PRESCHEDULING_QUEUE, false)
 
-    @msg_parts = @msg.to_s.split(';')
+    @msg = @queue.receive
 
-    @host = Socket.gethostname
-    @host = @host.split('.').first
-    puts 'my hostname is: '
-    puts @host.to_s
+    puts 'I just received the message:'
+    puts @msg
 
-    @targetHostname = @msg_parts[0].split('.').first
-    puts 'the target hostname is: '
-    puts @targetHostname
+    if @msg.to_s.split(';')[1] == SWITCH_TO_QUEUE_MSG and @msg.to_s.split(';').first != ''
+      @msg_parts = @msg.to_s.split(';')
 
-    if @targetHostname != @host
-      puts 'this is not for me '
-    else
-      # acá cojo la cola que me tocó
-      @exec_queue_name = @msg_parts[2]
+      @msg_parts = @msg.to_s.split(';')
 
-      puts 'They assigned the queue ' +@exec_queue_name + ' for me'
-      puts 'I will save it in the file exec_queue_name'
+      @host = Socket.gethostname
+      @host = @host.split('.').first
+      puts 'my hostname is: '
+      puts @host.to_s
 
-      File.open('exec_queue_name', 'w') do |stream|
+      @targetHostname = @msg_parts[0].split('.').first
+      puts 'the target hostname is: '
+      puts @targetHostname
+
+      if @targetHostname != @host
+        puts 'this is not for me '
+      else
+        # acá cojo la cola que me tocó
+        @exec_queue_name = @msg_parts[2]
+
+        puts 'They assigned the queue ' +@exec_queue_name + ' for me'
+        puts 'I will save it in the file exec_queue_name'
+
+        File.open('exec_queue_name', 'w') do |stream|
 
 
-        stream.puts @exec_queue_name
+          stream.puts @exec_queue_name
 
+        end
+
+        puts 'DONE'
+
+        @msg.delete
       end
-
-      puts 'DONE'
-
-      @msg.delete
     end
+
   end
+
+
 
 end

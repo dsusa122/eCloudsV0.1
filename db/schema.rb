@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209012640) do
+ActiveRecord::Schema.define(:version => 20121210163013) do
 
   create_table "applications", :force => true do |t|
     t.string   "name"
@@ -87,6 +87,10 @@ ActiveRecord::Schema.define(:version => 20121209012640) do
     t.integer  "cluster_id"
     t.string   "example_command"
     t.string   "queue_name"
+    t.integer  "running_jobs"
+    t.integer  "finished_jobs"
+    t.integer  "current_vms"
+    t.boolean  "ended"
   end
 
   create_table "inputs", :force => true do |t|
@@ -189,6 +193,7 @@ ActiveRecord::Schema.define(:version => 20121209012640) do
     t.integer  "slots"
     t.string   "AMI_name"
     t.integer  "cluster_id"
+    t.boolean  "is_busy"
   end
 
 end

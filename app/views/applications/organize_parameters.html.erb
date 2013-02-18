@@ -1,4 +1,4 @@
-<%= form_for(@application) do |f|  %>
+<%= form_for(@application) do |f| %>
     <% if @application.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
@@ -12,7 +12,7 @@
 
     <% end %>
 
-    <h1> <%= @application.name %>  <%= @application.version %> </h1>
+    <h1> <%= @application.name %> <%= @application.version %> </h1>
 
     <table>
       <tr>
@@ -142,6 +142,27 @@
       <li class="divider"></li>
 
     </ul>
+
+    <br>
+
+    <br>
+
+    Enter a preferred virtual machine size:
+
+    <br>
+
+    <%= select :execution_params, :instance_type , Aws::Ec2::INSTANCE_TYPES %>
+
+    <br>
+    <br>
+
+    Enter an estimated time per job in minutes:
+
+    <br>
+
+    <%= select :execution_params, :time_per_job , (1..1440).map { |i| i} %>
+
+    <br>
 
     <div class="actions">
       <%= f.submit 'Back', :name => "back" %>
