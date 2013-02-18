@@ -25,12 +25,30 @@ production:
   #timeout: 5000
 
   adapter: postgresql
-  username: qanovmkxrrgggj
-  password: ZuwoOyoMiwgLa4wfAeKsonyUOH
+  username: oxiqeeceicinlx
+  password: qVrIgaGSkOaLizKO_5Of4tjNuv
   ssl_mode: require
   encoding: utf8
-  host: ec2-54-243-184-143.compute-1.amazonaws.com
+  host: ec2-54-243-234-143.compute-1.amazonaws.com
   port: 5432
-  database: d42tk5c02lti87
+  database: da0t3ehj787dsm
+  pool: 5
+  timeout: 5000
+
+
+staging:
+  #adapter: sqlite3
+  #database: db/production.sqlite3
+  #pool: 5
+  #timeout: 5000
+
+  adapter: postgresql
+  username: niiewhouerwvgx
+  password: vcaNUiMrMSGXu2URTs6JdMAvdF
+  ssl_mode: require
+  encoding: utf8
+  host: ec2-54-243-190-113.compute-1.amazonaws.com
+  port: 5432
+  database: dccuat68qusfge
   pool: 5
   timeout: 5000
