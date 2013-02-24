@@ -14,7 +14,9 @@ class ConfirmationsController < Devise::ApplicationController
     if resource.update_attributes ( params[resource_name]) && resource.password_match?
 
              self.resource = resource_class.confirm_by_token(params[resource_name][:confirmation_token])
-             set_flash_message :notice, :confirmed
+             if self.resource.active_for_authentication?
+               set_flash_message :notice, :confirmed
+             end
              sign_ind_and_redirect(resource_name, resource)
     else
       render :action => "show"

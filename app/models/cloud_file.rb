@@ -15,6 +15,8 @@ class CloudFile < ActiveRecord::Base
   belongs_to :user
   belongs_to :directory
 
+  validates :name, :presence => true, :length => { :maximum => 50}
+
   mount_uploader :avatar, AvatarUploader
 
   def avatar=(obj)

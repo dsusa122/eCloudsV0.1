@@ -1,0 +1,7 @@
+wget https://s3.amazonaws.com/Eclouds/uploads/cloud_file/avatar/1/todo
+wget https://s3.amazonaws.com/Eclouds/uploads/cloud_file/avatar/2/Maxent2.R
+wget https://s3.amazonaws.com/Eclouds/uploads/cloud_file/avatar/1/todo
+wget https://s3.amazonaws.com/Eclouds/uploads/cloud_file/avatar/1/todo
+wget https://s3.amazonaws.com/Eclouds/uploads/cloud_file/avatar/1/todo
+wget https://s3.amazonaws.com/eclouds/testFiles/Maxent2.R
+R --no-save   todo  $HOME  Atelopus_nicefori  todo < Maxent2.R

@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   #attr_protected :current_directory
 
-
+  scope :pending_approval, where(:approved => false)
 
   has_many :clusters
 
@@ -29,6 +29,30 @@ class User < ActiveRecord::Base
 
   def to_s
     email
+  end
+
+  def active_for_authentication?
+    super && approved?
+  end
+
+  def inactive_message
+    if !approved?
+      :not_approved
+    else
+      super
+    end
+  end
+
+  def set_approved
+    if !approved?
+      self.toggle!(:approved)
+    end
+  end
+
+  def set_unapproved
+    if approved?
+      self.toggle!(:approved)
+    end
   end
 
 end
