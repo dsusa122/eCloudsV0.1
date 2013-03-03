@@ -1,5 +1,6 @@
 <%= form_for(@application, :html => {:multipart => true})  do |f| %>
-  <% if @application.errors.any? %>
+    <div class="well" xmlns="http://www.w3.org/1999/html">
+    <% if @application.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@application.errors.count, "error") %> prohibited this application from being saved:</h2>
 
@@ -11,32 +12,40 @@
     </div>
   <% end %>
 
+
+
         <div class="field">
-          <%= f.label :name %><br />
-          <%= f.text_field :name %>
+          <%= f.label :name %>
+          <%= f.text_field :name, :title => 'Application name.' %>
         </div>
 
 
         <div class="field">
-          <%= f.label :version %><br />
-          <%= f.text_field :version %>
+          <%= f.label :version %>
+          <%= f.text_field :version, :title => 'Application version (ej. 1.0).' %>
         </div>
 
         <div class="field">
-          <%= f.label :installer_url %><br />
-          <%= f.text_field :installer_url %>
+          <%= f.label :installer_url %>
+          <%= f.text_field :installer_url, :title => 'URL address where the installation Script is located.' %>
         </div>
-
 
         <div class="field">
-          <%= f.label "Application Icon" %><br />
-          <%= f.file_field :image%>
-        </div>
+        <%= f.label :description %>
+        <%= f.text_area :description, :rows=>'3', :title => 'Small meaningful app description.' %>
+         </div>
 
 
+   <!-- <div class="field">
+      <%= f.label "Application Icon" %><br />
+      <%= f.file_field :image , :title => 'Application icon'%>
+    </div> -->
 
+
+      <br>
 
   <div class="actions">
-    <%= f.submit  'Next' %>
+    <%= f.submit  'Next', class: 'btn btn-primary' %>
   </div>
+    </div>
 <% end %>

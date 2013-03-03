@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223135831) do
+ActiveRecord::Schema.define(:version => 20130227163929) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130223135831) do
     t.string   "begin_command"
     t.string   "end_command"
     t.string   "image"
+    t.string   "description"
   end
 
   create_table "cloud_files", :force => true do |t|

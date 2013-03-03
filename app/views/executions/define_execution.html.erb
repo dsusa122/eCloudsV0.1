@@ -27,14 +27,13 @@
       <li class="divider"></li>
 
     </ul>
-
+     <div class="well">
     <% i=0 %>
     <% @application.inputs.order('position asc').each do |input|%>
         <h3> <%=input.name%> </h3>
         <br>
-        <%=input.description%>
+        Description: <strong><%=input.description%></strong>
 
-        <br>
         <br>
 
         <% if input.is_file?%>
@@ -47,8 +46,6 @@
             </div>
 
 
-
-
         <% elsif input.is_directory?%>
 
             Select one of your directories in eClouds:
@@ -59,7 +56,7 @@
 
         <% else %>
 
-            <% if input.value != nil || input.value != ''%>
+            <% if input.value != nil || input.value != ''%>  <br>
                 The value of this parameter has been preset for you, you can change it if you want
 
                 <br>
@@ -73,11 +70,10 @@
         <% end %>
 
 
-
-        <br>
         <% i=i+1 %>
-    <% end %>
 
+    <% end %>
+     </div>
     <br>
 
     <ul class="nav nav-list">
@@ -86,17 +82,14 @@
 
     </ul>
 
-    Select the output directory for your execution
 
     <br>
-
+    <div class="well">
     <div class="field">
+      Select the output directory for your execution
       <%= select :inputs,  'output_dir', options_from_collection_for_select(@directories, :id,:name)  %><br />
     </div>
-
-    <br>
-    <br>
-
+    </div>
     <ul class="nav nav-list">
 
       <li class="divider"></li>
@@ -106,7 +99,7 @@
     <br>
 
     <div class="actions">
-      <%= e.submit %>
+      <%= e.submit :class => "btn btn-primary" %>
     </div>
 
 

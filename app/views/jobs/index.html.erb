@@ -6,8 +6,11 @@
 <% if @jobs.empty? %>
 
     <h2>Your execution is being processed and there are still no jobs launched</h2>
-
+    <div class="progress progress-info">
+      <div class="bar bar-success" style="width: 35%;"></div>
+    </div>
 <% end %>
+
 
 
 <strong> <%= @execution.current_vms %> Virtual machines running</strong> <br>

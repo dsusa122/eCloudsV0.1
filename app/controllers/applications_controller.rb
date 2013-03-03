@@ -1,5 +1,10 @@
 class ApplicationsController < InheritedResources::Base
 
+
+  before_filter :authenticate_admin_user!, :only => [:edit,:new, :create, :add_inputs, :add_parameters, :add_one_input, :organize_parameters, :update, :decrease_position_parameter, :increase_position_parameter]
+
+
+
   def new
     @application = Application.new
 
@@ -18,7 +23,9 @@ class ApplicationsController < InheritedResources::Base
 
     respond_to do |format|
       if @application.save
+        puts "Guardo correctamente-------------------------------------"
         format.html { redirect_to add_inputs_path(@application), notice: 'Application was successfully created.' }
+        puts "Redirijio------------------------------------------------"
         format.json { render json: @application, status: :created, location: @application}
       else
         format.html { render action: "new" }
@@ -28,7 +35,9 @@ class ApplicationsController < InheritedResources::Base
   end
 
   def add_inputs
+    puts "Entro a add inputs-----......................."
     @application = Application.find(params[:application_id])
+    puts "Hasta aqui llego-----------------------"
     @input = @application.inputs.new
 
   end
@@ -65,72 +74,72 @@ class ApplicationsController < InheritedResources::Base
     @application = Application.find(params[:application_id])
 
 
-      # si no están ordenados los organiza
+    # si no están ordenados los organiza
     @ordered_inputs = @application.inputs.order('position asc')
 
-        puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-        i=1
-        @ordered_inputs.each do |input|
+    puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    i=1
+    @ordered_inputs.each do |input|
 
-          puts input.name
-          puts input.position
-
-
-          if input.position==nil or input.position==0 or input.position != i
-
-            input.position = i
-            input.save
-            puts 'changed'
-          end
-
-          puts '--------------------------------------------'
-
-          i=i+1
-        end
-
-        @application.save
+      puts input.name
+      puts input.position
 
 
+      if input.position==nil or input.position==0 or input.position != i
 
-      @precommand_example =''
-      @precommand_base =''
-      @precommand_example_names=''
-
-
-
-      i=0
-      @ordered_inputs.each do |input|
-        i=i+1
-        @value_example
-        @value_base
-        @value_example_names
-        if input.value == nil || input.value == ''
-          @value_example = input.prefix + ' INPUT'+i.to_s
-        else
-          @value_example = input.prefix + ' ' +input.value
-        end
-
-        @value_base = input.prefix + ' INPUT'+i.to_s
-        @value_example_names = input.prefix + ' '+ input.name
-
-        @precommand_example = @precommand_example + ' ' + @value_example
-        @precommand_base =  @precommand_base + ' ' + @value_base
-        @precommand_example_names = @precommand_example_names + ' ' + @value_example_names
+        input.position = i
+        input.save
+        puts 'changed'
       end
 
-      if @application.begin_command == nil
-        @application.begin_command=''
+      puts '--------------------------------------------'
+
+      i=i+1
+    end
+
+    @application.save
+
+
+
+    @precommand_example =''
+    @precommand_base =''
+    @precommand_example_names=''
+
+
+
+    i=0
+    @ordered_inputs.each do |input|
+      i=i+1
+      @value_example
+      @value_base
+      @value_example_names
+      if input.value == nil || input.value == ''
+        @value_example = input.prefix + ' INPUT'+i.to_s
+      else
+        @value_example = input.prefix + ' ' +input.value
       end
 
-      if @application.end_command == nil
-        @application.end_command=''
-      end
+      @value_base = input.prefix + ' INPUT'+i.to_s
+      @value_example_names = input.prefix + ' '+ input.name
 
-      @application.base_command = @application.begin_command + @precommand_base + ' '+@application.end_command
-      @example_command =  @application.begin_command + @precommand_example + ' '+@application.end_command
-      @example_command_names = @application.begin_command + @precommand_example_names + ' '+@application.end_command
+      @precommand_example = @precommand_example + ' ' + @value_example
+      @precommand_base =  @precommand_base + ' ' + @value_base
+      @precommand_example_names = @precommand_example_names + ' ' + @value_example_names
+    end
 
-     @application.save
+    if @application.begin_command == nil
+      @application.begin_command=''
+    end
+
+    if @application.end_command == nil
+      @application.end_command=''
+    end
+
+    @application.base_command = @application.begin_command + @precommand_base + ' '+@application.end_command
+    @example_command =  @application.begin_command + @precommand_example + ' '+@application.end_command
+    @example_command_names = @application.begin_command + @precommand_example_names + ' '+@application.end_command
+
+    @application.save
 
 
 
@@ -164,12 +173,12 @@ class ApplicationsController < InheritedResources::Base
     elsif params[:back]
 
 
-        respond_to do |format|
+      respond_to do |format|
 
-          format.html { redirect_to add_inputs_path(@application), notice: '' }
-          format.json { render json: @application, status: :created, location: @application}
+        format.html { redirect_to add_inputs_path(@application), notice: '' }
+        format.json { render json: @application, status: :created, location: @application}
 
-        end
+      end
 
     elsif params[:finish]
 
@@ -212,7 +221,7 @@ class ApplicationsController < InheritedResources::Base
 
     # si es el primer input no hago nada
     if @input.id != @application.inputs.order('position asc').first.id
-       #debo encontrar el input anterior
+      #debo encontrar el input anterior
       @posInputAnterior = @input.position-1
 
       @inputAnterior = @application.inputs.where('position=?',@posInputAnterior)[0]
@@ -299,7 +308,6 @@ class ApplicationsController < InheritedResources::Base
         format.json { head :no_content }
       end
     end
-
 
 
 

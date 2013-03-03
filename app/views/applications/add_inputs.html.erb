@@ -13,43 +13,21 @@
     <% end %>
 
     <h1> <%= @application.name %>  <%= @application.version %> </h1>
-
-    <table>
-      <tr>
-        <td>
-          <h3>Name </h3>
-        </td>
-      </tr>
-      <td>
-          <%= @application.name %>
-      </td>
-      </tr>
-      <tr>
-        <td>
-          <h3> Version </h3>
-        </td>
-      </tr>
-      <td>
-        <%= @application.version %>
-      </td>
-      </tr>
-      <tr>
-        <td>
-          <h3> Installer Url </h3>
-        </td>
-      </tr>
-      <td>
-        <%= @application.installer_url %>
-      </td>
-      </tr>
-    </table>
-
+    <br>
+    <div class="well">
+      <h3>Name </h3>
+      <%= @application.name %>
+      <h3> Version </h3>
+      <%= @application.version %>
+      <h3> Installer Url </h3>
+      <%= @application.installer_url %>
+    </div>
     <br>
     <br>
 
     <ul class="nav nav-list">
 
-        <li class="divider"></li>
+      <li class="divider"></li>
 
     </ul>
 
@@ -62,31 +40,32 @@
         <br>
 
 
-            <h3> Current Inputs: </h3>
+        <h3> Current Inputs: </h3>
 
 
 
-            <table class="table">
+        <table class="table table-striped">
+          <tr>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Prefix</td>
+            <td>Value</td>
+            <td>File</td>
+            <td>Directory</td>
+          </tr>
+          <% @application.inputs.each do |input| %>
               <tr>
-                <td>Name</td>
-                <td>Description</td>
-                <td>Prefix</td>
-                <td>Value</td>
-                <td>File</td>
-                <td>Directory</td>
+                <td> <%= input.name %></td>
+                <td> <%= input.description %></td>
+                <td> <%= input.prefix %></td>
+                <td> <%= input.value %></td>
+                <td><% if input.is_file? %> X <% end %></td>
+                <td><% if input.is_directory? %> X <% end %></td>
+                <td><%= link_to 'Delete', input, method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
-              <% @application.inputs.each do |input| %>
-                  <tr>
-                    <td> <%= input.name %></td>
-                    <td> <%= input.description %></td>
-                    <td> <%= input.prefix %></td>
-                    <td> <%= input.value %></td>
-                    <td><% if input.is_file? %> X <% end %></td>
-                    <td><% if input.is_directory? %> X <% end %></td>
-                    <td><%= link_to 'Delete', input, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                  </tr>
-              <% end %>
-            </table>
+
+          <% end %>
+        </table>
 
     <% end %>
 
@@ -94,50 +73,56 @@
 
 
     <h2> Add Input: </h2>
+    <div class="well">
+      <div class="form-horizontal">
 
-    <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
+        <div class="field">
+          <%= f.label :name %>
+          <%= f.text_field :name, :title => 'What is the input name?' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :is_file, :html=>{:class=>"checkbox inline"} do%>
+              <%= f.check_box :is_file %>
+              It's a file?
+          <% end %>
+        </div>
+
+        <div class="field">
+
+          <%= f.label :is_directory, :html=>{:class=>"checkbox inline"} do%>
+              <%= f.check_box :is_directory %>
+              It's a directory?
+          <% end %>
+        </div>
+
+        <div class="field">
+          <%= f.label :prefix %>
+          <%= f.text_field :prefix, :title => 'What character sequence precedes the input value? (ej. -v)' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :value %>
+          <%= f.text_field :value, :title => 'What is the inputs value?' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :description %>
+          <%= f.text_area :description, :rows => 3, :title => 'Add an inputs description.' %>
+        </div>
+
+        <div class="field">
+          <%= f.hidden_field :application_id , :value => @application.id %>
+        </div>
+
+
+
+
+        <div class="actions">
+          <%= f.submit "Add Input" %>
+        </div>
+      </div>
     </div>
-
-    <div class="field">
-      <%= f.label :is_file %>
-      <%= f.check_box :is_file %>
-    </div>
-
-    <div class="field">
-      <%= f.label :is_directory %>
-      <%= f.check_box :is_directory %>
-    </div>
-
-    <div class="field">
-      <%= f.label :prefix %>
-      <%= f.text_field :prefix %>
-    </div>
-
-    <div class="field">
-      <%= f.label :value %><br />
-      <%= f.text_field :value %>
-    </div>
-
-    <div class="field">
-      <%= f.label :description %>
-      <%= f.text_area :description, :rows => 6 %>
-    </div>
-
-    <div class="field">
-      <%= f.hidden_field :application_id , :value => @application.id %>
-    </div>
-
-
-
-
-    <div class="actions">
-      <%= f.submit "Add Input" %>
-    </div>
-
-
-    <br>
     <br>
 
     <ul class="nav nav-list">
@@ -147,7 +132,7 @@
     </ul>
 
     <div class="actions">
-      <%= f.submit 'Next', :name => "next" %>
+      <%= f.submit 'Next', :name => "next" , class: 'btn btn-primary'%>
     </div>
 
 

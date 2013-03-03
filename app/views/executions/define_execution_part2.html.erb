@@ -16,7 +16,7 @@
 
     <br>
 
-    <h2> <%= @execution.application.name %> </h2>
+    <h1> <%= @execution.application.name %> </h1>
     <br>
     <strong> <%= @execution.example_command %></strong>
     <br>
@@ -31,24 +31,22 @@
 
     </ul>
 
-    <h1> Define the parameters for your execution: </h1>
+    <h2> Define the parameters for your execution: </h2>
 
+    <div class="well">
     <br>
-    <br>
-
+    <span class="badge badge-important">Important</span>
     To help e-Clouds calculate the best way to perform the execution, please estimate the following parameters:
 
+
     <br>
     <br>
-
-
 
     Choose a virtual machine type:
     <br>
 
     <%= select :execution_params, :instance_type , Aws::Ec2::INSTANCE_TYPES, :selected => @execution.vm_type %>
 
-    <br>
     <br>
 
     Enter an estimated time per job in minutes:
@@ -59,10 +57,10 @@
 
     <br>
 
-    <br>
+    </div>
 
     <div class="actions" >
-      <%= e.submit 'Calculate', :name => "calculate"%>
+      <%= e.submit 'Calculate', :name => "calculate" %>
     </div>
 
     <br>
@@ -127,11 +125,36 @@
 
     </ul>
 
-    <br>
-    <br>
+    <label class="checkbox" style="padding:0px 40px;">
+      <% checkbox_flag = false %>
+      <%= check_box_tag "checkbox_flag", checkbox_flag, false, {:onchange => "toggle_launch_button()"} %>
+      I have read and agree to the <a href="#terms" role="button" class="btn" data-toggle="modal">terms and conditions. </a>
+    </label>
 
     <div class="actions" >
-      <%= e.submit 'Launch Execution', :name => "launch"%>
+      <%= e.submit 'Launch Execution',:id=>'launchButton', :name => "launch",:disabled => true, :class => "btn btn-primary"%>
     </div>
 
 <% end %>
+
+<div id="terms" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>E-clouds Terms and Conditions</h3>
+  </div>
+  <div class="modal-body">
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere, mi vel feugiat vestibulum, enim sapien posuere diam, euismod condimentum nulla neque id eros. Proin nisi elit, luctus id fringilla quis, consequat a lorem. Fusce a dictum neque. Curabitur congue, libero at bibendum aliquet, odio purus feugiat nisl, nec faucibus purus nunc nec velit. Suspendisse bibendum posuere vestibulum. Aenean vel ligula nec lectus placerat viverra. Suspendisse potenti. Proin accumsan, augue eu fermentum luctus, velit massa ultricies enim, tempor vehicula tellus nulla non diam. Aenean id velit eget metus iaculis placerat. Proin nunc odio, vulputate nec dapibus et, pulvinar in risus. Nam mattis, sem id lobortis posuere, dolor dolor blandit elit, vitae blandit eros enim sed enim. Vivamus euismod, lectus eu viverra ornare, sapien neque pharetra est, ut porttitor justo dui vitae magna. Donec mi elit, lacinia nec mattis in, hendrerit ut ante. Duis sed nisl id nulla porttitor facilisis. Donec viverra libero quis eros sodales ullamcorper vitae nec quam. Sed est augue, sagittis a aliquet ac, adipiscing et risus.
+
+      Pellentesque ultrices lorem eget enim molestie condimentum. Suspendisse sagittis, eros non imperdiet elementum, leo justo feugiat odio, ac ultricies tellus quam nec odio. Curabitur interdum lacus at nisi lobortis consequat venenatis est ullamcorper. Vestibulum sit amet arcu nulla. Duis euismod turpis a sem commodo suscipit. Nunc malesuada tellus quis odio consectetur consequat. Nam mollis ligula justo, sit amet accumsan elit. In sed urna felis. Maecenas iaculis viverra sem, ac venenatis turpis sollicitudin in. Aenean convallis erat vehicula orci posuere feugiat adipiscing elit eleifend. Nullam a ultricies risus. </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<script type="text/javascript">
+    document.getElementById('launchButton').disabled=true;
+    function toggle_launch_button() {
+        document.getElementById('launchButton').disabled = !(document.getElementById('checkbox_flag').checked);
+    }
+</script>

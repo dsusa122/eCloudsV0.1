@@ -4,7 +4,7 @@ class ExecutionsController < InheritedResources::Base
 
   def create
     @execution = Execution.new(params[:execution])
-
+    @execution.user_id = current_user.id
     puts 'CREATE EXECUTION'
     puts params
     respond_to do |format|
@@ -228,6 +228,5 @@ class ExecutionsController < InheritedResources::Base
 
 
   end
-
 
 end

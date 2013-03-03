@@ -2,7 +2,7 @@
 <br>
 
 <br>
- <%= image_tag application.image_url.to_s %>
+ <%= image_tag @application.image_url().to_s %>
 
 <table>
   <tr>
@@ -106,6 +106,7 @@
   <li class="divider"></li>
 
 </ul>
-
+<% if user_signed_in? %>
 <%= link_to 'Edit', edit_application_path(@application) %> |
+    <% end %>
 <%= link_to 'Back', applications_path %>

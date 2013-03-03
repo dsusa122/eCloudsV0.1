@@ -2,35 +2,35 @@
 
     <% if @execution.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@execution.errors.count, "error") %> prohibited this application from being saved:</h2>
+          <h2><%= pluralize(@execution.errors.count, "error") %> prohibited this execution from being started:</h2>
 
           <ul>
-            <% execution.errors.full_messages.each do |msg| %>
+            <% @execution.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
             <% end %>
           </ul>
         </div>
 
     <% end %>
-
+      <div class="well">
     <div class="field">
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
+      <%= f.label :name %>
+      <%= f.text_field :name, :title => "Give a name to your execution." %>
     </div>
 
 
     <div class="field">
-      <%= f.label :description %><br />
-      <%= f.text_area :description, :rows =>5 %>
+      <%= f.label :description %>
+      <%= f.text_area :description, :rows =>3, :title => "Type a short description for future reference." %>
     </div>
 
     <div class="field">
-      <%= f.label :application_id %><br />
-      <%= select :execution,  :application_id,  options_from_collection_for_select(Application.all, :id,:name)  %><br />
+      <%= f.label :application_id %>
+      <%= select :execution,  :application_id,  options_from_collection_for_select(Application.all, :id,:name)  %>
     </div>
 
     <div class="actions">
-      <%= f.submit %>
+          <%= f.submit  :class => "btn btn-primary" %>
     </div>
-
+      </div>
 <% end %>

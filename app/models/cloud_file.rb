@@ -11,7 +11,7 @@ class CloudFile < ActiveRecord::Base
   DEVELOPMENT_BUCKET_URL =AMAZON_S3_BASE_URL + DEVELOPMENT_BUCKET
   STAGING_BUCKET_URL = AMAZON_S3_BASE_URL + STAGING_BUCKET
 
-  attr_accessible :name, :url, :avatar, :directory_id
+  attr_accessible :name, :url, :avatar, :directory_id, :updated_at
   belongs_to :user
   belongs_to :directory
 

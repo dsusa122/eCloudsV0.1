@@ -26,6 +26,7 @@
     <th></th>
     <th>Name</th>
     <th>Size (bytes)</th>
+    <th>Last modified</th>
     <th></th>
     <th></th>
   </tr>
@@ -35,6 +36,7 @@
         <td> <i class="icon-folder-open"></i></td>
         <td ><%= link_to directory.name, browse_path(directory) %></td>
         <td></td>
+        <td><%= directory.updated_at %></td>
         <td>
           <%= link_to "Rename" , rename_directory_path(directory) %>
         </td>

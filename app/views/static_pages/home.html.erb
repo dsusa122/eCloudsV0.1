@@ -1,18 +1,21 @@
 <% provide(:title, 'Home') %>
-<div class="center hero-unit">
+<div class="center">
   <h1>Welcome!</h1>
 
 
-
-
-
-
-  <% if user_signed_in? %>
-      <li><%= current_user.email%></li>
+<% if user_signed_in? %>
+      <p><%= current_user.email%></p>
+      <div class="well">
+      <%= render 'executions/executions' %>
+      </div>
   <% else %>
-      <li><%= link_to "Sign in!", new_user_session_path, class: "btn btn-large btn-primary" %></li>
+      <div class="center hero-unit">
+      <h3>If you are new to Eclouds please register by clicking the link above, otherwise <%= link_to "Sign in!", new_user_session_path, class: "btn btn-large btn-primary" %> to start usign the app.</h3>
+      <br>
+      </div>
+      <h3>Applications running on e-clouds </h3>
+      <%= render 'applications/apps' %>
+
   <% end %>
 
 </div>
-
-<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
