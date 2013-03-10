@@ -9,3 +9,11 @@
 .actions {
   padding-top: 20px;
 }
+
+[class^="icon-"], [class*=" icon-"] {
+  background-image: url("glyphicons-halflings.png") !important;
+}
+
+.icon-white {
+  background-image: url("glyphicons-halflings-white.png") !important;
+}

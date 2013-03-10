@@ -16,11 +16,10 @@
 
     <br>
     <h1> Define the Inputs for the Application: </h1>
-    <br>
 
     <h2> <%= @application.name %> <%= @application.version %></h2>
 
-    <br>
+
 
     <ul class="nav nav-list">
 
@@ -31,28 +30,28 @@
     <% i=0 %>
     <% @application.inputs.order('position asc').each do |input|%>
         <h3> <%=input.name%> </h3>
-        <br>
         Description: <strong><%=input.description%></strong>
 
-        <br>
 
         <% if input.is_file?%>
 
-            Select one of your files in eClouds:
+
 
 
             <div class="field">
-              <%= select :inputs,  i,  options_from_collection_for_select(@cloud_files, :id,:name)  %><br />
+              <%= link_to raw('<i class="icon-file icon-white"></i> Select File') , "#fileModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-info", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
+              <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
+              <%= hidden_field :inputs, i, :id => 'inputs_'+(i).to_s%>
             </div>
 
 
         <% elsif input.is_directory?%>
 
-            Select one of your directories in eClouds:
-
-            <div class="field">
-              <%= select :inputs,  i,  options_from_collection_for_select(@directories, :id,:name)  %><br />
-            </div>
+               <div class="field">
+                 <%= link_to raw('<i class="icon-folder-open icon-white"></i> Select Directory') , "#directoryModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-success", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
+                 <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
+                 <%= hidden_field :inputs, i, :id => 'inputs_'+(i).to_s%>
+               </div>
 
         <% else %>
 
@@ -72,22 +71,20 @@
 
         <% i=i+1 %>
 
+           <ul class="nav nav-list"><li class="divider"></li>   </ul>
+
     <% end %>
      </div>
     <br>
 
-    <ul class="nav nav-list">
-
-      <li class="divider"></li>
-
-    </ul>
-
-
-    <br>
     <div class="well">
     <div class="field">
       Select the output directory for your execution
-      <%= select :inputs,  'output_dir', options_from_collection_for_select(@directories, :id,:name)  %><br />
+      <div class="field">
+        <%= link_to raw('<i class="icon-folder-open icon-white"></i> Select Directory') , "#directoryModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-success", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
+        <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
+        <%= hidden_field :inputs, 'output_dir', :id => 'inputs_'+(i).to_s%>
+      </div>
     </div>
     </div>
     <ul class="nav nav-list">
@@ -106,3 +103,45 @@
 
 
 <% end %>
+
+
+<!-- Modal -->
+<div id="fileModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="fileModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="fileModalLabel">Your Files:</h3>
+  </div>
+  <div class="well">
+  <div class="modal-body">
+    <div class="css-treeview">
+
+        <ul class="nav nav-list">
+      <%= render :partial => 'browser/treeview', :collection => @directories, :as => :directory %>
+      <% @cloud_files.each do |cloud_file| %>
+          <li><%= link_to cloud_file.name, '#', :onclick => "set_value('#{cloud_file.id}', '#{cloud_file.name}');", :data => {:dismiss => "modal"}  %></li>
+      <% end %>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div id="directoryModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="directoryModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="directoryModalLabel">Your Directories:</h3>
+  </div>
+  <div class="well">
+    <div class="modal-body">
+      <div class="css-treeview">
+
+        <ul class="nav nav-list">
+          <%= render :partial => 'browser/treeview_no_files', :collection => @directories, :as => :directory %>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>

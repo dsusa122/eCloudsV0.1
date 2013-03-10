@@ -15,3 +15,13 @@
 //= require_tree .
 //= require bootstrap
 
+
+field = "";
+function set_field(f)
+{
+    field = f;
+}
+function set_value(id, name) {
+    $('#lab'+(parseInt(field)+1)).text("File Selected: "+name);
+    $('#inputs_'+field).val(id);
+}
