@@ -18,24 +18,24 @@ task :checkPreschedulingQueue => :environment do
 
     if @parts[0]== PROCESS_EXECUTION_MSG
 
-      puts 'I goes to Check For Executions Procedure'
+      puts 'I am going to Check For Executions Procedure'
 
       checkForExecutions @msg
 
     elsif @parts[0]== ASSIGN_EXECUTION_MSG
 
-      puts 'I goes to Assign Execution Procedure'
+      puts 'I am going to Assign Execution Procedure'
 
       assignExecution @msg
 
-    elsif (@parts[0] == SCHEDULE_JOB_MSG)
+    elsif @parts[0] == SCHEDULE_JOB_MSG
 
-      puts 'I goes to Schedule Job Procedure'
+      puts 'I am going to Schedule Job Procedure'
 
       checkForJobs @msg
 
     else
-      puts 'I goes to Check Job Status Procedure'
+      puts 'I am going to Check Job Status Procedure'
 
       checkJobStatus @msg
 

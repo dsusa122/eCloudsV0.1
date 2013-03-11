@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
   <title><%= yield(:title)%></title>
   <%= stylesheet_link_tag    "application", media: "all" %>
@@ -19,30 +19,33 @@
       <div class= "brand"><%= link_to "e-Clouds", '#', id: "logo" %> <%= image_tag('https://s3.amazonaws.com/eclouds/imagenes/logo.jpg' , :size => "30x30") %> </div>
       <nav>
         <ul class="nav pull-right">
+          <li class="icon-home icon-white"><li><%= link_to "Home",    '/static_pages/home' %></li></li>
+
 
           <% if user_signed_in? %>
 
-              <li><%= link_to "Executions",   executions_path %></li>
-              <li><%= link_to "Apps",   applications_path %></li>
-              <li><%= link_to "My Data",   data_home_path %></li>
+              <li class="icon-check icon-white"><li><%= link_to "Executions",   executions_path %></li></li>
+              <li class="icon-th icon-white"><li><%= link_to "Apps",   applications_path %></li></li>
+              <li class="icon-folder-open icon-white"><li><%= link_to "My Data",   data_home_path %></li> </li>
           <% end %>
 
 
-          <li><%= link_to "Home",    '/static_pages/home' %></li>
-          <li><%= link_to "Help",    '#' %></li>
 
 
+          <li class="icon-question-sign icon-white"><li><%= link_to "Help",    '#' %></li> </li>
           <!-- botones de inicio de sesiion -->
           <% if user_signed_in? %>
-              <li><%= link_to "Logout ", destroy_user_session_path , :method => :delete%></li>
+              <li class="icon-user icon-white"><li><%= link_to "Edit registration", edit_user_registration_path %></li></li>
+              <li class="icon-off icon-white"><li><%= link_to "Logout ", destroy_user_session_path , :method => :delete%></li></li>
           <% else %>
-              <li><%= link_to "Login", new_user_session_path %></li>
+              <li class="icon-plus icon-white"><li><%= link_to "Register", new_user_registration_path %></li></li>
+              <li class="icon-lock icon-white"><li><%= link_to "Login", new_user_session_path %></li></li>
           <% end %>
 
           <% if user_signed_in? %>
-              <li><%= link_to "Edit registration", edit_user_registration_path %></li>
+
           <% else %>
-              <li><%= link_to "Register", new_user_registration_path %></li>
+
           <% end %>
 
 
