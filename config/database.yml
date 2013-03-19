@@ -37,13 +37,16 @@ production:
 
 
 staging:
-adapter: postgresql
-encoding: unicode
-pool: 5
-database: dccuat68qusfge
-username: niiewhouerwvgx
-password: vcaNUiMrMSGXu2URTs6JdMAvdF
-host: ec2-54-243-190-113.compute-1.amazonaws.com
-port: 5432
+
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  ssl_mode: require
+  database: dccuat68qusfge
+  username: niiewhouerwvgx
+  password: vcaNUiMrMSGXu2URTs6JdMAvdF
+  host: ec2-54-243-190-113.compute-1.amazonaws.com
+  port: 5432
+  timeout: 5000
 
 

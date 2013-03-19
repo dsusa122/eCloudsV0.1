@@ -7,9 +7,9 @@ class CloudFile < ActiveRecord::Base
   AMAZON_S3_BASE_URL =   "https://s3.amazonaws.com/"
 
 
-  PRODUCTION_BUCKET_URL =AMAZON_S3_BASE_URL + PRODUCTION_BUCKET
-  DEVELOPMENT_BUCKET_URL =AMAZON_S3_BASE_URL + DEVELOPMENT_BUCKET
-  STAGING_BUCKET_URL = AMAZON_S3_BASE_URL + STAGING_BUCKET
+  PRODUCTION_BUCKET_URL =AMAZON_S3_BASE_URL + "EcloudsProd/"
+  DEVELOPMENT_BUCKET_URL =AMAZON_S3_BASE_URL + "Eclouds/"
+  STAGING_BUCKET_URL = AMAZON_S3_BASE_URL + "EcloudsStaging/"
 
   attr_accessible :name, :url, :avatar, :directory_id, :updated_at
   belongs_to :user
@@ -30,6 +30,8 @@ class CloudFile < ActiveRecord::Base
       return DEVELOPMENT_BUCKET_URL + self.url
     elsif Rails.env.production?
       return PRODUCTION_BUCKET_URL + self.url
+    elsif Rails.env.staging?
+      return STAGING_BUCKET_URL + self.url
     end
   end
 

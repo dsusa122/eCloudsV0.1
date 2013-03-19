@@ -1,5 +1,7 @@
 task :checkPreschedulingQueue => :environment do
 
+
+
   while 1 < 2 do
     sleep 10
 
@@ -722,6 +724,8 @@ def create_job cluster, cloud_file_inputs, all_inputs, base_command, execution
     for i in 0..(cloud_file_inputs.size-1) do
 
       @inputActual = cloud_file_inputs[i]
+      puts "Estoy haciendo DEBUG----------------////"
+      puts @inputActual.complete_url
       stream.puts 'wget ' + @inputActual.complete_url
       puts 'adding input to wget:'+ @inputActual.complete_url
     end
@@ -741,7 +745,15 @@ def create_job cluster, cloud_file_inputs, all_inputs, base_command, execution
   f=File.open(@commandFilename, 'r')
 
   @s3 = Aws::S3.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-  @bucket = @s3.bucket(ENV["S3_BUCKET_DEV"])
+  if Rails.env.development?
+    @bucket = @s3.bucket(ENV["S3_BUCKET_DEV"])
+  elsif  Rails.env.staging?
+  @bucket = @s3.bucket(ENV["S3_BUCKET_STAGING"])
+  elsif  Rails.env.production?
+  @bucket = @s3.bucket(ENV["S3_BUCKET_PROD"])
+
+  end
+
 
 
   # el permiso que toca ponerle es public-read

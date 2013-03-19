@@ -1,4 +1,4 @@
-<h1>Your Data</h1>
+<h1>My Data</h1>
 
 
 <!-- Button to trigger modal -->
@@ -65,13 +65,7 @@
 
 
 </table>
-<div class="css-treeview well">
 
-<%= render :partial => 'browser/treeview', :collection => @directories, :as => :directory %>
-  <% @cloud_files.each do |cloud_file| %>
-      <ul><li><a href="./"><%= cloud_file.name %> </a></li></ul>
-  <% end %>
-</div>
 
 
 
