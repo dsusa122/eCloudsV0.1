@@ -61,10 +61,6 @@ class CloudFilesController < ApplicationController
   def create
 
 
-    
-
-
-
     @cloud_file = CloudFile.new(params[:cloud_file])
 
     
@@ -162,6 +158,7 @@ class CloudFilesController < ApplicationController
 
 
   end
+
    # para guardar archivos en el servidor
    #def self.save(upload)
    # name=upload['datafile'].original_filename

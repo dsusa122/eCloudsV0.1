@@ -3,7 +3,7 @@ class Execution < ActiveRecord::Base
 
   validates :name, :presence => true, :length => { :maximum => 50}
   #validates :total_estimated_cost, :numericality => {:less_than_or_equal_to => 20}
-  #validates :time_per_job, :numericality => {:less_than_or_equal_to => 2000}
+  validates :time_per_job, :numericality => {:less_than_or_equal_to => 2000}
 
   belongs_to :user
   belongs_to :application

@@ -17,12 +17,7 @@
     <br>
 
     <h1> <%= @execution.application.name %> </h1>
-    <br>
-    <strong> <%= @execution.example_command %></strong>
-    <br>
-    <strong> <%= @execution.base_command %></strong>
 
-    <br>
     <br>
 
     <ul class="nav nav-list">
@@ -42,18 +37,37 @@
     <br>
     <br>
 
-    Choose a virtual machine type:
+    <strong>Choose a virtual machine type:</strong>
     <br>
 
-    <%= select :execution_params, :instance_type , Aws::Ec2::INSTANCE_TYPES, :selected => @execution.vm_type %>
+      <table class="table table-striped">
+        <tr>
+          <th>Instance Type</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+
+        <% descriptions   = ['613 Mb Memory, Up to 2 compute units, IO Performance: Low ',
+                             '1.7 Gb Memory, 1 compute units, IO Performance: Moderate ',
+                             '3.75 Gb Memory, 2 compute units, IO Performance: Moderate',
+                             '7.5 Gb Memory, 4 compute units, IO Performance: Moderate',
+                             '15 Gb Memory, 8 compute units, IO Performance: High',
+                             '7 Gb Memory, 20 compute units, IO Performance: High'] %>
+    <% Aws::Ec2::INSTANCE_TYPES.each_with_index do |type, index|%>
+          <tr>
+            <td><%= type %></td>
+            <td><%= descriptions[index] %></td>
+            <td><%= radio_button(:execution_params, :instance_type, type, :checked => (type == @execution.vm_type)) %></td>
+          </tr>
+
+    <% end %>
+      </table>
 
     <br>
 
-    Enter an estimated time per job in minutes:
+   <strong> Enter an estimated time per job in minutes:</strong>
 
-    <br>
-
-    <%= select :execution_params, :time_per_job , (1..1440).map { |i| i} , :selected => @execution.time_per_job %>
+    <%= text_field :execution_params, :time_per_job, :value => @execution.time_per_job %>
 
     <br>
 
@@ -76,8 +90,6 @@
 
     <br>
     <br>
-    <br>
-
     <table class="table span3">
 
       <tr>

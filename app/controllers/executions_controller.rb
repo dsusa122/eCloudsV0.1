@@ -5,6 +5,7 @@ class ExecutionsController < InheritedResources::Base
   def create
     @execution = Execution.new(params[:execution])
     @execution.user_id = current_user.id
+    @execution.time_per_job = 0
     puts 'CREATE EXECUTION'
     puts params
     respond_to do |format|

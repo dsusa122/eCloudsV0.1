@@ -129,13 +129,11 @@
 
 
 <% if @execution.completed? %>
-    <%= link_to 'Complete', define_execution_path(@execution) %>
+    <%= link_to 'Complete', define_execution_path(@execution) %>    |
 <% elsif @execution.launched? %>
-    <%= link_to 'Launch', define_execution_part2_path(@execution) %>
-<% else %>
-    <%= link_to 'Edit', edit_execution_path(@execution) %>
+    <%= link_to 'Launch', define_execution_part2_path(@execution) %>   |
 <% end %>
 
 
- |
+
 <%= link_to 'Back', executions_path %>

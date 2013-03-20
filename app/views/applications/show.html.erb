@@ -29,14 +29,14 @@
 
 
     <table class="table">
-      <th>
-        <td>Name</td>
-        <td>Description</td>
-        <td>Prefix</td>
-        <td>Value</td>
-        <td>File</td>
-        <td>Directory</td>
-        <td>Position</td>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Prefix</th>
+        <th>Value</th>
+        <th>File</th>
+        <th>Directory</th>
+        <th>Position</th>
       </tr>
       <% @application.inputs.order('position asc').each do |input| %>
           <tr>
