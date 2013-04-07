@@ -69,7 +69,7 @@ task :checkJobsQueue => :environment do
         @queue_monitoring.send_message(@installing_msg)
 
         puts 'Creating output dir'
-        system( 'mkdir jobOutputs')
+        system( 'mkdir jobsOutputs')
 
 
         if( File.exists? @installation_file_name )
@@ -90,14 +90,14 @@ task :checkJobsQueue => :environment do
 
           puts 'Now I will execute the installer file'
           system( 'chown root '+ @installation_file_name)
-          system( 'sudo ./'+@installation_file_name+' 2> jobOutputs/errors.txt')
+          system( 'sudo ./'+@installation_file_name+' 2> jobsOutputs/errors.txt')
 
           system( 'touch '+@installation_file_name)
 
         end
 
 
-        system( 'cd jobOutputs')
+        system( 'cd jobsOutputs')
 
 
 
@@ -119,8 +119,8 @@ task :checkJobsQueue => :environment do
         system( 'chmod 755 ' + @command_file_name )
 
 
-        puts './'+@command_file_name + ' > jobsOutputs/output.txt 2>> jobsOutputs/errors.txt'
-        system( './'+@command_file_name + ' > jobsOutputs/output.txt 2>> jobsOutputs/errors.txt' )
+        puts '../'+@command_file_name + ' > jobsOutputs/output.txt 2>> jobsOutputs/errors.txt'
+        system( '../'+@command_file_name + ' > jobsOutputs/output.txt 2>> jobsOutputs/errors.txt' )
 
         puts 'I will upload the outputs'
 

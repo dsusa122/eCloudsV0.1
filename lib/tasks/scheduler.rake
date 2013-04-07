@@ -576,11 +576,11 @@ def checkJobStatus (msg)
     @msg.delete
 
     #si la ejecución terminó, apago todas las máquinas virtuales
-    # @virtual_machines.each do |vm|
+     @virtual_machines.each do |vm|
 
-    # stop_one_vm vm
+     #stop_one_vm vm
 
-    #end
+    end
 
     #le pongo que la fecha de finalización es ahora
     @end_date = DateTime.now
