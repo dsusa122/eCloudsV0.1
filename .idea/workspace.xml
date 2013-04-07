@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="892d8a1f-0d41-4c6b-b5a3-e3dfa5cc2945" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/executions/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/executions/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/agent.rake" afterPath="$PROJECT_DIR$/lib/tasks/agent.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tasks/scheduler.rake" afterPath="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/application.rb" afterPath="$PROJECT_DIR$/app/models/application.rb" />
     </list>
     <ignored path="eCloudsV0.1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -16,7 +12,8 @@
     <file path="/a.dummy" changelist="892d8a1f-0d41-4c6b-b5a3-e3dfa5cc2945" time="1364861197110" ignored="false" />
     <file path="/agent.rake" changelist="892d8a1f-0d41-4c6b-b5a3-e3dfa5cc2945" time="1365346717823" ignored="false" />
     <file path="/scheduler.rake" changelist="892d8a1f-0d41-4c6b-b5a3-e3dfa5cc2945" time="1365347270417" ignored="false" />
-    <file path="/_form.html.erb" changelist="892d8a1f-0d41-4c6b-b5a3-e3dfa5cc2945" time="1365347586328" ignored="false" />
+    <file path="/_form.html.erb" changelist="892d8a1f-0d41-4c6b-b5a3-e3dfa5cc2945" time="1365349266123" ignored="false" />
+    <file path="/application.rb" changelist="892d8a1f-0d41-4c6b-b5a3-e3dfa5cc2945" time="1365349337588" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,10 +30,28 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_form.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_form.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/executions/_form.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="111" selection-start="924" selection-end="924" vertical-scroll-proportion="0.71672356">
+            <state line="29" column="70" selection-start="942" selection-end="942" vertical-scroll-proportion="-18.125">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/application.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="4" selection-start="490" selection-end="490" vertical-scroll-proportion="0.3442623">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="applications_controller.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/applications_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="310" column="50" selection-start="8580" selection-end="8580" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -63,6 +78,7 @@
         <option value="$PROJECT_DIR$/lib/tasks/agent.rake" />
         <option value="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
         <option value="$PROJECT_DIR$/app/views/executions/_form.html.erb" />
+        <option value="$PROJECT_DIR$/app/models/application.rb" />
       </list>
     </option>
   </component>
@@ -168,6 +184,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eCloudsV0.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eCloudsV0.1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -500,21 +534,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/models/cloud_file.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="64" selection-start="981" selection-end="981" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -585,9 +604,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/applications_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="310" column="50" selection-start="8580" selection-end="8580" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/executions/_form.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="111" selection-start="924" selection-end="924" vertical-scroll-proportion="0.71672356">
+        <state line="29" column="70" selection-start="942" selection-end="942" vertical-scroll-proportion="-18.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/application.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="4" selection-start="490" selection-end="490" vertical-scroll-proportion="0.3442623">
           <folding />
         </state>
       </provider>

@@ -9,4 +9,11 @@ class Application < ActiveRecord::Base
   has_many :inputs , :dependent => :destroy
 
   mount_uploader :image, ImageUploader
+
+
+  def app_info
+    name + " (" + version + ")"
+  end
+
+
 end
