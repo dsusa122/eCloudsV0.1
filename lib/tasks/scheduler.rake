@@ -724,15 +724,14 @@ def create_job cluster, cloud_file_inputs, all_inputs, base_command, execution
     for i in 0..(cloud_file_inputs.size-1) do
 
       @inputActual = cloud_file_inputs[i]
-      puts "Estoy haciendo DEBUG----------------////"
       puts @inputActual.complete_url
       stream.puts 'wget ' + @inputActual.complete_url
       puts 'adding input to wget:'+ @inputActual.complete_url
     end
 
     # acá le pongo el input base que falta colocarlo bien
-    stream.puts 'wget https://s3.amazonaws.com/eclouds/testFiles/Maxent2.R'
-    stream.puts @command
+    #stream.puts 'wget https://s3.amazonaws.com/eclouds/testFiles/Maxent2.R'
+    stream.puts @command + ' 2>> jobsOutputs/errors.txt'
   end
 
 

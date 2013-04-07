@@ -68,6 +68,10 @@ task :checkJobsQueue => :environment do
         @installing_msg = INSTALLING_APP_MSG+';'+ @msg_parts[1].to_s
         @queue_monitoring.send_message(@installing_msg)
 
+        puts 'Creating output dir'
+        system( 'mkdir jobOutputs')
+
+
         if( File.exists? @installation_file_name )
           puts 'application already installed'
         else
@@ -86,15 +90,13 @@ task :checkJobsQueue => :environment do
 
           puts 'Now I will execute the installer file'
           system( 'chown root '+ @installation_file_name)
-          system( 'sudo ./'+@installation_file_name)
+          system( 'sudo ./'+@installation_file_name+' 2> jobOutputs/errors.txt')
 
           system( 'touch '+@installation_file_name)
 
         end
 
 
-        puts 'Creating output dir'
-        system( 'mkdir jobOutputs')
         system( 'cd jobOutputs')
 
 
@@ -117,8 +119,8 @@ task :checkJobsQueue => :environment do
         system( 'chmod 755 ' + @command_file_name )
 
 
-        puts './'+@command_file_name + ' > jobsOutputs/output.txt'
-        system( './'+@command_file_name + ' > jobsOutputs/output.txt' )
+        puts './'+@command_file_name + ' > jobsOutputs/output.txt 2>> jobsOutputs/errors.txt'
+        system( './'+@command_file_name + ' > jobsOutputs/output.txt 2>> jobsOutputs/errors.txt' )
 
         puts 'I will upload the outputs'
 
@@ -130,7 +132,7 @@ task :checkJobsQueue => :environment do
         @job_id = @msg_parts[1].to_s
 
         @s3 = Aws::S3.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-        @bucket = @s3.bucket('Eclouds')
+        @bucket = @s3.bucket('EcloudsStaging')
 
         for i in 0..(@outputFiles.size-1) do
 
