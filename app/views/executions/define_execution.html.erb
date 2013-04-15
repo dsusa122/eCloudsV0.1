@@ -1,4 +1,7 @@
+
 <%= form_for(@execution) do |e|%>
+
+
 
     <% if @execution.errors.any? %>
         <div id="error_explanation">
@@ -15,21 +18,16 @@
 
 
     <br>
-    <h1> Define the Inputs for the Application: </h1>
-
-    <h2> <%= @application.name %> <%= @application.version %></h2>
-
-
-
-    <ul class="nav nav-list">
-
-      <li class="divider"></li>
-
+    <h4> Define the Inputs for the Application: <%= @application.name %> <%= @application.version %></h4>
+    <ul class="breadcrumb">
+      <%= link_to "Basic Params |", edit_execution_path(@execution) %>
     </ul>
+
+
      <div class="well">
     <% i=0 %>
     <% @application.inputs.order('position asc').each do |input|%>
-        <h3> <%=input.name%> </h3>
+        <h4> <%=input.name%> </h4>
         Description: <strong><%=input.description%></strong>
 
 
@@ -71,7 +69,7 @@
 
         <% i=i+1 %>
 
-           <ul class="nav nav-list"><li class="divider"></li>   </ul>
+        <ul class="nav nav-list"><li class="divider"></li>   </ul>
 
     <% end %>
      </div>
@@ -87,16 +85,11 @@
       </div>
     </div>
     </div>
-    <ul class="nav nav-list">
-
-      <li class="divider"></li>
-
-    </ul>
 
     <br>
 
     <div class="actions">
-      <%= e.submit :class => "btn btn-primary" %>
+      <%= e.submit 'Next Steps', :class => "btn btn-primary" %>
     </div>
 
 

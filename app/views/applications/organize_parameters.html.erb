@@ -15,13 +15,13 @@
     <h1> <%= @application.name %> <%= @application.version %> </h1>
     <br>
     <div class="well">
-    <h3>Name </h3>
-    <%= @application.name %>
-    <h3> Version </h3>
-    <%= @application.version %>
-    <h3> Installer Url </h3>
-    <%= @application.installer_url %>
-     </div>
+      <h3>Name </h3>
+      <%= @application.name %>
+      <h3> Version </h3>
+      <%= @application.version %>
+      <h3> Installer Url </h3>
+      <%= @application.installer_url %>
+    </div>
     <ul class="nav nav-list">
 
       <li class="divider"></li>
@@ -77,36 +77,36 @@
     </ul>
 
     <h2> Base Command: </h2>
-     <div class="well">
-    <div class="field">
-      <%= f.label :begin_command %>
-      <%= f.text_field :begin_command %>
+    <div class="well">
+      <div class="field">
+        <%= f.label :begin_command %>
+        <%= f.text_field :begin_command %>
+      </div>
+
+      <div class="field">
+        <%= f.label :end_command %>
+        <%= f.text_field :end_command %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit 'Update Command', :name => "update_command" %>
+      </div>
+
+      <br>
+      <br>
+
+      <h4>Example:</h4>
+
+      <%= @example_command %>
+
+      <h4>General Command:</h4>
+
+      <%= @example_command_names %>
+
+      <h4>Base Command:</h4>
+
+      <%= @application.base_command %>
     </div>
-
-    <div class="field">
-      <%= f.label :end_command %>
-      <%= f.text_field :end_command %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit 'Update Command', :name => "update_command" %>
-    </div>
-
-    <br>
-    <br>
-
-    <h4>Example:</h4>
-
-    <%= @example_command %>
-
-    <h4>General Command:</h4>
-
-    <%= @example_command_names %>
-
-    <h4>Base Command:</h4>
-
-    <%= @application.base_command %>
-     </div>
     <br>
 
     <ul class="nav nav-list">

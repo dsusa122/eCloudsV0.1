@@ -1,139 +1,198 @@
-<p id="notice"><%= notice %></p>
+<p class="alert alert-success"><%= notice %></p>
 
+
+<h3> Summary: <%= @execution.name %> </h3>
+
+<p> <strong><%= @execution.description %></strong> </p>
+
+
+<ul class="breadcrumb">
+  <li><%= link_to "Basic Params |", edit_execution_path(@execution) %></li>
+  <li><%= link_to "Edit Inputs |", define_execution_path(@execution) %>  </li>
+  <li><%= link_to "Advanced Settings |", define_execution_part2_path(@execution) %></li>
+</ul>
+
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        <i class="icon-chevron-down"></i>App settings
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
+
+        <table class="table table-striped">
+          <tr>
+            <td>
+              Application:
+            </td>
+            <td>
+              <%= @execution.application.name %>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              Output Directory:
+            </td>
+            <% if @execution.directory %>
+                <td><%= link_to @execution.directory.name, browse_path(@execution.directory) %></td>
+            <% else %>
+                <td>Not assigned</td>
+            <% end %>
+
+          </tr>
+
+          <tr>
+            <td>
+              Start Date:
+            </td>
+            <td>
+              <%= @execution.start_date %>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              End Date:
+            </td>
+            <td>
+              <%= @execution.end_date %>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              Number of virtual machines:
+            </td>
+            <td>
+              <%= @execution.vm_number %>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              Number of jobs:
+            </td>
+            <td>
+              <%= @execution.number_of_jobs %>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              Virtual machine type
+            </td>
+            <td>
+              <%= @execution.vm_type %>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              Cost per Virtual Machine
+            </td>
+            <td>
+              $USD <%= @execution.vm_cost %>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              Estimated Cost
+            </td>
+            <td>
+              $USD <%= @execution.total_estimated_cost %>
+            </td>
+
+          </tr>
+
+          <tr>
+            <td>
+              Estimated Time
+            </td>
+            <td>
+              <%= @execution.estimated_time_minutes %>  minutes
+            </td>
+
+          </tr>
+        </table>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        <i class="icon-chevron-down"></i>Inputs
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <% @inputs.each do |inp| %>
+            <table class="table table-striped">
+              <th>
+                Input name
+              </th>
+              <th>
+                Value
+              </th>
+              <tr><td><%=inp.name%></td><td><%=inp.value%></td></tr>
+            </table>
+        <% end %>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
 <br>
 
-<h1> <%= @execution.name %> </h1>
 
-<br>
+<label class="checkbox" style="padding:0px 40px;">
+  <% checkbox_flag = false %>
+  <%= check_box_tag "checkbox_flag", checkbox_flag, false, {:onchange => "toggle_launch_button()"} %>
+  I have read and agree to the <a href="#terms" role="button" class="btn" data-toggle="modal">terms and conditions. </a>
+</label>
 
-<h2> <%= @execution.description %> </h2>
 
-<table class="table">
-  <tr>
-    <td>
-      Application:
-    </td>
-    <td>
-      <%= @execution.application.name %>
-    </td>
-
-  </tr>
-
-  <tr>
-    <td>
-      Output Directory:
-    </td>
-    <% if @execution.directory %>
-        <td><%= link_to @execution.directory.name, browse_path(@execution.directory) %></td>
-    <% else %>
-        <td>Not assigned</td>
-    <% end %>
-
-  </tr>
-
-  <tr>
-    <td>
-      Start Date:
-    </td>
-    <td>
-      <%= @execution.start_date %>
-    </td>
-
-  </tr>
-
-  <tr>
-    <td>
-      End Date:
-    </td>
-    <td>
-      <%= @execution.end_date %>
-    </td>
-
-  </tr>
-
-  <tr>
-    <td>
-      Number of virtual machines:
-    </td>
-    <td>
-      <%= @execution.vm_number %>
-    </td>
-
-  </tr>
-
-  <tr>
-    <td>
-      Number of jobs:
-    </td>
-    <td>
-      <%= @execution.number_of_jobs %>
-    </td>
-
-  </tr>
-
-  <tr>
-    <td>
-      Virtual machine type
-    </td>
-    <td>
-      <%= @execution.vm_type %>
-    </td>
-
-  </tr>
-
-  <tr>
-    <td>
-      Cost per Virtual Machine
-    </td>
-    <td>
-      $USD <%= @execution.vm_cost %>
-    </td>
-
-  </tr>
-
-  <tr>
-    <td>
-      Estimated Cost
-    </td>
-    <td>
-      $USD <%= @execution.total_estimated_cost %>
-    </td>
-
-  </tr>
-
-  <tr>
-    <td>
-      Estimated Time
-    </td>
-    <td>
-      <%= @execution.estimated_time_minutes %>  minutes
-    </td>
-
-  </tr>
-</table>
-
-<br>
-
-<br>
-
-<%= link_to 'View Jobs', execution_jobs_path(@execution) %>
+<div class="actions" >
+  <%= button_to 'Launch execution',launch_execution_path,:id=>'launchButton', :name => "launch",:disabled => true, :class => "btn btn-primary"%>
+</div>
 
 
 
 
+<div id="terms" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>E-clouds Terms and Conditions</h3>
+  </div>
+  <div class="modal-body">
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam posuere, mi vel feugiat vestibulum, enim sapien posuere diam, euismod condimentum nulla neque id eros. Proin nisi elit, luctus id fringilla quis, consequat a lorem. Fusce a dictum neque. Curabitur congue, libero at bibendum aliquet, odio purus feugiat nisl, nec faucibus purus nunc nec velit. Suspendisse bibendum posuere vestibulum. Aenean vel ligula nec lectus placerat viverra. Suspendisse potenti. Proin accumsan, augue eu fermentum luctus, velit massa ultricies enim, tempor vehicula tellus nulla non diam. Aenean id velit eget metus iaculis placerat. Proin nunc odio, vulputate nec dapibus et, pulvinar in risus. Nam mattis, sem id lobortis posuere, dolor dolor blandit elit, vitae blandit eros enim sed enim. Vivamus euismod, lectus eu viverra ornare, sapien neque pharetra est, ut porttitor justo dui vitae magna. Donec mi elit, lacinia nec mattis in, hendrerit ut ante. Duis sed nisl id nulla porttitor facilisis. Donec viverra libero quis eros sodales ullamcorper vitae nec quam. Sed est augue, sagittis a aliquet ac, adipiscing et risus.
 
-<br>
+      Pellentesque ultrices lorem eget enim molestie condimentum. Suspendisse sagittis, eros non imperdiet elementum, leo justo feugiat odio, ac ultricies tellus quam nec odio. Curabitur interdum lacus at nisi lobortis consequat venenatis est ullamcorper. Vestibulum sit amet arcu nulla. Duis euismod turpis a sem commodo suscipit. Nunc malesuada tellus quis odio consectetur consequat. Nam mollis ligula justo, sit amet accumsan elit. In sed urna felis. Maecenas iaculis viverra sem, ac venenatis turpis sollicitudin in. Aenean convallis erat vehicula orci posuere feugiat adipiscing elit eleifend. Nullam a ultricies risus. </p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
 
-<br>
-
-
-
-<% if @execution.completed? %>
-    <%= link_to 'Complete', define_execution_path(@execution) %>    |
-<% elsif @execution.launched? %>
-    <%= link_to 'Launch', define_execution_part2_path(@execution) %>   |
-<% end %>
-
-
-
-<%= link_to 'Back', executions_path %>
+<script type="text/javascript">
+    document.getElementById('launchButton').disabled=true;
+    function toggle_launch_button() {
+        document.getElementById('launchButton').disabled = !(document.getElementById('checkbox_flag').checked);
+    }
+</script>

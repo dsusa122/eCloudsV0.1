@@ -11,6 +11,7 @@ class Execution < ActiveRecord::Base
   belongs_to :directory
   has_many :inputs , :dependent => :destroy
   has_one :cluster , :dependent => :destroy
+  default_scope order(:start_date, :name)
 
 
   def completed?

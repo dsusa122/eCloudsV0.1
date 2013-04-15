@@ -1,17 +1,31 @@
-<ul class="media-list">
 
+<div class="row-fluid">
+  <ul class="thumbnails">
 <% @applications.each do |application| %>
-  <li class="media">
-    <a class="pull-left" href="#">
-      <%= image_tag 'Instituto_Humboldt_logo.jpg', :size => '80x80', :html=>{:class=>'media-object'}%>
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading"><%= application.name %></h4>
-      <p><%= application.version %></p>
-      <p><%= application.description %></p>
-      <p><%= link_to 'Details...', application %></p>
-      </div>
-  </li>
+
+
+
+
+          <li class="span3">
+            <div class="thumbnail">
+              <%= image_tag 'Instituto_Humboldt_logo.jpg', :size => '300x200', :html=>{:class=>'media-object'}%>
+              <div class="caption">
+                <h4><%= application.name %> : <%= application.version %></h4>
+                <p><%= application.description %></p>
+                <p>
+                  <%= link_to 'Details', application, :class => "btn btn-primary" %>
+
+                  <% if user_signed_in? %>
+                  <%= link_to 'Launch Demo', application, :class => "btn btn-info" %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          </li>
+
+
+
 <% end %>
- </ul>
+</ul>
+</div>
 

@@ -3,6 +3,7 @@
 @import url('//fonts.googleapis.com/css?family=Oswald|Noticia+Text');
 
 /*!
+
  * Bootstrap v2.3.1
  *
  * Copyright 2012 Twitter, Inc
@@ -1069,7 +1070,7 @@ input,
 button,
 select,
 textarea {
-  font-family: Georgia, Utopia, Palatino, 'Palatino Linotype', serif;
+  font-family: 'arial', serif;
 }
 
 label {
@@ -6670,7 +6671,7 @@ input,
 button,
 select,
 textarea {
-  font-family: 'Noticia Text', serif;
+  font-family: 'arial', serif;
 }
 
 legend {
@@ -6850,7 +6851,7 @@ label {
 .alert {
   color: #2E2E2E;
   text-shadow: none;
-  background-color: #45515f;
+  background-color: #FCF8E3;
   border: none;
 }
 
@@ -6903,8 +6904,8 @@ label {
 }
 
 .thumbnail {
-  background: #45515f;
-  border: none;
+  background: #ffffff;
+  border: chocolate;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;

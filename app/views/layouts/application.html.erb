@@ -49,13 +49,25 @@
           <% end %>
 
 
-
-
         </ul>
       </nav>
     </div>
   </div>
 </header>
+
+
+<% flash.each do |key,value| %>
+    <br>
+    <% if key == :notice %>
+        <p class="alert alert-info"><%= notice %></p>
+
+    <% elsif key == :alert %>
+        <p class="alert"><%= alert %></p>
+    <% else %>
+        <p class="alert alert-info"><%= notice %></p>
+    <% end %>
+<% end %>
+
 <div class="container">
   <br>
   <br>
@@ -65,18 +77,9 @@
   <br>
   <br>
 
-  <% flash.each do |key,value| %>
-        <% if key == :notice %>
-            <p class="notice span4"><%= notice %></p>
-            
-        <% elsif key == :alert %>
-            <p class="alert span4"><%= alert %></p>
-        <% else %>
-          <p class="notice span4"><%= notice %></p>
-        <% end %>
-      <% end %>
 
-  
+
+
 
 </div>
 </body>

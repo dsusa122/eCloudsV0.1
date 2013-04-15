@@ -2,10 +2,45 @@ class ExecutionsController < InheritedResources::Base
 
   before_filter :authenticate_user!
 
+  def show
+    @inputs  = Input.find_all_by_execution_id(params[:id])
+    @execution = Execution.find(params[:id])
+  end
+
+  def launch_execution
+    @execution = Execution.find(params[:id])
+
+    @execution.user = current_user
+
+    @now = DateTime.now
+
+    @execution.start_date = @now
+
+    #acá pongo el mensaje en la cola
+    @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
+    @queue = @sqs.queue(PRESCHEDULING_QUEUE, false )
+
+    @msg = PROCESS_EXECUTION_MSG + ':' + @execution.id.to_s
+    @queue.send_message(@msg)
+
+    respond_to do |format|
+      if @execution.save
+        format.html { redirect_to @execution, notice: 'Your execution is being launched' }
+        format.json { render json: @execution, status: :created, location: @execution}
+      else
+        format.html { render action: "new" }
+        format.json { render json: @execution.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
   def create
     @execution = Execution.new(params[:execution])
     @execution.user_id = current_user.id
-    @execution.time_per_job = 0
+    @application = @execution.application
+    @execution.time_per_job = @application.estimated_time
+    @execution.vm_type = @application.vm_type
     puts 'CREATE EXECUTION'
     puts params
     respond_to do |format|
@@ -59,34 +94,22 @@ class ExecutionsController < InheritedResources::Base
 
 
       if params[:calculate]
+          calculate_costs
+          respond_to do |format|
+            if @execution.save
+              format.html { redirect_to define_execution_part2_path(@execution), notice: 'Define the parameters for your execution' }
+              format.json { render json: @execution, status: :created, location: @execution}
+            else
+              format.html { render action: "new" }
+              format.json { render json: @execution.errors, status: :unprocessable_entity }
+            end
+          end
 
-        @execution_params = params["execution_params"]
-
-        @time_per_job = @execution_params["time_per_job"].to_i
-
-        @execution.time_per_job=@time_per_job
-
-        @execution.computing_hours = ((@time_per_job*1.0 * @execution.number_of_jobs)/60).ceil
-
-        @execution.computing_minutes = @time_per_job*1.0 * @execution.number_of_jobs
-
-        @vm_type = @execution_params["instance_type"]
-
-        @execution.vm_type = @vm_type
-
-        @vm_cost = VM_PRICING[@vm_type]
-
-        @execution.vm_cost = @vm_cost
-
-        @execution.vm_number = @execution.computing_hours
-
-        @execution.total_estimated_cost = @execution.vm_number * @vm_cost *1.0
-
-        @execution.estimated_time_minutes = @execution.computing_minutes / @execution.vm_number
-
+      elsif  params[:summary]
+        calculate_costs
         respond_to do |format|
           if @execution.save
-            format.html { redirect_to define_execution_part2_path(@execution), notice: 'Define the parameters for your execution' }
+            format.html { redirect_to @execution, notice: 'Your execution is now ready to launch' }
             format.json { render json: @execution, status: :created, location: @execution}
           else
             format.html { render action: "new" }
@@ -94,33 +117,7 @@ class ExecutionsController < InheritedResources::Base
           end
         end
 
-      elsif params[:launch]
-
-        @execution.user = current_user
-
-        @now = DateTime.now
-
-        @execution.start_date = @now
-
-        #acá pongo el mensaje en la cola
-        @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
-        @queue = @sqs.queue(PRESCHEDULING_QUEUE, false )
-
-        @msg = PROCESS_EXECUTION_MSG + ':' + @execution.id.to_s
-        @queue.send_message(@msg)
-
-        respond_to do |format|
-          if @execution.save
-            format.html { redirect_to @execution, notice: 'Your execution is being launched' }
-            format.json { render json: @execution, status: :created, location: @execution}
-          else
-            format.html { render action: "new" }
-            format.json { render json: @execution.errors, status: :unprocessable_entity }
-          end
-        end
-
-      else
-
+      elsif !@raw_inputs.nil?
         # este es el número de jobs total
         @num_jobs = 1
 
@@ -212,8 +209,53 @@ class ExecutionsController < InheritedResources::Base
           end
         end
 
+      else
+        puts 'HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+        @execution = Execution.find(params[:id])
+        @execution.user_id = current_user.id
+        @application = @execution.application
+        @execution.time_per_job = @application.estimated_time
+        @execution.vm_type = @application.vm_type
+        respond_to do |format|
+          if @execution.update_attributes(params[:execution])
+            format.html { redirect_to define_execution_path(@execution), notice: 'Define the inputs for your execution' }
+            format.json { head :no_content }
+          else
+            format.html { render action: "edit" }
+            format.json { render json: @execution.errors, status: :unprocessable_entity }
+          end
+        end
       end
 
+
+
+  end
+
+
+  def calculate_costs
+    @execution_params = params["execution_params"]
+
+    @time_per_job = @execution_params["time_per_job"].to_i
+
+    @execution.time_per_job=@time_per_job
+
+    @execution.computing_hours = ((@time_per_job*1.0 * @execution.number_of_jobs)/60).ceil
+
+    @execution.computing_minutes = @time_per_job*1.0 * @execution.number_of_jobs
+
+    @vm_type = @execution_params["instance_type"]
+
+    @execution.vm_type = @vm_type
+
+    @vm_cost = VM_PRICING[@vm_type]
+
+    @execution.vm_cost = @vm_cost
+
+    @execution.vm_number = @execution.computing_hours
+
+    @execution.total_estimated_cost = @execution.vm_number * @vm_cost *1.0
+
+    @execution.estimated_time_minutes = @execution.computing_minutes / @execution.vm_number
 
 
   end
@@ -227,6 +269,11 @@ class ExecutionsController < InheritedResources::Base
     @cloud_files = current_user.cloud_files.all
     @directories = current_user.directories.all
 
+
+  end
+
+
+  def demo_execution
 
   end
 

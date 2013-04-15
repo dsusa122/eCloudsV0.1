@@ -58,7 +58,6 @@ ECloudsV01::Application.routes.draw do
 
   match "browse/index" => "browser#index" , :as =>  "data_home"
 
-
   #rutas para browsear directorios
 
   match "browse/:directory_id" => "browser#browse", :as => "browse"
@@ -91,6 +90,7 @@ ECloudsV01::Application.routes.draw do
   #rutas para crear las ejecuciones
   match "define_execution/:execution_id" => "executions#define_execution" , :as => "define_execution"
   match "define_execution_part2/:execution_id" => "executions#define_execution_part2" , :as => "define_execution_part2"
+  match "launch_executions/:id" => "executions#launch_execution" , :as => "launch_execution"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
