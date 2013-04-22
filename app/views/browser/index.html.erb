@@ -8,11 +8,13 @@
 <ul >
   <% if @current_directory %>
 
-      <li><%= link_to "Upload", new_sub_file_path(@current_directory) %></li>
-      <li><%= link_to "New Folder", new_sub_directory_path(@current_directory) %></li>
+      <ul class="pager">
+        <li class="next"><%= link_to "Upload", new_sub_file_path(@current_directory), :class=>'btn btn-primary' %></li>
+        <li class="next"><%= link_to "New Folder", new_sub_directory_path(@current_directory), :class=>'btn btn-primary' %></li></ul>
   <% else %>
-      <li><%= link_to "Upload", new_cloud_file_path %></li>
-      <li><%= link_to "New Folder", new_directory_path %></li>
+      <ul class="pager">
+        <li class="next"><%= link_to "Upload", new_cloud_file_path, :class=>'btn btn-primary' %></li>
+        <li class="next"><%= link_to "New Folder", new_directory_path, :class=>'btn btn-primary' %></li></ul>
   <% end %>
 </ul>
 

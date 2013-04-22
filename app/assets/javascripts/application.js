@@ -25,3 +25,15 @@ function set_value(id, name) {
     $('#lab'+(parseInt(field)+1)).text("File Selected: "+name);
     $('#inputs_'+field).val(id);
 }
+function set_display(e, div) {
+    if (e.checked)
+    {
+        document.getElementById(div).style.display = 'block';
+        document.getElementById('textButton').style.display = 'none';
+    }
+    else{
+        document.getElementById(div).style.display = 'none';
+        document.getElementById('textButton').style.display = 'block';
+    }
+
+}

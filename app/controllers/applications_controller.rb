@@ -18,7 +18,7 @@ class ApplicationsController < InheritedResources::Base
   # POST /operating_systems.json
   def create
     @application = Application.new(params[:application])
-
+    @application.estimated_time = 0
     session[:current_application_id]=@application
 
     respond_to do |format|
@@ -39,6 +39,8 @@ class ApplicationsController < InheritedResources::Base
     @application = Application.find(params[:application_id])
     puts "Hasta aqui llego-----------------------"
     @input = @application.inputs.new
+    @directories = Directory.find_all_by_is_public(true)
+    @cloud_files = CloudFile.find_all_by_user_id(0)
 
   end
 
@@ -56,6 +58,16 @@ class ApplicationsController < InheritedResources::Base
     puts params
     @input.application_id = @application.id
 
+    if@input.is_directory?
+      @directory = Directory.find(@input.value.to_i)
+      @input.directory = @directory
+      @input.value = 'DIR('+@directory.name+')'
+
+    elsif @input.is_file?
+      @cloud_file = CloudFile.find(@input.value.to_i)
+      @input.cloud_file = @cloud_file
+      @input.value = @cloud_file.name
+    end
     respond_to do |format|
       if @input.save
         format.html { redirect_to add_inputs_path(@application), notice: 'Input successfully added.' }

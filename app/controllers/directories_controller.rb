@@ -1,6 +1,7 @@
 class DirectoriesController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :authenticate_admin_user!
+
   # GET /directories
   # GET /directories.json
   def index

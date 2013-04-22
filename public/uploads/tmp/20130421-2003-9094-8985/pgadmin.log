@@ -1,0 +1,3 @@
+2013-02-18 06:04:05 ERROR  : Error connecting to the server: FATAL:  permission denied for database "postgres"
+DETAIL:  User does not have CONNECT privilege.
+

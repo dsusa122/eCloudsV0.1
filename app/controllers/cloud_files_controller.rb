@@ -1,6 +1,6 @@
 class CloudFilesController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :authenticate_admin_user!
   # GET /cloud_files
   # GET /cloud_files.json
   def index
@@ -37,8 +37,6 @@ class CloudFilesController < ApplicationController
   def new
 
     @cloud_file = CloudFile.new
-
-
     if params[:directory_id] #if we want to upload a file inside another folder
       @current_directory = current_user.directories.find(params[:directory_id])
       @cloud_file.directory_id = @current_directory.id

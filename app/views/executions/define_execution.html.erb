@@ -24,66 +24,67 @@
     </ul>
 
 
-     <div class="well">
-    <% i=0 %>
-    <% @application.inputs.order('position asc').each do |input|%>
-        <h4> <%=input.name%> </h4>
-        Description: <strong><%=input.description%></strong>
+    <div class="well">
+      <% i=0 %>
+      <% @application.inputs.order('position asc').each do |input|%>
+          <% if input.visible? %>
+              <h4> <%=input.name%> </h4>
+              Description: <strong><%=input.description%></strong>
 
 
-        <% if input.is_file?%>
-
-
-
-
-            <div class="field">
-              <%= link_to raw('<i class="icon-file icon-white"></i> Select File') , "#fileModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-info", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
-              <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
-              <%= hidden_field :inputs, i, :id => 'inputs_'+(i).to_s%>
-            </div>
-
-
-        <% elsif input.is_directory?%>
-
-               <div class="field">
-                 <%= link_to raw('<i class="icon-folder-open icon-white"></i> Select Directory') , "#directoryModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-success", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
-                 <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
-                 <%= hidden_field :inputs, i, :id => 'inputs_'+(i).to_s%>
-               </div>
-
-        <% else %>
-
-            <% if input.value != nil || input.value != ''%>  <br>
-                The value of this parameter has been preset for you, you can change it if you want
-
-                <br>
-                <%= text_field :inputs, i , :value => input.value%>
-            <% else%>
-                <%= text_field :inputs, i %>
-            <% end %>
+              <% if input.is_file?%>
 
 
 
-        <% end %>
+
+                  <div class="field">
+                    <%= link_to raw('<i class="icon-file icon-white"></i> Select File') , "#fileModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-info", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
+                    <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
+                    <%= hidden_field :inputs, i, :id => 'inputs_'+(i).to_s%>
+                  </div>
 
 
-        <% i=i+1 %>
+              <% elsif input.is_directory?%>
 
-        <ul class="nav nav-list"><li class="divider"></li>   </ul>
+                  <div class="field">
+                    <%= link_to raw('<i class="icon-folder-open icon-white"></i> Select Directory') , "#directoryModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-success", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
+                    <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
+                    <%= hidden_field :inputs, i, :id => 'inputs_'+(i).to_s%>
+                  </div>
 
-    <% end %>
-     </div>
+              <% else %>
+
+                  <% if input.value != nil || input.value != ''%>  <br>
+                      The value of this parameter has been preset for you, you can change it if you want
+
+                      <br>
+                      <%= text_field :inputs, i , :value => input.value%>
+                  <% else%>
+                      <%= text_field :inputs, i %>
+                  <% end %>
+
+
+
+              <% end %>
+              <ul class="nav nav-list"><li class="divider"></li>   </ul>
+          <% end %>
+
+          <% i=i+1 %>
+
+
+      <% end %>
+    </div>
     <br>
 
     <div class="well">
-    <div class="field">
-      Select the output directory for your execution
       <div class="field">
-        <%= link_to raw('<i class="icon-folder-open icon-white"></i> Select Directory') , "#directoryModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-success", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
-        <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
-        <%= hidden_field :inputs, 'output_dir', :id => 'inputs_'+(i).to_s%>
+        Select the output directory for your execution
+        <div class="field">
+          <%= link_to raw('<i class="icon-folder-open icon-white"></i> Select Directory') , "#directoryModal", :onclick => "set_field('#{(i).to_s}');" ,:class => "btn btn-success", :data => {:toggle => "modal"}, :role => "button" , :id => "but"+(i+1).to_s%>
+          <%= label_tag "lab"+(i+1).to_s, "", :id => 'lab'+(i+1).to_s%>
+          <%= hidden_field :inputs, 'output_dir', :id => 'inputs_'+(i).to_s%>
+        </div>
       </div>
-    </div>
     </div>
 
     <br>
@@ -105,14 +106,14 @@
     <h3 id="fileModalLabel">Your Files:</h3>
   </div>
   <div class="well">
-  <div class="modal-body">
-    <div class="css-treeview">
+    <div class="modal-body">
+      <div class="css-treeview">
 
         <ul class="nav nav-list">
-      <%= render :partial => 'browser/treeview', :collection => @directories, :as => :directory %>
-      <% @cloud_files.each do |cloud_file| %>
-          <li><%= link_to cloud_file.name, '#', :onclick => "set_value('#{cloud_file.id}', '#{cloud_file.name}');", :data => {:dismiss => "modal"}  %></li>
-      <% end %>
+          <%= render :partial => 'browser/treeview', :collection => @directories, :as => :directory %>
+          <% @cloud_files.each do |cloud_file| %>
+              <li><%= link_to cloud_file.name, '#', :onclick => "set_value('#{cloud_file.id}', '#{cloud_file.name}');", :data => {:dismiss => "modal"}  %></li>
+          <% end %>
         </ul>
       </div>
 

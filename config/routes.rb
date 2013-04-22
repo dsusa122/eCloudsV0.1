@@ -91,6 +91,7 @@ ECloudsV01::Application.routes.draw do
   match "define_execution/:execution_id" => "executions#define_execution" , :as => "define_execution"
   match "define_execution_part2/:execution_id" => "executions#define_execution_part2" , :as => "define_execution_part2"
   match "launch_executions/:id" => "executions#launch_execution" , :as => "launch_execution"
+  match "demo_executions/:application_id" => "executions#demo_execution" , :as => "demo_execution"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

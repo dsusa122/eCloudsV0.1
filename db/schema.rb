@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413144848) do
+ActiveRecord::Schema.define(:version => 20130420215914) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20130413144848) do
     t.datetime "updated_at",     :null => false
     t.integer  "user_id"
     t.integer  "parent_id"
+    t.boolean  "is_public"
   end
 
   add_index "directories", ["parent_id"], :name => "index_directories_on_parent_id"
@@ -144,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20130413144848) do
     t.string   "prefix"
     t.integer  "position"
     t.integer  "execution_id"
+    t.boolean  "visible"
   end
 
   create_table "instance_types", :force => true do |t|

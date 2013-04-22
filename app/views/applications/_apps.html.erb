@@ -16,7 +16,7 @@
                   <%= link_to 'Details', application, :class => "btn btn-primary" %>
 
                   <% if user_signed_in? %>
-                  <%= link_to 'Launch Demo', application, :class => "btn btn-info" %>
+                      <%= link_to 'Launch Demo',demo_execution_path(application.id),:id=>'launchButton', :name => "launch", :class => "btn btn-info"%>
                   <% end %>
                 </p>
               </div>

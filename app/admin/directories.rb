@@ -6,4 +6,13 @@ ActiveAdmin.register Directory do
      column :user
      default_actions
    end
+
+   form do |f|
+     f.inputs "Directory Details" do
+       f.input :name
+       f.input :is_public
+     end
+     f.actions
+   end
+
 end

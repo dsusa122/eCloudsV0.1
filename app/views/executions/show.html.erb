@@ -139,17 +139,18 @@
     </div>
     <div id="collapseTwo" class="accordion-body collapse">
       <div class="accordion-inner">
+        <table class="table table-striped">
+          <th>
+            Input name
+          </th>
+          <th>
+            Value
+          </th>
         <% @inputs.each do |inp| %>
-            <table class="table table-striped">
-              <th>
-                Input name
-              </th>
-              <th>
-                Value
-              </th>
               <tr><td><%=inp.name%></td><td><%=inp.value%></td></tr>
-            </table>
+
         <% end %>
+        </table>
 
 
 
