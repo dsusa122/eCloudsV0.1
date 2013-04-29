@@ -1,6 +1,6 @@
 ECloudsV01::Application.routes.draw do
 
-
+  match "executions/costs" => "executions#costs" , :as => "costs"
 
   resources :executions do
     resources :jobs
@@ -55,8 +55,10 @@ ECloudsV01::Application.routes.draw do
 
   #get "browser/browse"
   get "browser/index"
+  get "executions/costs"
 
   match "browse/index" => "browser#index" , :as =>  "data_home"
+
 
   #rutas para browsear directorios
 
@@ -66,6 +68,7 @@ ECloudsV01::Application.routes.draw do
   match "browse/:directory_id/new_file" => "cloud_files#new", :as => "new_sub_file"
 
   match "browse/:directory_id/rename" => "directories#edit", :as => "rename_directory"
+
 
   #rutas para acciones con máquinas virtuales
   # acá puse el current cluster para saber a qué cluster toca devolverse
@@ -92,6 +95,7 @@ ECloudsV01::Application.routes.draw do
   match "define_execution_part2/:execution_id" => "executions#define_execution_part2" , :as => "define_execution_part2"
   match "launch_executions/:id" => "executions#launch_execution" , :as => "launch_execution"
   match "demo_executions/:application_id" => "executions#demo_execution" , :as => "demo_execution"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

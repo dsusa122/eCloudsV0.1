@@ -7,6 +7,11 @@ class ExecutionsController < InheritedResources::Base
     @execution = Execution.find(params[:id])
   end
 
+  def costs
+    puts 'Entrooooo'
+    @executions = Execution.where("end_date IS NOT NULL")
+  end
+
   def launch_execution
     @execution = Execution.find(params[:id])
 

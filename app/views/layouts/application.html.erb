@@ -19,34 +19,31 @@
       <div class= "brand"><%= link_to "e-Clouds", '#', id: "logo" %> <%= image_tag('https://s3.amazonaws.com/eclouds/imagenes/logo.jpg' , :size => "30x30") %> </div>
       <nav>
         <ul class="nav pull-right">
-          <li class="icon-home icon-white"><li><%= link_to "Home",    '/static_pages/home' %></li></li>
+          <li><%= link_to raw('<i class="icon-home"></i> Home'),    '/static_pages/home' %></li>
 
-
-          <% if user_signed_in? %>
-
-              <li class="icon-check icon-white"><li><%= link_to "Executions",   executions_path %></li></li>
-              <li class="icon-th icon-white"><li><%= link_to "Apps",   applications_path %></li></li>
-              <li class="icon-folder-open icon-white"><li><%= link_to "My Data",   data_home_path %></li> </li>
-          <% end %>
-
-
-
-
-          <li class="icon-question-sign icon-white"><li><%= link_to "Help",    '#' %></li> </li>
           <!-- botones de inicio de sesiion -->
           <% if user_signed_in? %>
-              <li class="icon-user icon-white"><li><%= link_to "Edit registration", edit_user_registration_path %></li></li>
-              <li class="icon-off icon-white"><li><%= link_to "Logout ", destroy_user_session_path , :method => :delete%></li></li>
+              <li><%= link_to raw('<i class="icon-check"></i> Executions'),   executions_path %></li>
+              <li><%= link_to raw('<i class="icon-th"></i> Apps'),   applications_path %></li>
+              <li><%= link_to raw('<i class="icon-folder-open"></i> My Data'),   data_home_path %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  My Account
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <li><%= link_to raw('<i class="icon-folder-open"></i> Account Balance'),   costs_path %></li>
+                  <li><%= link_to raw('<i class="icon-user"></i> Edit Registration'), edit_user_registration_path %></li>
+                  <li><%= link_to raw('<i class="icon-off"></i> Logout'), destroy_user_session_path , :method => :delete%></li>
+                </ul>
+              </li>
+
           <% else %>
-              <li class="icon-plus icon-white"><li><%= link_to "Register", new_user_registration_path %></li></li>
-              <li class="icon-lock icon-white"><li><%= link_to "Login", new_user_session_path %></li></li>
+              <li><%= link_to raw('<i class="icon-plus "></i> Register'), new_user_registration_path %></li>
+              <li><%= link_to raw('<i class="icon-lock"></i> Login'), new_user_session_path %></li>
           <% end %>
+          <li><%= link_to raw('<i class="icon-question-sign"></i> Help'),    '#' %></li>
 
-          <% if user_signed_in? %>
-
-          <% else %>
-
-          <% end %>
 
 
         </ul>
@@ -83,7 +80,7 @@
 
 </div>
 </body>
-
+<script>$('.dropdown-toggle').dropdown()</script>
 
 </html>
 

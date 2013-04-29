@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130420215914) do
+ActiveRecord::Schema.define(:version => 20130428213111) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(:version => 20130420215914) do
 
   add_index "directories", ["parent_id"], :name => "index_directories_on_parent_id"
   add_index "directories", ["user_id"], :name => "index_directories_on_user_id"
+
+  create_table "events", :force => true do |t|
+    t.integer  "execution_id"
+    t.string   "description"
+    t.integer  "code"
+    t.datetime "event_date"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "executions", :force => true do |t|
     t.integer  "user_id"

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  execution_id: 1
+  description: MyString
+  code: 1
+  event_date: 2013-04-28 16:31:11
+
+two:
+  execution_id: 1
+  description: MyString
+  code: 1
+  event_date: 2013-04-28 16:31:11

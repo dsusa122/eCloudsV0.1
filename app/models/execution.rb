@@ -8,6 +8,7 @@ class Execution < ActiveRecord::Base
   belongs_to :user
   belongs_to :application
   has_many :jobs, :dependent => :destroy
+  has_many :events, :dependent => :destroy
   belongs_to :directory
   has_many :inputs , :dependent => :destroy
   has_one :cluster , :dependent => :destroy
