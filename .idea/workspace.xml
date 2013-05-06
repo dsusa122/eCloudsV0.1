@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="514e7fe3-d266-4ce4-910e-ea0206405977" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/executions/_executions.html.erb" afterPath="$PROJECT_DIR$/app/views/executions/_executions.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/executions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
     </list>
     <ignored path="eCloudsV0.1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -11,7 +11,7 @@
     <file path="/execution.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367184801132" ignored="false" />
     <file path="/costs.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367713605688" ignored="false" />
     <file path="/routes.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367242176835" ignored="false" />
-    <file path="/executions_controller.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367806519325" ignored="false" />
+    <file path="/executions_controller.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367852040307" ignored="false" />
     <file path="/application.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367244383446" ignored="false" />
     <file path="/custom.css.scss" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367715123555" ignored="false" />
     <file path="/_executions.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367851701531" ignored="false" />
@@ -38,10 +38,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="executions_controller.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="executions_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="13" selection-start="1367" selection-end="1367" vertical-scroll-proportion="0.0">
+            <state line="15" column="88" selection-start="422" selection-end="422" vertical-scroll-proportion="0.28795812">
               <folding />
             </state>
           </provider>
@@ -92,10 +92,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_executions.html.erb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_executions.html.erb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/executions/_executions.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="71" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.7103825">
+            <state line="41" column="71" selection-start="1647" selection-end="1647" vertical-scroll-proportion="-16.25">
               <folding />
             </state>
           </provider>
@@ -143,10 +143,10 @@
         <option value="$PROJECT_DIR$/app/admin/clusters.rb" />
         <option value="$PROJECT_DIR$/app/admin/virtual_machines.rb" />
         <option value="$PROJECT_DIR$/config/initializers/general.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
         <option value="$PROJECT_DIR$/lib/tasks/scheduler.rake" />
         <option value="$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/views/executions/_executions.html.erb" />
+        <option value="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
       </list>
     </option>
   </component>
@@ -501,13 +501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="13" selection-start="1367" selection-end="1367" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/tasks/scheduler.rake">
       <provider selected="true" editor-type-id="text-editor">
         <state line="808" column="22" selection-start="18824" selection-end="18824" vertical-scroll-proportion="0.0">
@@ -531,7 +524,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/executions/_executions.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="71" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.7103825">
+        <state line="41" column="71" selection-start="1647" selection-end="1647" vertical-scroll-proportion="-16.25">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="88" selection-start="422" selection-end="422" vertical-scroll-proportion="0.28795812">
           <folding />
         </state>
       </provider>

@@ -13,7 +13,7 @@ class ExecutionsController < InheritedResources::Base
 
   def costs
     @date = Date.today
-    @executions2 = Execution.where("end_date IS NOT NULL  and start_date IS NOT NULL and start_date > "+@date.to_s)
+    @executions2 = Execution.where("end_date IS NOT NULL  and start_date IS NOT NULL ") #and start_date > "+@date.to_s)
     @directories = current_user.directories
     @fileSize=0
     @cloud_files =  current_user.cloud_files
