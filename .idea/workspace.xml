@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="514e7fe3-d266-4ce4-910e-ea0206405977" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/executions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/static_pages_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/static_pages_controller.rb" />
     </list>
     <ignored path="eCloudsV0.1.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -17,7 +17,7 @@
     <file path="/_executions.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367851701531" ignored="false" />
     <file path="/home.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367713674817" ignored="false" />
     <file path="/_base_costs.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367714476471" ignored="false" />
-    <file path="/static_pages_controller.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367715043808" ignored="false" />
+    <file path="/static_pages_controller.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367852320524" ignored="false" />
     <file path="/applications.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367716044277" ignored="false" />
     <file path="/events.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367716615789" ignored="false" />
     <file path="/general.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367806243872" ignored="false" />
@@ -38,10 +38,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="executions_controller.rb" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="executions_controller.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="88" selection-start="422" selection-end="422" vertical-scroll-proportion="0.28795812">
+            <state line="15" column="88" selection-start="422" selection-end="422" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -83,10 +83,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="static_pages_controller.rb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="static_pages_controller.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/static_pages_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="19" selection-start="485" selection-end="494" vertical-scroll-proportion="0.0">
+            <state line="6" column="89" selection-start="292" selection-end="292" vertical-scroll-proportion="0.15706806">
               <folding />
             </state>
           </provider>
@@ -136,7 +136,6 @@
         <option value="$PROJECT_DIR$/app/views/static_pages/home.html.erb" />
         <option value="$PROJECT_DIR$/app/views/executions/_base_costs.html.erb" />
         <option value="$PROJECT_DIR$/app/views/executions/costs.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/static_pages_controller.rb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss" />
         <option value="$PROJECT_DIR$/app/admin/applications.rb" />
         <option value="$PROJECT_DIR$/app/admin/events.rb" />
@@ -147,6 +146,7 @@
         <option value="$PROJECT_DIR$/app/views/devise/registrations/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/views/executions/_executions.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/executions_controller.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/static_pages_controller.rb" />
       </list>
     </option>
   </component>
@@ -515,13 +515,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/static_pages_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="19" selection-start="485" selection-end="494" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/executions/_executions.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="71" selection-start="1647" selection-end="1647" vertical-scroll-proportion="-16.25">
@@ -531,7 +524,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/executions_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="88" selection-start="422" selection-end="422" vertical-scroll-proportion="0.28795812">
+        <state line="15" column="88" selection-start="422" selection-end="422" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/static_pages_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="89" selection-start="292" selection-end="292" vertical-scroll-proportion="0.15706806">
           <folding />
         </state>
       </provider>
