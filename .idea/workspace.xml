@@ -14,7 +14,7 @@
     <file path="/executions_controller.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367806519325" ignored="false" />
     <file path="/application.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367244383446" ignored="false" />
     <file path="/custom.css.scss" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367715123555" ignored="false" />
-    <file path="/_executions.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367851511678" ignored="false" />
+    <file path="/_executions.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367851701531" ignored="false" />
     <file path="/home.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367713674817" ignored="false" />
     <file path="/_base_costs.html.erb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367714476471" ignored="false" />
     <file path="/static_pages_controller.rb" changelist="514e7fe3-d266-4ce4-910e-ea0206405977" time="1367715043808" ignored="false" />
@@ -95,7 +95,7 @@
       <file leaf-file-name="_executions.html.erb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/executions/_executions.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="22" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.73770493">
+            <state line="41" column="71" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.7103825">
               <folding />
             </state>
           </provider>
@@ -531,7 +531,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/executions/_executions.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="22" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.73770493">
+        <state line="41" column="71" selection-start="1647" selection-end="1647" vertical-scroll-proportion="0.7103825">
           <folding />
         </state>
       </provider>

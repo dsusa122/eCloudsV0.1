@@ -39,7 +39,7 @@
           <% else %>
               <%= link_to 'Running', edit_execution_path(execution), :class => "btn btn-large btn-info btn-block" %>
                   <% if !execution.start_date.nil? %>
-                  <%= "Started at: "+ execution.start_date    %>
+                  <%= "Started at: "+ execution.start_date.to_default_s    %>
 
                       <%end%>
 
