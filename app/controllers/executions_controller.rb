@@ -2,14 +2,33 @@ class ExecutionsController < InheritedResources::Base
 
   before_filter :authenticate_user!
 
+  def index
+    @executions =  Execution.find_all_by_user_id(current_user.id)
+  end
+
   def show
     @inputs  = Input.find_all_by_execution_id(params[:id])
     @execution = Execution.find(params[:id])
   end
 
   def costs
-    puts 'Entrooooo'
-    @executions = Execution.where("end_date IS NOT NULL")
+    @date = Date.today
+    @executions2 = Execution.where("end_date IS NOT NULL  and start_date IS NOT NULL and start_date > "+@date.to_s)
+    @directories = current_user.directories
+    @fileSize=0
+    @cloud_files =  current_user.cloud_files
+    @cloud_files.each do |file|
+      @fileSize += file.size
+    end
+    @directories.each do |direc|
+      @cloud_files =  direc.cloud_files
+      @cloud_files.each do |file|
+          @fileSize += file.size
+      end
+    end
+
+    @month = @date.strftime("%B, %Y")
+
   end
 
   def launch_execution
@@ -28,6 +47,9 @@ class ExecutionsController < InheritedResources::Base
     @msg = PROCESS_EXECUTION_MSG + ':' + @execution.id.to_s
     @queue.send_message(@msg)
 
+    #@event = Event.new(:code => 0, :description => EXECUTION_LAUNCHED+@execution.id, :event_date => @now)
+    #@event.execution = @execution
+
     respond_to do |format|
       if @execution.save
         format.html { redirect_to @execution, notice: 'Your execution is being launched' }
@@ -42,7 +64,6 @@ class ExecutionsController < InheritedResources::Base
 
   def demo_execution
     @application = Application.find(params[:application_id])
-    puts "Funcionoooooooooooo"+@application.name
     #Crear la ejecucion
     @now = DateTime.now
     @execution = Execution.new

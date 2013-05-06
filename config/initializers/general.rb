@@ -45,6 +45,22 @@ REGISTER_FILE_MSG = 'REGISTER_FILE_MSG'
 FINISHED_JOB_MSG = 'FINISHED_JOB_MSG'
 
 
+EXECUTION_LAUNCHED = 'The execution has been launched, waiting for the scheduler: '
+LAUNCHED_VM= 'The following VM has been started: '
+CREATED_JOB = 'The following job has been created: '
+SWITCHED_TO_QUEUE = 'The VM switched to queue: '
+INSTALLING_APP='The VM is installing the application: '
+RUNNING_APP='The VM is running the assigned job: '
+UPLOADING_OUTPUTS='The outputs are being uploaded: '
+REGISTER_FILE='The following file is available: '
+FINISHED_JOB='The following job has finished: '
+VM_SHUTDOWN='The following virtual machine is shuting down: '
+EXECUTION_FINISHED='The following execution has finished: '
+
+
+
+
+
 
 
 

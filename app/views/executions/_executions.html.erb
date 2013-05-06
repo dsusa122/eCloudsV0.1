@@ -1,59 +1,53 @@
-<h1>My Executions:</h1>
 
-<ul class="pager">
-<li class="next"><%= link_to 'New Execution', new_execution_path, :class=>'btn btn-primary' %></li>
-</ul>
-<br>
 
-<table class="table table-striped table-condensed table-hover">
-  <tr>
+<div class="content-box">
+  <div class="content-box-header">
+    <h3>
+       My Executions
 
-    <th>Name</th>
-    <th>Description</th>
-    <th>Application</th>
-    <th>Directory</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    </h3>
+    <ul class="pager">
+      <li class="next"><%= link_to 'New Execution', new_execution_path, :class=>'btn btn-inverse' %></li>
+    </ul>
+  </div>
+  <div class="content-box-content task_block">
+    <% @executions.each do |execution| %>
 
-  <% @executions.each do |execution| %>
+        <div class="content-list">
+          <p class="title">
+            View Execution: <%= link_to execution.name, execution %>
+          </p>
+          <p class="project">
+            Application: <%= link_to execution.application.name, execution.application %>
+            <% if execution.directory %>
+                - Directory: <%= link_to execution.directory.name, browse_path(execution.directory) %>
+            <% else %>
+                - Directory: Not set
+            <% end %>
 
-      <tr>
+          </p>
+           <p>Description: <%= execution.description %></p>
+          <p class="status" >
+            <div style="max-width: 400px;">
+            <% if execution.completed? %>
+              <%= link_to 'Complete', define_execution_path(execution), :class => "btn btn-large btn-danger btn-block" %>
+            <% elsif execution.launched? %>
+              <%= link_to 'Launch', define_execution_part2_path(execution), :class => "btn btn-large btn-warning btn-block" %>
 
-        <td><%= execution.name %></td>
-        <td><%= execution.description %></td>
-        <td><%= execution.application.name %></td>
-        <% if execution.directory %>
-            <td><%= link_to execution.directory.name, browse_path(execution.directory) %></td>
-        <% else %>
-            <td>Not assigned</td>
-        <% end %>
-        <td><%= execution.start_date %></td>
-        <td><%= execution.end_date %></td>
-        <td><%= link_to 'Show', execution %></td>
-        <td><%= link_to 'Destroy', execution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% if execution.completed? %>
-            <td><%= link_to 'Complete', define_execution_path(execution) %></td>
-            <td><span class="badge badge-important">Not completed</span></td>
-        <% elsif execution.launched? %>
-            <td><%= link_to 'Launch', define_execution_part2_path(execution) %></td>
-            <td><span class="badge badge-warning">Not Launched yet</span></td>
-        <% elsif execution.ended? %>
-            <td></td>
-            <td><span class="badge badge-success">Execution finished!</span></td>
-        <% else %>
-            <td><%= link_to 'Edit', edit_execution_path(execution) %></td>
-            <td><span class="badge badge-info">Running</span></td>
-        <% end %>
+          <% elsif execution.ended? %>
+              <td></td>
+          <% else %>
+              <%= link_to 'Running', edit_execution_path(execution), :class => "btn btn-large btn-info btn-block" %>
+                  <%= "Started at: "+execution.start_date    %>
+          <% end %>
+            </div>
 
-      </tr>
-  <% end %>
-</table>
+          </p>
 
-<br />
+          </div>
+    <% end %>
+    </div>
+  </div>
+
 
 

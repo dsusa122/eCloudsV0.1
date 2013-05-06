@@ -778,6 +778,7 @@ h2 {
 
 h3 {
   font-size: 26.25px;
+  padding-left: 10px;
 }
 
 h4 {
@@ -6995,4 +6996,71 @@ label {
 
 .thumbnail.right-caption > .caption {
   padding: 4px;
+}
+
+.content-box {
+  border-radius: 6px 6px 6px 6px;
+}
+.content-box {
+  background: none repeat scroll 0 0 #E6E6E6;
+  border: 1px solid #E5E5E5;
+  box-shadow: 0 1px 1px 0 #F3F3F3;
+  margin: 0 0 20px;
+}
+.content-box-header {
+  border-radius: 6px 6px 0 0;
+}
+.content-box-header {
+  background: none repeat scroll 0 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  height: 50px;
+  position: relative;
+}
+.content-box-content {
+  border-top: 1px solid #BDBDBD;
+  padding: 10px;
+}
+.task_block .content-list {
+  padding: 15px 10px;
+  position: relative;
+}
+.content-box .content-list {
+  border-bottom: 1px solid #BDBDBD;
+  padding: 15px 10px;
+  position: relative;
+}
+
+.task_block p.title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: normal;
+}
+.task_block p.project {
+  color: #525252;
+}
+
+.task_block p.project a{
+  color: orange;
+}
+
+.task_block p.title a{
+  color: dimgrey;
+}
+
+.task_block p.status {
+  font-size: 11px;
+  margin: 5px 0 0;
+}
+
+.column-left {
+  float: left;
+  width: 49%;
+  background-color: #E6E6E6;
+}
+
+.column-right {
+  float: right;
+  width: 49%;
+  background-color: #E6E6E6;
 }

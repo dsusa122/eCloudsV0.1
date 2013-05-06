@@ -1,32 +1,4 @@
-<div>
-<h3>Account Balance</h3>
-<table class="table table-striped">
-  <tr>
-    <td><strong>Period:</strong></td>
-    <td>April 2013</td>
-  </tr>
-  <tr>
-    <td><strong>Estimated Storage:</strong></td>
-    <td>4 Gb</td>
-  </tr>
-  <tr>
-    <td><strong>Number of Executions:</strong></td>
-    <td>5</td>
-  </tr>
-  <tr>
-    <td><strong>Total for Computing Hours:</strong></td>
-    <td>$125</td>
-  </tr>
-  <tr>
-    <td><strong>Period Total:</strong></td>
-    <td>$129</td>
-  </tr>
-  <tr>
-    <td><strong>Remaining Funds:</strong></td>
-    <td>$71</td>
-  </tr>
-</table>
-</div>
+<%= render 'base_costs' %>
 
 <div>
   <h4>Details for the period</h4>
@@ -37,7 +9,7 @@
       <th>Total Time (hours)</th>
       <th>Total Cost ($USD)</th>
     </tr>
-    <% @executions.each do |exec| %>
+    <% @executions2.each do |exec| %>
         <tr>
           <td><%= exec.name %></td>
           <td><%= exec.start_date %></td>

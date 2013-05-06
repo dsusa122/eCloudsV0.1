@@ -1,4 +1,5 @@
 ActiveAdmin.register Cluster do
+  actions :index, :show
 
   index do
     column :id

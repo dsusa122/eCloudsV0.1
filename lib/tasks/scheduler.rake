@@ -576,9 +576,9 @@ def checkJobStatus (msg)
     @msg.delete
 
     #si la ejecución terminó, apago todas las máquinas virtuales
-     @virtual_machines.each do |vm|
+    @virtual_machines.each do |vm|
 
-     #stop_one_vm vm
+      #stop_one_vm vm
 
     end
 
@@ -747,9 +747,9 @@ def create_job cluster, cloud_file_inputs, all_inputs, base_command, execution
   if Rails.env.development?
     @bucket = @s3.bucket(ENV["S3_BUCKET_DEV"])
   elsif  Rails.env.staging?
-  @bucket = @s3.bucket(ENV["S3_BUCKET_STAGING"])
+    @bucket = @s3.bucket(ENV["S3_BUCKET_STAGING"])
   elsif  Rails.env.production?
-  @bucket = @s3.bucket(ENV["S3_BUCKET_PROD"])
+    @bucket = @s3.bucket(ENV["S3_BUCKET_PROD"])
 
   end
 

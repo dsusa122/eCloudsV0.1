@@ -5,9 +5,12 @@
 
 <% if user_signed_in? %>
       <p><%= current_user.email%></p>
-      <div class="well">
+        <div class="column-left" >
       <%= render 'executions/executions' %>
-      </div>
+        </div>
+      <div class="column-right">
+        <%= render 'executions/base_costs' %>
+        </div>
   <% else %>
       <div class="center hero-unit">
       <h3>If you are new to Eclouds please register by clicking the link above, otherwise <%= link_to "Sign in!", new_user_session_path, class: "btn btn-large btn-primary" %> to start usign the app.</h3>

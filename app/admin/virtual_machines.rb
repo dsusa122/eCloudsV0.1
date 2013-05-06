@@ -1,5 +1,7 @@
 ActiveAdmin.register VirtualMachine do
 
+  actions :index, :show
+
   index do  |vm|
     column :id
     column :hostname

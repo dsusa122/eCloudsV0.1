@@ -1,0 +1,29 @@
+<div>
+  <h3>Account Balance</h3>
+  <table class="table table-striped">
+    <tr>
+      <td><strong>Period:</strong></td>
+      <td><%= @month %></td>
+    </tr>
+    <tr>
+      <td><strong>Estimated Storage:</strong></td>
+      <td><%= number_to_human_size @fileSize %></td>
+    </tr>
+    <tr>
+      <td><strong>Number of Executions:</strong></td>
+      <td><%= @executions2.count %></td>
+    </tr>
+    <tr>
+      <td><strong>Total for Computing Hours:</strong></td>
+      <td>$125</td>
+    </tr>
+    <tr>
+      <td><strong>Period Total:</strong></td>
+      <td>$129</td>
+    </tr>
+    <tr>
+      <td><strong>Remaining Funds:</strong></td>
+      <td>$71</td>
+    </tr>
+  </table>
+</div>
