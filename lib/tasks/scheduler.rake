@@ -416,11 +416,6 @@ end
 def checkJobStatus (msg)
 
 
-
-
-
-
-
   @sqs = Aws::Sqs.new(AMAZON_ACCESS_KEY_ID, AMAZON_SECRET_ACCESS_KEY)
 
   @queue_name = PRESCHEDULING_QUEUE
@@ -487,6 +482,9 @@ def checkJobStatus (msg)
     @job.status = JOBS_STATUS[:UPLOADING_OUTPUTS]
     @job.save
     @msg.delete
+
+    #@event = Event.new(:code => 6, :description => UPLOADING_OUTPUTS+@job.id, :event_date => Date.now)
+    #@event.execution = @job.execution
   end
 
   if(@parts2[0] == REGISTER_FILE_MSG)
@@ -533,6 +531,9 @@ def checkJobStatus (msg)
     @cloud_file.save
 
     @msg.delete
+
+    #@event =  Event.new(:code => 7, :description => REGISTER_FILE+@cloud_file.name, :event_date => Date.now)
+    #@event.execution = @job.execution
   end
 
   if ( @parts[0]== FINISHED_JOB_MSG)
@@ -585,6 +586,11 @@ def checkJobStatus (msg)
     #le pongo que la fecha de finalización es ahora
     @end_date = DateTime.now
     @execution.end_date = @end_date
+
+
+    #@event = Event.new(:code => 10, :description => EXECUTION_FINISHED+@execution.id, :event_date => @end_date)
+    #@event.execution = @execution
+
 
   end
 
@@ -668,9 +674,10 @@ def create_job cluster, cloud_file_inputs, all_inputs, base_command, execution
   @job.directory= execution.directory
 
   @job.save
+  @now = DateTime.now
 
-
-
+  @event = Event.new(:code => 2, :description => CREATED_JOB+@job.id, :event_date => @now)
+  @event.execution = execution
 
   puts 'now I will generate the command'
 
@@ -813,6 +820,9 @@ def launch_one_vm(instance_type, cluster)
   @event.vm_id = @virtual_machine.id
   @event.user_id = cluster.user.id
   @event.save
+  @now = DateTime.now
+  #@exec_event = Event.new(:code => 1, :description => LAUNCHED_VM+@virtual_machine.hostname, :event_date => @now)
+  #@exec_event.execution = cluster.execution
 
   @virtual_machine
 
@@ -835,6 +845,9 @@ def stop_one_vm(vm)
     @event.vm_id = vm.id
     @event.user_id = current_user.id
     @event.save
+    @now = DateTime.now
+    #@exec_event = Event.new(:code => 9, :description => VM_SHUTDOWN+vm.hostname, :event_date => @now)
+    #@exec_event.execution = vm.cluster.execution
 
 
   end
