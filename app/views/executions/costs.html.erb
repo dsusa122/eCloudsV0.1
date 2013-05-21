@@ -13,6 +13,8 @@
         <tr>
           <td><%= exec.name %></td>
           <td><%= exec.start_date %></td>
+          <td><%= exec.compute_total_hours exec %></td>
+          <td><%= exec.total_cost %></td>
         </tr>
     <% end %>
   </table>

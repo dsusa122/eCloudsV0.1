@@ -24,6 +24,9 @@ VM_PRICING = {"t1.micro"  => 0.020,
               "m1.xlarge"  => 0.520,
               "c1.xlarge" => 0.660}
 
+S3_PRICING = {"first-TB per GB" =>0.095
+              }
+
 AWS_ACCESS_KEY_ID = ENV["AMAZON_ACCESS_KEY_ID"]
 
 AWS_SECRET_ACCESS_KEY = ENV["AMAZON_SECRET_ACCESS_KEY"]
@@ -46,7 +49,7 @@ FINISHED_JOB_MSG = 'FINISHED_JOB_MSG'
 
 
 EXECUTION_LAUNCHED = 'The execution has been launched, waiting for the scheduler: '
-LAUNCHED_VM= 'The following VM has been started: '
+LAUNCHED_VM= 'The following VM has been started:'
 CREATED_JOB = 'The following job has been created: '
 SWITCHED_TO_QUEUE = 'The VM switched to queue: '
 INSTALLING_APP='The VM is installing the application: '
@@ -54,11 +57,11 @@ RUNNING_APP='The VM is running the assigned job: '
 UPLOADING_OUTPUTS='The outputs are being uploaded: '
 REGISTER_FILE='The following file is available: '
 FINISHED_JOB='The following job has finished: '
-VM_SHUTDOWN='The following virtual machine is shuting down: '
+VM_SHUTDOWN='The following virtual machine is shuting down:'
 EXECUTION_FINISHED='The following execution has finished: '
 
 
-
+EXECUTION_FINISHED='The following execution has finished: '
 
 
 

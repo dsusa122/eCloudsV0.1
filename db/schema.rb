@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130428213111) do
+ActiveRecord::Schema.define(:version => 20130521013423) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20130428213111) do
     t.integer  "finished_jobs"
     t.integer  "current_vms"
     t.boolean  "ended"
+    t.decimal  "total_cost"
   end
 
   create_table "inputs", :force => true do |t|
@@ -216,6 +217,7 @@ ActiveRecord::Schema.define(:version => 20130428213111) do
     t.string   "confirmation_url"
     t.integer  "current_directory_id"
     t.boolean  "approved",               :default => false, :null => false
+    t.decimal  "funds"
   end
 
   add_index "users", ["approved"], :name => "index_users_on_approved"
@@ -237,13 +239,14 @@ ActiveRecord::Schema.define(:version => 20130428213111) do
     t.integer  "cores"
     t.integer  "localStorage"
     t.integer  "clusterId"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "state"
     t.integer  "slots"
     t.string   "AMI_name"
     t.integer  "cluster_id"
     t.boolean  "is_busy"
+    t.integer  "execution_hours"
   end
 
 end

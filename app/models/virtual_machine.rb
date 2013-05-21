@@ -1,5 +1,5 @@
 class VirtualMachine < ActiveRecord::Base
-  attr_accessible :cores, :hostname, :localStorage, :ram , :cluster_id, :AMI_name, :slots, :is_busy
+  attr_accessible :cores, :hostname, :localStorage, :ram , :cluster_id, :AMI_name, :slots, :is_busy, :execution_hours
   belongs_to :cluster
 
   has_many :jobs

@@ -439,6 +439,10 @@ def checkJobStatus (msg)
     @job.save
     @msg.delete
 
+    @event = Event.new(:code => 4, :description => @msg, :event_date => DateTime.now )
+    @event.execution = @job.execution
+    @event.save
+
   end
 
   if(@parts[0] == RUNNING_APP_MSG)
@@ -473,6 +477,10 @@ def checkJobStatus (msg)
     puts 'vm saved'
 
     @msg.delete
+
+    @event = Event.new(:code => 5, :description => @msg, :event_date => DateTime.now)
+    @event.execution = @execution
+    @event.save
   end
 
   if(@parts[0] == UPLOADING_OUTPUTS_MSG)
@@ -483,8 +491,9 @@ def checkJobStatus (msg)
     @job.save
     @msg.delete
 
-    #@event = Event.new(:code => 6, :description => UPLOADING_OUTPUTS+@job.id, :event_date => Date.now)
-    #@event.execution = @job.execution
+    @event = Event.new(:code => 6, :description => UPLOADING_OUTPUTS+@job.id, :event_date => Date.now)
+    @event.execution = @job.execution
+    @event.save
   end
 
   if(@parts2[0] == REGISTER_FILE_MSG)
@@ -532,8 +541,9 @@ def checkJobStatus (msg)
 
     @msg.delete
 
-    #@event =  Event.new(:code => 7, :description => REGISTER_FILE+@cloud_file.name, :event_date => Date.now)
-    #@event.execution = @job.execution
+    @event =  Event.new(:code => 7, :description => REGISTER_FILE+@cloud_file.name, :event_date => Date.now)
+    @event.execution = @job.execution
+    @event.save
   end
 
   if ( @parts[0]== FINISHED_JOB_MSG)
@@ -576,10 +586,13 @@ def checkJobStatus (msg)
 
     @msg.delete
 
-    #si la ejecución terminó, apago todas las máquinas virtuales
+    @execution_total_cost = 0
+        #si la ejecución terminó, apago todas las máquinas virtuales
     @virtual_machines.each do |vm|
 
-      #stop_one_vm vm
+      stop_one_vm vm
+
+      @execution_total_cost += vm.execution_hours*  VM_PRICING[vm.execution.vm_type]
 
     end
 
@@ -588,9 +601,21 @@ def checkJobStatus (msg)
     @execution.end_date = @end_date
 
 
-    #@event = Event.new(:code => 10, :description => EXECUTION_FINISHED+@execution.id, :event_date => @end_date)
-    #@event.execution = @execution
 
+    @event = Event.new(:code => 10, :description => EXECUTION_FINISHED+@execution.id, :event_date => @end_date)
+    @event.execution = @execution
+    @event.save
+
+
+  end
+
+  if ( @parts[0]== SWITCHED_TO_QUEUE)
+
+    @event = Event.new(:code => 3, :description => @msg, :event_date => DateTime.now )
+    @queue = @parts[1].to_s.split('-')
+    @exec = Execution.find(@queue[1])
+    @event.execution = @exec
+    @event.save
 
   end
 
@@ -678,6 +703,7 @@ def create_job cluster, cloud_file_inputs, all_inputs, base_command, execution
 
   @event = Event.new(:code => 2, :description => CREATED_JOB+@job.id, :event_date => @now)
   @event.execution = execution
+  @event.save
 
   puts 'now I will generate the command'
 
@@ -821,8 +847,9 @@ def launch_one_vm(instance_type, cluster)
   @event.user_id = cluster.user.id
   @event.save
   @now = DateTime.now
-  #@exec_event = Event.new(:code => 1, :description => LAUNCHED_VM+@virtual_machine.hostname, :event_date => @now)
-  #@exec_event.execution = cluster.execution
+  @exec_event = Event.new(:code => 1, :description => LAUNCHED_VM+@virtual_machine.hostname, :event_date => @now)
+  @exec_event.execution = cluster.execution
+  @exec_event.save
 
   @virtual_machine
 
@@ -845,11 +872,16 @@ def stop_one_vm(vm)
     @event.vm_id = vm.id
     @event.user_id = current_user.id
     @event.save
+
     @now = DateTime.now
-    #@exec_event = Event.new(:code => 9, :description => VM_SHUTDOWN+vm.hostname, :event_date => @now)
-    #@exec_event.execution = vm.cluster.execution
+    @exec_event = Event.new(:code => 9, :description => VM_SHUTDOWN+vm.hostname, :event_date => @now)
+    @exec_event.execution = vm.cluster.execution
+    @exec_event.save
 
-
+    @start_event = Event.where("execution_id=? and code=?", @exec_event.execution_id, 1)
+    @date_diff =  ((@start_event.event_date.to_i - @exec_event.event_date.to_i)/3600).ceil
+    vm.execution_hours = @date_diff
+    vm.save
   end
 
 end

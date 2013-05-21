@@ -13,22 +13,47 @@ class ExecutionsController < InheritedResources::Base
 
   def costs
     @date = Date.today
-    @executions2 = Execution.where("end_date IS NOT NULL  and start_date IS NOT NULL ") #and start_date > "+@date.to_s)
+    @executions2 = Execution.where("end_date IS NOT NULL and start_date IS NOT NULL and start_date >= ?", @date) #and start_date > "+@date.to_s)
     @directories = current_user.directories
     @fileSize=0
     @cloud_files =  current_user.cloud_files
     @cloud_files.each do |file|
       @fileSize += file.size
     end
+
+    @periodTotal = 0
+    @computingTotal = 0
+                                                                                                                 #Se calcula el costo total de las horas de computo
+    @executions2.each do |exec|
+      @computingTotal += exec.total_cost
+    end
+                                                                                                                 #Se suma al total del periodo el total por horas de computo
+    @periodTotal += @computingTotal
+
+
     @directories.each do |direc|
       @cloud_files =  direc.cloud_files
       @cloud_files.each do |file|
-          @fileSize += file.size
+        @fileSize += file.size
       end
     end
 
+    #Se calcula el costo total por almacenamiento, se divide por el numero de bytes en un GB y se aproxima
+    @filesTotal = S3_PRICING["first-TB per GB"]*(@fileSize/1000000000).ceil
+
+    @periodTotal += @filesTotal
+    @funds = current_user.funds - @periodTotal
     @month = @date.strftime("%B, %Y")
 
+  end
+
+  def compute_total_hours (exec)
+    @vms = VirtualMachine.find_all_by_cluster_id(hexec.cluster_id)
+    @hours = 0
+    @vms.each do |vm|
+      @hours += vm.execution_hours
+    end
+    @hours
   end
 
   def launch_execution
@@ -47,8 +72,9 @@ class ExecutionsController < InheritedResources::Base
     @msg = PROCESS_EXECUTION_MSG + ':' + @execution.id.to_s
     @queue.send_message(@msg)
 
-    #@event = Event.new(:code => 0, :description => EXECUTION_LAUNCHED+@execution.id, :event_date => @now)
-    #@event.execution = @execution
+    @event = Event.new(:code => 0, :description => EXECUTION_LAUNCHED+@execution.id.to_s, :event_date => @now)
+    @event.execution = @execution
+    @event.save
 
     respond_to do |format|
       if @execution.save
@@ -258,65 +284,68 @@ class ExecutionsController < InheritedResources::Base
       @application.inputs.order('position asc').each do |app_input|
         @raw_input = @raw_inputs[i.to_s]
         @execution_input = app_input.dup
+        if app_input.visible?
 
-        if app_input.is_file
-          @file_id = @raw_input.to_i
-          @cloud_file = current_user.cloud_files.find(@file_id)
+          if app_input.is_file
+            @file_id = @raw_input.to_i
+            @cloud_file = current_user.cloud_files.find(@file_id)
 
-          @execution_input.cloud_file = @cloud_file
-          @execution_input.value = @cloud_file.name
+            @execution_input.cloud_file = @cloud_file
+            @execution_input.value = @cloud_file.name
 
-          if @execution_input.prefix != nil or @execution_input.prefix != ''
+            if @execution_input.prefix != nil or @execution_input.prefix != ''
 
-            @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+ '}'+' '
+              @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+ '}'+' '
 
-          else
-            @example_command = @example_command + '{'+@execution_input.value+ '}'+' '
+            else
+              @example_command = @example_command + '{'+@execution_input.value+ '}'+' '
 
-          end
+            end
 
-        elsif app_input.is_directory
+          elsif app_input.is_directory
 
-          @directory_id = @raw_input.to_i
-          @directory = current_user.directories.find(@directory_id)
+            @directory_id = @raw_input.to_i
+            @directory = current_user.directories.find(@directory_id)
 
-          @execution_input.directory = @directory
-          @execution_input.value = 'DIR('+@directory.name+')'
-          @number_of_files = @directory.cloud_files.size
-          @num_jobs = @num_jobs * @number_of_files
+            @execution_input.directory = @directory
+            @execution_input.value = 'DIR('+@directory.name+')'
+            @number_of_files = @directory.cloud_files.size
+            @num_jobs = @num_jobs * @number_of_files
 
-          if @execution_input.prefix != nil or @execution_input.prefix != ''
+            if @execution_input.prefix != nil or @execution_input.prefix != ''
 
-            @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+ '}'+' '
+              @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+ '}'+' '
 
-          else
-            @example_command = @example_command +'{'+ @execution_input.value+'}'+' '
+            else
+              @example_command = @example_command +'{'+ @execution_input.value+'}'+' '
 
-          end
-
-        else
-          @input_value = @raw_input
-          @execution_input.value = @input_value
-
-          if @execution_input.prefix != nil or @execution_input.prefix != ''
-
-            @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+'}'+ ' '
+            end
 
           else
-            @example_command = @example_command + '{'+ @execution_input.value+'}' + ' '
+            @input_value = @raw_input
+            @execution_input.value = @input_value
 
+            if @execution_input.prefix != nil or @execution_input.prefix != ''
+
+              @example_command = @example_command +'{'+@execution_input.prefix + ' '+ @execution_input.value+'}'+ ' '
+
+            else
+              @example_command = @example_command + '{'+ @execution_input.value+'}' + ' '
+
+            end
           end
+
+          @execution_input.execution_id =  @execution.id
+          @execution_input.application_id = nil
+          @execution_input.save
+
+          puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
+          puts @base_command
+
+          @base_command = @base_command+ ' '+@execution_input.prefix+' '+'INPUT'+i.to_s
+
         end
-
-        @execution_input.execution_id =  @execution.id
-        @execution_input.application_id = nil
-        @execution_input.save
-
-        puts 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-
-        puts @base_command
-
-        @base_command = @base_command+ ' '+@execution_input.prefix+' '+'INPUT'+i.to_s
         i=i+1
       end
 

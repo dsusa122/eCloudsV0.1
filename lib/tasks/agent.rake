@@ -252,6 +252,10 @@ task :getAssignedQueue => :environment do
         puts 'DONE'
 
         @msg.delete
+
+        @message = SWITCHED_TO_QUEUE + ";"+@exec_queue_name
+        @queue.send_message(@message)
+
       end
     end
 
