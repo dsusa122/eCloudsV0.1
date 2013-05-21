@@ -39,7 +39,8 @@ class ExecutionsController < InheritedResources::Base
     end
 
     #Se calcula el costo total por almacenamiento, se divide por el numero de bytes en un GB y se aproxima
-    @filesTotal = S3_PRICING["first-TB per GB"]*(@fileSize/1000000000).ceil
+    @moduli = (@fileSize%1000000000 == 0) ? 0:1
+    @filesTotal = S3_PRICING["first-TB per GB"]*((@fileSize/1000000000)+@moduli)
 
     @periodTotal += @filesTotal
     @funds = current_user.funds - @periodTotal
