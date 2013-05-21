@@ -1,6 +1,15 @@
 class CloudFilesController < ApplicationController
 
-  before_filter :authenticate_user!, :authenticate_admin_user!
+  before_filter :auth_user!
+
+
+  def auth_user!(opts = {})
+    if :admin_user_signed_in?
+      :authenticate_admin_user!
+    else
+      :authenticate_user!
+    end
+  end
   # GET /cloud_files
   # GET /cloud_files.json
   def index

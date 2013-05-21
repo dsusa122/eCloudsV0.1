@@ -61,7 +61,6 @@ VM_SHUTDOWN='The following virtual machine is shuting down:'
 EXECUTION_FINISHED='The following execution has finished: '
 
 
-EXECUTION_FINISHED='The following execution has finished: '
 
 
 
